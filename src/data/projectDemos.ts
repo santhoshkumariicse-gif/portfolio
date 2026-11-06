@@ -76,7 +76,7 @@ export const projectDemosData: ProjectDemoDetail[] = [
   },
   {
     id: 'hr-recruitment-suite',
-    title: 'HR Recruitment Pipeline Suite',
+    title: 'NexusATS — Recruitment & Applicant Tracking System',
     category: 'Workflow Automation · Parsing Pipeline',
     status: 'In Development',
     tagline: 'Structured candidate parsing workflow extracting technical taxonomies and sanitizing personal identifiers.',

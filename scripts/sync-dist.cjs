@@ -12,11 +12,21 @@ if (!fs.existsSync(distDir)) {
 // 1. Copy dist/index.html to root index.html
 fs.copyFileSync(path.join(distDir, 'index.html'), path.join(rootDir, 'index.html'));
 
-// 2. Copy dist/assets to root assets
+// 2. Clean and copy dist/assets to root assets
 const distAssets = path.join(distDir, 'assets');
 const rootAssets = path.join(rootDir, 'assets');
+if (fs.existsSync(rootAssets)) {
+  fs.rmSync(rootAssets, { recursive: true, force: true });
+}
 if (fs.existsSync(distAssets)) {
   fs.cpSync(distAssets, rootAssets, { recursive: true, force: true });
+}
+
+// 2b. Copy dist/images to root images
+const distImages = path.join(distDir, 'images');
+const rootImages = path.join(rootDir, 'images');
+if (fs.existsSync(distImages)) {
+  fs.cpSync(distImages, rootImages, { recursive: true, force: true });
 }
 
 // 3. Copy other public assets from dist to root if needed

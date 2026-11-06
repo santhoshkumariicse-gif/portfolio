@@ -24,6 +24,8 @@ export interface ProjectItem {
   solution: string;
   technologies: string[];
   evidenceNote: string;
+  keyFeatures?: string[];
+  contribution?: string;
   demoUrl?: string;
   repoUrl?: string;
   architectureType: ArchitectureType;
@@ -35,7 +37,7 @@ export interface SkillCategory {
   title: string;
   description: string;
   items: string[];
-  iconType: 'programming' | 'web' | 'security' | 'workflow' | 'ai-security';
+  iconType: 'programming' | 'frontend' | 'backend' | 'mobile' | 'database' | 'tools' | 'ai-emerging' | 'web' | 'security' | 'workflow' | 'ai-security';
 }
 
 export interface ExperienceItem {
@@ -88,7 +90,12 @@ export interface ResumeMetadata {
 
 export interface PersonalProfile {
   name: string;
+  profession: string;
   headline: string;
+  tagline: string;
+  department: string;
+  interests: string[];
+  photoUrl: string;
   bio: string[];
   education: EducationInfo;
   internships: InternshipInfo[];

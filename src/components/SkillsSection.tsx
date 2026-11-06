@@ -4,8 +4,10 @@ import { skillsData } from '../data/skills';
 import {
   ProgrammingSvg,
   WebArchitectureSvg,
-  SecurityEngineeringSvg,
-  WorkflowToolingSvg,
+  BackendSvg,
+  MobileDevelopmentSvg,
+  DatabaseSvg,
+  ToolsSvg,
   AISecuritySvg
 } from '../svgs/SkillCategorySvgs';
 
@@ -16,16 +18,23 @@ export const SkillsSection: React.FC = () => {
     switch (type) {
       case 'programming':
         return <ProgrammingSvg className="w-6 h-6 text-[var(--accent)]" />;
+      case 'frontend':
       case 'web':
         return <WebArchitectureSvg className="w-6 h-6 text-[var(--accent)]" />;
-      case 'security':
-        return <SecurityEngineeringSvg className="w-6 h-6 text-[var(--accent)]" />;
+      case 'backend':
+        return <BackendSvg className="w-6 h-6 text-[var(--accent)]" />;
+      case 'mobile':
+        return <MobileDevelopmentSvg className="w-6 h-6 text-[var(--accent)]" />;
+      case 'database':
+        return <DatabaseSvg className="w-6 h-6 text-[var(--accent)]" />;
+      case 'tools':
       case 'workflow':
-        return <WorkflowToolingSvg className="w-6 h-6 text-[var(--accent)]" />;
+        return <ToolsSvg className="w-6 h-6 text-[var(--accent)]" />;
+      case 'ai-emerging':
       case 'ai-security':
         return <AISecuritySvg className="w-6 h-6 text-[var(--accent)]" />;
       default:
-        return null;
+        return <ProgrammingSvg className="w-6 h-6 text-[var(--accent)]" />;
     }
   };
 
@@ -44,13 +53,13 @@ export const SkillsSection: React.FC = () => {
             03 / Technical Toolkit
           </p>
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--primary-text)]">
-            Tools for the{' '}
+            Verified skills.{' '}
             <span className="font-[var(--serif)] italic font-normal text-[var(--accent)]">
-              next layer.
+              Practical execution.
             </span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-[var(--secondary-text)] max-w-[620px] leading-relaxed">
-            A verified index of technical abilities supported by internship contributions and practical security lab study. No arbitrary proficiency percentages.
+            Organized by domain and substantiated by project repositories and developer internship contributions. Clear engineering capabilities with zero fabricated percentages.
           </p>
         </motion.div>
 

@@ -20,6 +20,7 @@ export interface TranslationDictionary {
     bio: string;
     exploreBtn: string;
     resumeBtn: string;
+    contactBtn: string;
     githubLink: string;
     linkedinLink: string;
   };
@@ -74,15 +75,16 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       contact: 'Contact'
     },
     hero: {
-      kicker: 'Computer Science · Defensive Security',
-      headingLine1: 'Building digital things',
-      headingLine2: 'that',
-      headingLine2Accent: 'work.',
-      bio: 'Computer Science Engineering student focused on Python development, secure web architectures, and practical vulnerability assessment.',
-      exploreBtn: 'Explore projects',
-      resumeBtn: 'Request Résumé',
-      githubLink: 'GitHub Profile',
-      linkedinLink: 'LinkedIn Profile'
+      kicker: 'Computer Science Engineering Student · Gnanamani College of Technology',
+      headingLine1: 'SANTHOSH KUMAR M',
+      headingLine2: 'Building Ideas Into',
+      headingLine2Accent: 'Practical Digital Solutions.',
+      bio: "I'm Santhosh Kumar M, a Computer Science Engineering student passionate about building practical software solutions. I enjoy developing applications, exploring emerging technologies, solving real-world problems, and continuously improving my engineering skills.",
+      exploreBtn: 'View Projects',
+      resumeBtn: 'Download Resume',
+      contactBtn: 'Contact Me',
+      githubLink: 'GitHub',
+      linkedinLink: 'LinkedIn'
     },
     tracks: {
       general: 'Complete Tour',
@@ -139,9 +141,10 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       headingLine2Accent: 'பொறியியல்.',
       bio: 'பைத்தான் மேம்பாடு, பாதுகாப்பான இணைய கட்டமைப்பு மற்றும் பயன்பாட்டு பாதுகாப்பு தணிக்கையில் கவனம் செலுத்தும் கணினி அறிவியல் பொறியியல் மாணவர்.',
       exploreBtn: 'திட்டங்களை காண்க',
-      resumeBtn: 'விவரக்குறிப்பு கோருக',
-      githubLink: 'கிட்ஹப் சுயவிவரம்',
-      linkedinLink: 'லிங்க்ட்இன் சுயவிவரம்'
+      resumeBtn: 'விவரக்குறிப்பு பதிவிறக்குக',
+      contactBtn: 'தொடர்பு கொள்க',
+      githubLink: 'கிட்ஹப்',
+      linkedinLink: 'லிங்க்ட்இன்'
     },
     tracks: {
       general: 'முழுமையான பார்வை',

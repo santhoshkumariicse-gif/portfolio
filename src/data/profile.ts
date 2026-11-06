@@ -2,11 +2,23 @@ import { PersonalProfile } from '../types';
 
 export const personalProfileData: PersonalProfile = {
   name: 'Santhosh Kumar M',
-  headline: 'Computer Science Engineering Student · Defensive Security & Python Tooling',
+  profession: 'Computer Science Engineering Student | Aspiring Software Developer',
+  headline: 'Computer Science Engineering Student · Aspiring Software Developer',
+  tagline: 'Building Ideas Into Practical Digital Solutions.',
+  department: 'Computer Science and Engineering',
+  photoUrl: `${import.meta.env.BASE_URL}images/santhosh-kumar.jpg`,
+  interests: [
+    'Full-Stack Development',
+    'Android Application Development',
+    'Artificial Intelligence',
+    'Software Engineering',
+    'UI/UX Design',
+    'Cybersecurity'
+  ],
   bio: [
-    'I focus on understanding how software systems communicate, identifying vulnerabilities in controlled lab sandboxes, and building reliable, defensible web and automation applications.',
-    'Currently interning as a Python Developer at Cybernaut, creating automated server log triage pipelines and structured verification scripts.',
-    'Seeking technical internship opportunities in SOC operations, defensive security, or software development.'
+    "I'm Santhosh Kumar M, a Computer Science Engineering student passionate about building practical software solutions. I enjoy developing applications, exploring emerging technologies, solving real-world problems, and continuously improving my engineering skills.",
+    'Currently pursuing my Bachelor of Engineering in Computer Science & Engineering at Gnanamani College of Technology, where I focus on software architecture, clean system logic, and secure application development.',
+    'My hands-on experience includes developing full-stack platforms such as the LorryBook / RDA driver booking platform and NexusATS applicant tracking system, building Android applications, and participating in hackathon AI prototypes like Recall AI.'
   ],
   education: {
     institution: 'Gnanamani College of Technology',
@@ -19,8 +31,9 @@ export const personalProfileData: PersonalProfile = {
       'Operating Systems',
       'Computer Networks & Protocols',
       'Database Management Systems',
-      'Information & Network Security',
-      'Object-Oriented Programming (Python/Java)'
+      'Object-Oriented Programming (Java / Python)',
+      'Software Engineering Principles',
+      'Web Technologies & Application Security'
     ]
   },
   internships: [
@@ -29,14 +42,14 @@ export const personalProfileData: PersonalProfile = {
       role: 'Python Developer Intern',
       period: 'Jul 2024 – Present',
       location: 'Remote / India',
-      summary: 'Automating server log triage, regex authentication monitoring, and data verification scripts.'
+      summary: 'Developing automated log analysis pipelines, verification scripts, and routine data processing utilities in Python.'
     },
     {
       company: 'ELITA',
       role: 'Web & App Development Intern',
       period: 'Jul 2025 – Aug 2025',
       location: 'Namakkal, India',
-      summary: 'Built responsive UI layouts and focused on client-side state handling and WCAG accessibility standards.'
+      summary: 'Constructed responsive user interface layouts, handled client-side state, and implemented accessible web standards.'
     }
   ],
   contact: {
@@ -52,10 +65,11 @@ export const personalProfileData: PersonalProfile = {
     lastUpdated: 'November 2026',
     atsCompliant: true,
     targetRoles: [
-      'Security Operations Center (SOC) Analyst Intern',
-      'Cybersecurity Engineer Intern',
+      'Software Developer Intern',
+      'Full-Stack Developer Intern',
       'Python Backend Developer Intern',
-      'Application Security Trainee'
+      'Android Developer Trainee',
+      'Security Operations & Defensive Engineer'
     ]
   }
 };

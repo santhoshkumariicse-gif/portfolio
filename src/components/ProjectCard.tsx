@@ -129,6 +129,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
                   </strong>
                   <p>{project.solution}</p>
                 </div>
+
+                {project.keyFeatures && project.keyFeatures.length > 0 && (
+                  <div>
+                    <strong className="text-[var(--primary-text)] font-semibold block font-[var(--mono)] uppercase tracking-wider text-[0.72rem] text-[var(--accent)] mb-1">
+                      Key Features:
+                    </strong>
+                    <ul className="list-disc list-inside space-y-0.5 text-xs text-[var(--secondary-text)]">
+                      {project.keyFeatures.map((feature, fIdx) => (
+                        <li key={fIdx}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {project.contribution && (
+                  <div>
+                    <strong className="text-[var(--primary-text)] font-semibold block font-[var(--mono)] uppercase tracking-wider text-[0.72rem] text-[var(--accent)] mb-1">
+                      My Contribution:
+                    </strong>
+                    <p className="text-xs text-[var(--primary-text)]">{project.contribution}</p>
+                  </div>
+                )}
               </motion.div>
             )}
           </div>

@@ -2,44 +2,60 @@ import { SkillCategory } from '../types';
 
 export const skillsData: SkillCategory[] = [
   {
-    id: 'programming',
+    id: 'programming-languages',
     number: '01',
-    title: 'Programming & Logic',
-    description: 'Developing clean, maintainable logic with strong emphasis on structured file handling and algorithm efficiency.',
-    items: ['Python 3', 'Scripting & Automation', 'Data Structures', 'Regular Expressions', 'File I/O Handling'],
+    title: 'Programming Languages',
+    description: 'Core languages for algorithm implementation, structured problem solving, and object-oriented systems.',
+    items: ['Python', 'Java', 'JavaScript', 'TypeScript', 'C / C++ fundamentals'],
     iconType: 'programming'
   },
   {
-    id: 'web-architecture',
+    id: 'frontend-development',
     number: '02',
-    title: 'Web & UI Systems',
-    description: 'Engineering semantic, responsive interfaces with strict adherence to accessibility, clean layout rhythm, and zero bloat.',
-    items: ['HTML5 Semantic Markup', 'Modern CSS3 & Grid/Flexbox', 'Client-Server Communication', 'RESTful API Integration', 'Responsive Design'],
-    iconType: 'web'
+    title: 'Frontend Development',
+    description: 'Building responsive, accessible, high-performance interfaces with modern component architectures and micro-interactions.',
+    items: ['React', 'HTML5 Semantic Markup', 'Modern CSS3', 'Tailwind CSS', 'Vite & Bundling', 'Responsive UI/UX'],
+    iconType: 'frontend'
   },
   {
-    id: 'security-engineering',
+    id: 'backend-development',
     number: '03',
-    title: 'Security & Assessment',
-    description: 'Identifying application weaknesses in controlled environments and formulating robust defensive architectures.',
-    items: ['Web App Vulnerability Testing', 'OWASP Top 10 Mitigation', 'SQLi & XSS Inspection', 'Ethical Hacking Fundamentals', 'Network Reconnaissance'],
-    iconType: 'security'
+    title: 'Backend Development',
+    description: 'Designing reliable server architectures, RESTful API endpoints, request validation, and event handling.',
+    items: ['Node.js & Express', 'FastAPI & Flask (Python)', 'REST API Design', 'Input Sanitization', 'Authentication Patterns'],
+    iconType: 'backend'
   },
   {
-    id: 'workflow-tooling',
+    id: 'mobile-development',
     number: '04',
-    title: 'Workflow & Engineering Tooling',
-    description: 'Managing source versioning, technical documentation, testing harnesses, and terminal development pipelines.',
-    items: ['Git & Version Control', 'Linux / Bash CLI', 'VS Code Environment', 'Burp Suite / OWASP ZAP', 'GitHub Actions CI/CD'],
-    iconType: 'workflow'
+    title: 'Mobile Application Development',
+    description: 'Engineering native and modern mobile application layouts, state management, and device integration.',
+    items: ['Android Development', 'Java / Kotlin Basics', 'XML Layouts', 'Mobile App Architecture', 'API Client Integration'],
+    iconType: 'mobile'
   },
   {
-    id: 'ai-security',
+    id: 'databases',
     number: '05',
-    title: 'AI Systems & LLM Security',
-    description: 'Studying emerging adversarial threat surfaces in AI-enabled applications, prompt injection defenses, and agentic workflows.',
-    items: ['Prompt Injection Defense', 'OWASP Top 10 for LLMs', 'Agentic ReAct Workflows', 'Vector Retrieval Principles', 'Guardrail Sanitization'],
-    iconType: 'ai-security'
+    title: 'Databases & Data Modeling',
+    description: 'Structuring relational schemas, indexed queries, and document storage for persistent data integrity.',
+    items: ['PostgreSQL', 'MySQL', 'SQLite', 'MongoDB', 'Query Optimization', 'Data Validation'],
+    iconType: 'database'
+  },
+  {
+    id: 'development-tools',
+    number: '06',
+    title: 'Development Tools & DevOps',
+    description: 'Command line environments, source version control, testing harnesses, and automated build pipelines.',
+    items: ['Git & GitHub', 'Linux / Bash CLI', 'VS Code Environment', 'Postman API Testing', 'GitHub Actions CI/CD'],
+    iconType: 'tools'
+  },
+  {
+    id: 'ai-emerging',
+    number: '07',
+    title: 'AI & Emerging Technologies',
+    description: 'Applying generative AI tooling, vector embeddings, prompt engineering, and defensive cybersecurity principles.',
+    items: ['AI-Assisted Development', 'OpenAI API & LLM Integrations', 'Prompt Engineering', 'OWASP Top 10 Web Security', 'Defensive Hardening'],
+    iconType: 'ai-emerging'
   }
 ];
 
