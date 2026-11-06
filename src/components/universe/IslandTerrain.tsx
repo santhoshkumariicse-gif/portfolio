@@ -4,15 +4,11 @@ import * as THREE from 'three';
 
 export const IslandTerrain: React.FC = () => {
   const beaconBeamRef = useRef<THREE.Mesh>(null);
-  const crystalsRef = useRef<THREE.Group>(null);
 
-  // Subtle rotational animations for beacon and floating crystals
+  // Subtle rotational animations for beacon
   useFrame((_, delta) => {
     if (beaconBeamRef.current) {
       beaconBeamRef.current.rotation.y += delta * 0.4;
-    }
-    if (crystalsRef.current) {
-      crystalsRef.current.position.y = 5 + Math.sin(Date.now() * 0.002) * 0.4;
     }
   });
 
@@ -62,22 +58,6 @@ export const IslandTerrain: React.FC = () => {
       {/* ======================================================== */}
       {/* ZONE LANDMARKS & PROCEDURAL MONUMENTS                   */}
       {/* ======================================================== */}
-
-      {/* ZONE 02: Skill Forest Floating Bioluminescent Crystals */}
-      <group ref={crystalsRef} position={[-65, 5, 20]}>
-        <mesh position={[0, 0, 0]}>
-          <octahedronGeometry args={[3.2, 0]} />
-          <meshStandardMaterial color="#00E5FF" emissive="#00E5FF" emissiveIntensity={1.8} flatShading />
-        </mesh>
-        <mesh position={[-6, -1, 4]}>
-          <octahedronGeometry args={[1.8, 0]} />
-          <meshStandardMaterial color="#C7FF45" emissive="#C7FF45" emissiveIntensity={1.4} flatShading />
-        </mesh>
-        <mesh position={[6, -0.5, -4]}>
-          <octahedronGeometry args={[2.2, 0]} />
-          <meshStandardMaterial color="#00E5FF" emissive="#00E5FF" emissiveIntensity={1.5} flatShading />
-        </mesh>
-      </group>
 
       {/* ZONE 03: Project City Cyber Neon Towers */}
       <group position={[60, 8, -25]}>

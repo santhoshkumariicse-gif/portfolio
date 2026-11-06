@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { IslandTerrain } from './IslandTerrain';
 import { PrologueScene } from './PrologueScene';
 import { OriginCoastScene } from './OriginCoastScene';
+import { SkillForestScene } from './SkillForestScene';
 import { AvatarController } from './AvatarController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
 
@@ -34,9 +35,14 @@ const CameraRig: React.FC<CameraRigProps> = ({ targetZone }) => {
 export interface UniverseCanvasProps {
   activeZone: ZoneCoordinate;
   onSelectOriginPOI?: (poiId: 'workspace' | 'education') => void;
+  onSelectSkillCategory?: (categoryId: string) => void;
 }
 
-export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({ activeZone, onSelectOriginPOI }) => {
+export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
+  activeZone,
+  onSelectOriginPOI,
+  onSelectSkillCategory
+}) => {
   return (
     <div className="relative w-full h-full bg-[#0A0B09]">
       <Canvas
@@ -100,6 +106,9 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({ activeZone, onSe
 
             {/* Zone 01: Origin Coast High-Fidelity Environment */}
             <OriginCoastScene onSelectPOI={onSelectOriginPOI} />
+
+            {/* Zone 02: Skill Forest Bioluminescent Tech Sanctuary */}
+            <SkillForestScene onSelectCategory={onSelectSkillCategory} />
 
             {/* Santhosh Developer Avatar 3D Presence */}
             <AvatarController
