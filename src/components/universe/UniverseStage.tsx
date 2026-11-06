@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { UniverseCanvas } from './UniverseCanvas';
 import { WorldMinimap } from './WorldMinimap';
 import { ZONE_COORDINATES, ZoneCoordinate } from './WorldCoordinates';
+import { AICore, AIConversationPanel } from '../../ai';
 import { Layers, X, Sparkles, Navigation } from 'lucide-react';
 
 export interface UniverseStageProps {
@@ -124,6 +125,12 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
         <div>• Scroll Wheel: Zoom Altitude</div>
         <div>• Minimap: Click zones to travel</div>
       </div>
+
+      {/* 6. Floating SAN AI Holographic Core & Conversation Panel */}
+      <div className="fixed top-20 right-4 sm:right-6 z-30 pointer-events-auto">
+        <AICore size={80} />
+      </div>
+      <AIConversationPanel />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { SanAIProvider } from './ai';
 import { MotionProvider } from './motion/MotionProvider';
 import { LanguageProvider } from './i18n/LanguageContext';
 import './index.css';
@@ -23,7 +24,9 @@ if (rootElement) {
     <React.StrictMode>
       <LanguageProvider>
         <MotionProvider>
-          <App />
+          <SanAIProvider>
+            <App />
+          </SanAIProvider>
         </MotionProvider>
       </LanguageProvider>
     </React.StrictMode>

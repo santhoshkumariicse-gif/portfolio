@@ -1,4 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { AICore, AIConversationPanel } from './ai';
 import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgress } from './motion/ScrollProgress';
 import { PageTransition } from './motion/PageTransition';
@@ -329,6 +330,12 @@ export const App: React.FC = () => {
           if (p) setSelectedDetailProject(p);
         }}
       />
+
+      {/* Floating SAN AI Holographic Copilot */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <AICore size={72} />
+      </div>
+      <AIConversationPanel />
 
       {/* Site Footer */}
       <Footer />
