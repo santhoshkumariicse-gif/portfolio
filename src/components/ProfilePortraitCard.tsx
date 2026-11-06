@@ -107,3 +107,4 @@ export const ProfilePortraitCard: React.FC<ProfilePortraitCardProps> = ({
     </div>
   );
 };
+
