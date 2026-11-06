@@ -7,9 +7,10 @@ import { OriginCoastModal } from './OriginCoastModal';
 import { SkillForestModal } from './SkillForestModal';
 import { ProjectCityModal } from './ProjectCityModal';
 import { ExperienceMountainModal } from './ExperienceMountainModal';
+import { ContactBeaconModal } from './ContactBeaconModal';
 import { ZONE_COORDINATES, ZoneCoordinate } from './WorldCoordinates';
 import { AICore, AIConversationPanel, useSanAI } from '../../ai';
-import { Layers, X, Sparkles, Navigation, FileText, Cpu, Building2, Mountain } from 'lucide-react';
+import { Layers, X, Sparkles, Navigation, FileText, Cpu, Building2, Mountain, Radio } from 'lucide-react';
 
 export interface UniverseStageProps {
   onExitUniverse: () => void;
@@ -26,6 +27,8 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
   const [selectedProjectId, setSelectedProjectId] = useState('rda-lorrybook');
   const [expModalOpen, setExpModalOpen] = useState(false);
   const [expModalTab, setExpModalTab] = useState<'roles' | 'certifications'>('roles');
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [contactModalTab, setContactModalTab] = useState<'transmit' | 'resume'>('transmit');
   const [announcedZones, setAnnouncedZones] = useState<Set<string>>(new Set());
 
   const { announce } = useSanAI();
@@ -53,6 +56,11 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
       announce(
         "Welcome to Experience Mountain. As you ascend the mountain path, you will discover the checkpoints marking Santhosh's developer internships at Cybernaut and ELITA, his competitive CTF challenges, and his verified technical certifications. Click any checkpoint to inspect his track record."
       );
+    } else if (activeZone.id === 'contact-beacon' && !announcedZones.has('contact-beacon')) {
+      setAnnouncedZones((prev) => new Set(prev).add('contact-beacon'));
+      announce(
+        "Welcome to Contact Beacon, the northernmost boundary of our digital universe. From here, you can transmit a message directly to Santhosh, inspect his verified ATS resume, or connect via GitHub and LinkedIn."
+      );
     }
   }, [activeZone.id, announcedZones, announce]);
 
@@ -77,6 +85,10 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
           onSelectExperiencePOI={(tab) => {
             setExpModalTab(tab);
             setExpModalOpen(true);
+          }}
+          onSelectContactPOI={(tab) => {
+            setContactModalTab(tab);
+            setContactModalOpen(true);
           }}
         />
       </div>
@@ -159,6 +171,17 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
                 >
                   <Mountain className="w-3.5 h-3.5" />
                   <span>INSPECT EXPERIENCE</span>
+                </button>
+              )}
+
+              {activeZone.id === 'contact-beacon' && (
+                <button
+                  type="button"
+                  onClick={() => setContactModalOpen(true)}
+                  className="px-2.5 py-1.5 bg-[#C7FF45]/15 border border-[#C7FF45]/60 text-[#C7FF45] font-mono text-xs font-bold rounded-sm hover:bg-[#C7FF45]/30 transition-all flex items-center gap-1.5 backdrop-blur-md shadow-[0_0_12px_rgba(199,255,69,0.3)] animate-pulse"
+                >
+                  <Radio className="w-3.5 h-3.5" />
+                  <span>TRANSMIT SIGNAL</span>
                 </button>
               )}
             </div>
@@ -281,6 +304,15 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
         initialTab={expModalTab}
         onClose={() => setExpModalOpen(false)}
         onTravelToNextZone={() => setActiveZone(ZONE_COORDINATES['contact-beacon'])}
+      />
+
+      {/* Contact Beacon Finale Modal */}
+      <ContactBeaconModal
+        isOpen={contactModalOpen}
+        initialTab={contactModalTab}
+        onClose={() => setContactModalOpen(false)}
+        onRestartJourney={() => setActiveZone(ZONE_COORDINATES['origin-coast'])}
+        onExitToClassic={onExitUniverse}
       />
 
       {/* Global AI Conversation Panel */}

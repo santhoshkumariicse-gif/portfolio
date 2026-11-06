@@ -1,17 +1,6 @@
-import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import React from 'react';
 
 export const IslandTerrain: React.FC = () => {
-  const beaconBeamRef = useRef<THREE.Mesh>(null);
-
-  // Subtle rotational animations for beacon
-  useFrame((_, delta) => {
-    if (beaconBeamRef.current) {
-      beaconBeamRef.current.rotation.y += delta * 0.4;
-    }
-  });
-
   return (
     <group name="aethelgard-island-world">
       {/* 1. Endless Digital Ocean Plane */}
@@ -54,38 +43,6 @@ export const IslandTerrain: React.FC = () => {
         <cylinderGeometry args={[22, 28, 28, 10]} />
         <meshStandardMaterial color="#1A1F1A" roughness={0.9} flatShading />
       </mesh>
-
-      {/* ======================================================== */}
-      {/* ZONE LANDMARKS & PROCEDURAL MONUMENTS                   */}
-      {/* ======================================================== */}
-
-      {/* ZONE 05: Contact Beacon (The Oceanic Lighthouse & Light Beam) */}
-      <group position={[10, 36, -135]}>
-        {/* Lighthouse Core Structure */}
-        <mesh position={[0, 7, 0]}>
-          <cylinderGeometry args={[2.5, 4, 14, 12]} />
-          <meshStandardMaterial color="#E8ECE5" roughness={0.3} />
-        </mesh>
-
-        {/* Rotating Lighthouse Beam */}
-        <mesh ref={beaconBeamRef} position={[0, 14.5, 0]}>
-          <cylinderGeometry args={[0.8, 14, 40, 16, 1, true]} />
-          <meshStandardMaterial
-            color="#C7FF45"
-            emissive="#C7FF45"
-            emissiveIntensity={1.5}
-            transparent
-            opacity={0.35}
-            side={THREE.DoubleSide}
-          />
-        </mesh>
-
-        {/* Vertical Zenith Signal Pillar */}
-        <mesh position={[0, 70, 0]}>
-          <cylinderGeometry args={[0.3, 0.3, 110, 8]} />
-          <meshStandardMaterial color="#C7FF45" emissive="#C7FF45" emissiveIntensity={2.5} transparent opacity={0.6} />
-        </mesh>
-      </group>
     </group>
   );
 };

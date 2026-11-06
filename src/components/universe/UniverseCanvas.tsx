@@ -8,6 +8,7 @@ import { OriginCoastScene } from './OriginCoastScene';
 import { SkillForestScene } from './SkillForestScene';
 import { ProjectCityScene } from './ProjectCityScene';
 import { ExperienceMountainScene } from './ExperienceMountainScene';
+import { ContactBeaconScene } from './ContactBeaconScene';
 import { AvatarController } from './AvatarController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
 
@@ -40,6 +41,7 @@ export interface UniverseCanvasProps {
   onSelectSkillCategory?: (categoryId: string) => void;
   onSelectProject?: (projectId: string) => void;
   onSelectExperiencePOI?: (tab: 'roles' | 'certifications') => void;
+  onSelectContactPOI?: (tab: 'transmit' | 'resume') => void;
 }
 
 export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
@@ -47,7 +49,8 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
   onSelectOriginPOI,
   onSelectSkillCategory,
   onSelectProject,
-  onSelectExperiencePOI
+  onSelectExperiencePOI,
+  onSelectContactPOI
 }) => {
   return (
     <div className="relative w-full h-full bg-[#0A0B09]">
@@ -121,6 +124,9 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
 
             {/* Zone 04: Experience Mountain Ascent & Summit Observatory */}
             <ExperienceMountainScene onSelectPOI={onSelectExperiencePOI} />
+
+            {/* Zone 05: Contact Beacon Oceanic Lighthouse & Launch Deck */}
+            <ContactBeaconScene onSelectPOI={onSelectContactPOI} />
 
             {/* Santhosh Developer Avatar 3D Presence */}
             <AvatarController
