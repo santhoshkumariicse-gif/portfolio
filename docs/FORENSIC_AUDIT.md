@@ -136,3 +136,4 @@ All personal data in the codebase has been verified against authenticated record
 2. **Design Tokens (`src/design-system/tokens.ts`)**: Colors (`#0A0B09`, `#C7FF45`, `#FF3358`, `#00E5FF`) and typography scale seamlessly match the futuristic JARVIS aesthetic.
 3. **Framer Motion Components (`src/motion/`)**: Overlay HUDs, chapter indicators, and dialog panels can directly sit atop the WebGL canvas.
 4. **Character SVGs (`src/svgs/character/`)**: Ideal high-fidelity 2D fallback companion and HUD speaker portrait when 3D avatar GLB is loading or disabled.
+

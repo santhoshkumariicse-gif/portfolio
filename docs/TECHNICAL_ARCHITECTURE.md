@@ -119,3 +119,4 @@ Target hardware is an **Intel Core i5-1334U with Intel Iris Xe Graphics** and mi
    - Resume `frameloop="always"` only during active movement or camera transitions.
 4. **Memory Cleanup Protocol**:
    - Geometries, materials, and textures must register explicit `.dispose()` calls within `useEffect` cleanup hooks.
+

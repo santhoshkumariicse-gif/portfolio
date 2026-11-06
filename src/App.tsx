@@ -35,6 +35,7 @@ const TechnicalBlogSection = lazy(() => import('./components/TechnicalBlogSectio
 const EngineeringDocCenter = lazy(() => import('./components/EngineeringDocCenter').then(m => ({ default: m.EngineeringDocCenter })));
 const CareerResumeCenter = lazy(() => import('./components/CareerResumeCenter').then(m => ({ default: m.CareerResumeCenter })));
 const ProjectDetailModal = lazy(() => import('./components/ProjectDetailModal').then(m => ({ default: m.ProjectDetailModal })));
+const UniverseStage = lazy(() => import('./components/universe/UniverseStage').then(m => ({ default: m.UniverseStage })));
 
 const FallbackLoader: React.FC = () => (
   <div className="py-16 flex items-center justify-center font-[var(--mono)] text-xs text-[var(--muted)]">
@@ -48,6 +49,7 @@ export const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedDetailProject, setSelectedDetailProject] = useState<ProjectItem | null>(null);
+  const [portfolioMode, setPortfolioMode] = useState<'classic' | 'universe'>('classic');
   const [visitorPath, setVisitorPath] = useState<VisitorPath>(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -135,6 +137,14 @@ export const App: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  if (portfolioMode === 'universe') {
+    return (
+      <Suspense fallback={<FallbackLoader />}>
+        <UniverseStage onExitUniverse={() => setPortfolioMode('classic')} />
+      </Suspense>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--primary-text)] font-[var(--sans)] flex flex-col selection:bg-[var(--accent)] selection:text-[var(--bg)]">
       {/* Skip to Main Content Link (WCAG 2.2 AA SC 2.4.1) */}
@@ -160,6 +170,7 @@ export const App: React.FC = () => {
         isMobileMenuOpen={isMobileMenuOpen}
         onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        onEnterUniverse={() => setPortfolioMode('universe')}
         navItems={navItems}
       />
 

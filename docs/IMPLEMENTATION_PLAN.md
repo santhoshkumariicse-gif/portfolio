@@ -97,3 +97,4 @@ npm install three @types/three @react-three/fiber @react-three/drei gsap
 1. **Incremental Compilation**: Every prompt must complete with clean TypeScript validation (`npx tsc --noEmit`) and successful production build (`npm run build`).
 2. **Safe Fallback**: At all times, users must be able to click "Enter Classic Portfolio" to instantly view the complete 2D responsive website.
 3. **No Fabricated Data**: All zone descriptions, project metrics, and academic statistics must strictly source from the verified datasets in `src/data/`.
+

@@ -8,6 +8,7 @@ interface NavbarProps {
   isMobileMenuOpen: boolean;
   onToggleMobileMenu: () => void;
   onOpenCommandPalette?: () => void;
+  onEnterUniverse?: () => void;
   navItems: { id: string; label: string }[];
 }
 
@@ -16,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isMobileMenuOpen,
   onToggleMobileMenu,
   onOpenCommandPalette,
+  onEnterUniverse,
   navItems
 }) => {
   const { language, setLanguage } = useLanguage();
@@ -94,6 +96,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <kbd className="hidden lg:inline text-[0.65rem] px-1.5 py-0.5 bg-[var(--raised)] border border-[var(--border)] text-[var(--muted)]">
                   ⌘K
                 </kbd>
+              </button>
+            )}
+
+            {onEnterUniverse && (
+              <button
+                type="button"
+                onClick={onEnterUniverse}
+                className="min-h-[38px] px-3 py-1.5 border border-[#00E5FF]/60 bg-[#00E5FF]/10 text-[#00E5FF] hover:bg-[#00E5FF] hover:text-[#0A0B09] font-[var(--mono)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-sm transition-all shadow-[0_0_12px_rgba(0,229,255,0.25)]"
+                title="Enter 3D Open-World Island Universe"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-ping" />
+                <span>3D Universe</span>
               </button>
             )}
 
