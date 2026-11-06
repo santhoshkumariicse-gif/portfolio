@@ -1,90 +1,76 @@
-# ASSET INVENTORY & SPECIFICATION
-**Project**: SANTHOSH KUMAR M | THE DEVELOPER CHRONICLES  
-**Phase**: Prompt 01 — Asset Inventory & Specification  
-**Date**: November 2026  
-**Author**: Lead Visual Designer & Asset Architect  
+# COMPREHENSIVE ASSET INVENTORY & VISUAL SPECIFICATION
+**Project**: THE ROAD OF SANTHOSH — Powered by SAN AI  
+**Archive Source**: User Supplied Archive `11.zip` (Extracted to `extracted_assets/11/`)  
+**Production Destination**: `public/assets/`  
+**Date**: November 2026 | **Auditor**: Lead Creative Technologist & Asset Architect  
 
 ---
 
-## 1. Existing Assets Baseline
+## 1. Asset Classification Policy & Mandatory Guardrails
 
-### 1.1 Authentic Photographic Assets
-- **Asset**: `public/images/santhosh-kumar.jpg` (105,051 bytes, JPEG)
-  - **Mirror**: `images/santhosh-kumar.jpg` (root level for direct branch deployment)
-  - **Description**: High-resolution formal portrait of Santhosh Kumar M in black suit, white collared shirt, and black necktie.
-  - **Status**: Live, verified, and rendering across Hero, About section, Open Graph meta tags, and PWA metadata.
-
-### 1.2 Custom SVG Technical Illustrations (14 Modules in `src/svgs/`)
-1. `HeroSystemArchitecture.tsx` (197 lines): Interactive central coordinator mesh with telemetry nodes.
-2. `DeveloperBlueprintSvg.tsx` (191 lines): Technical CAD engineering schematic with rotating radar sweep.
-3. `ContactNetworkSvg.tsx` (129 lines): Encrypted communication gateway with packet transmission pulses.
-4. `CybersecurityWorkflowSvg.tsx` (144 lines): Step-by-step security pipeline diagram.
-5. `PythonAutomationSvg.tsx` (127 lines): Event bus log parsing daemon schematic.
-6. `HrSuiteArchitectureSvg.tsx` (119 lines): Resume parsing and blind review stage-gate triage model.
-7. `RdaArchitectureSvg.tsx` (120 lines): Logistics geofenced route and driver queue architecture.
-8. `RecallAiArchitectureSvg.tsx` (120 lines): Vector retrieval and document chunking model.
-9. `NeuralArchitectureSVG.tsx` (172 lines): Neural network graph with glowing node layers.
-10. `RAGPipelineSVG.tsx` (154 lines): Retrieval-Augmented Generation ingestion pipeline.
-11. `CtfMatrixSvg.tsx` (107 lines): Reconnaissance and cryptographic challenge grid.
-12. `SkillCategorySvgs.tsx` (108 lines): Bespoke vector icons for Programming, Frontend, Backend, Mobile, Databases, Tools, and AI.
-13. `AIAgentArchitectureSvg.tsx` (145 lines): ReAct agentic feedback loop diagram.
-14. `index.ts` (26 lines): Unified barrel export interface.
-
-### 1.3 Static Public Files (`public/`)
-- `manifest.json`: Web Application Manifest for offline PWA installability.
-- `sw.js`: Service worker with cache-first and network-fallback strategy.
-- `robots.txt`: Search engine crawling directives.
-- `sitemap.xml`: SEO index containing verified canonical URL.
-- `404.html`: Single-page routing fallback preserving Vite path redirects on GitHub Pages.
-- `.nojekyll`: Instructs GitHub Pages to serve raw static assets without Jekyll interference.
+> [!IMPORTANT]
+> **Strict Policy on Personal Representation**:
+> - **Authentic Portrait**: Only Image [9] (`santhosh-profile-formal.jpg`) is the genuine personal photograph of Santhosh Kumar M. It is reserved exclusively for the About section, Hero credentials, Resume badge, and authentic profile cards.
+> - **Anime Illustrations**: Images [1], [8], [12], [13], [14] represent creative anime developer avatars, world-building artwork, and thematic workstation visuals. They must NEVER be labeled or presented as Santhosh's actual physical appearance.
+> - **AI / HUD Visuals**: Images [4], [5], [10] serve as telemetry backgrounds, SAN AI holographic core backdrops, and HUD reference overlays.
+> - **Domain Visuals**: Images [2], [3], [11] serve as technical backdrop graphics for Systems Lab, Cybersecurity SOC, and Neural Architecture projects.
 
 ---
 
-## 2. New Anime & Storytelling Asset Architecture
+## 2. Granular Inventory of the 14 User-Supplied Visual Assets
 
-To power "THE DEVELOPER CHRONICLES", a dedicated asset directory hierarchy is planned in `public/images/`:
+| # | Normalized Production Path | Original Archive Filename | Format | Dimensions | Aspect | Size (KB) | Visual Category | Quality Rating | Target UI Section & Usage |
+| :-: | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :---: | :--- |
+| **01** | `public/assets/illustrations/anime-coder-purple-study.jpg` | `0C6-jsSAEqNRsrp...jpg` | JPEG | 1000 × 561 | 1.78 (16:9) | 51.5 KB | Anime Illustration | High (Optimized) | **KM 6: Rest Stop** (Late Night Coding Sanctuary billboard & creative rest stop modal) |
+| **02** | `public/assets/projects/systems-lab-optical-bus.jpg` | `BPCvJ3Eew3V2...jpg` | JPEG | 1024 × 576 | 1.78 (16:9) | 128.6 KB | Systems / Hardware | High (Vibrant) | **KM 4: Project Highway** (Project 2: Inside the Systems Lab / High-Throughput Microservice Bus) |
+| **03** | `public/assets/cybersecurity/cyber-soc-threat-command.jpg` | `EitbpT_DAq_CRk...jpg` | JPEG | 600 × 340 | 1.76 (16:9) | 41.1 KB | Cybersecurity | Medium (Fast Load) | **KM 5: Experience Toll Gate** (Cybernaut Security & Threat Defense billboard visual) |
+| **04** | `public/assets/ai-interface/san-ai-keynote-telemetry.jpg` | `eYZoAIIhpI_5B...jpg` | JPEG | 1536 × 1024 | 1.50 (3:2) | 169.9 KB | Futuristic AI Core | Ultra-High (Retina) | **KM 0: Welcome Gate** & **SAN AI Global Assistant** modal backdrop / keynote telemetry |
+| **05** | `public/assets/ai-interface/avatar-wireframe-diagnostics.jpg` | `mSnMvrGr769d...jpg` | JPEG | 1080 × 608 | 1.78 (16:9) | 77.7 KB | Avatar Telemetry | High (Clean lines) | **SAN AI Diagnostics HUD** & System Telemetry Drawer (biometric and scan line overlay) |
+| **06** | `public/assets/backgrounds/jarvis-holographic-lab.jpg` | `n9jHV2BWOxm6...jpg` | JPEG | 884 × 442 | 2.00 (2:1) | 37.2 KB | Reference / Ambient | Standard | **KM 7: Hire Me / Mission Control** background glass lab atmosphere |
+| **07** | `public/assets/backgrounds/curved-workstation-reference.jpg` | `QNOokmbHG-ry...jpg` | JPEG | 1000 × 563 | 1.78 (16:9) | 71.1 KB | Reference / Ambient | High | **KM 3: Skills Junction** engineering lab backdrop & hardware workstation reference |
+| **08** | `public/assets/illustrations/anime-coder-sunset-cat.jpg` | `uH2q4jBooXfd...jpg` | JPEG | 919 × 517 | 1.78 (16:9) | 71.2 KB | Anime Illustration | High (Warm tone) | **KM 6: Rest Stop** (Sunset Lo-Fi Companion view & calm developer reflection zone) |
+| **09** | `public/assets/profile/santhosh-profile-formal.jpg` | `WhatsApp Image 2026-11-06 at 9.53.01 AM.jpeg` | JPEG | 970 × 1300 | 0.75 (3:4) | 57.9 KB | **Authentic Profile** | **Crisp Studio** | **KM 1: About Santhosh Billboard**, Bio Card, Navigation Avatar, Resume Header, Open Graph |
+| **10** | `public/assets/ai-interface/san-ai-crimson-hud-reference.jpg` | `wnb_RROZ1M38...jpg` | JPEG | 1000 × 533 | 1.88 (21:9) | 69.4 KB | HUD Telemetry UI | High (Tactical) | **Highway HUD Speedometer & Compass Ring** styling reference, tactical telemetry overlay |
+| **11** | `public/assets/projects/ai-brain-neural-architecture.jpg` | `X7Q26LLJ4CCv...jpg` | JPEG | 1024 × 576 | 1.78 (16:9) | 57.0 KB | AI / Neural Network | High (Luminescent) | **KM 4: Project Highway** (Project 1: Recall AI / Autonomous Multi-Agent RAG Orchestrator) |
+| **12** | `public/assets/illustrations/anime-coder-neon-looking-back.jpg` | `x9jLgr6fBUuB...jpg` | JPEG | 1024 × 576 | 1.78 (16:9) | 79.8 KB | Anime Illustration | High (Atmospheric) | **KM 2: Education Milestone** (Night study journey at Gnanamani College of Technology) |
+| **13** | `public/assets/illustrations/anime-coder-panoramic-red.jpg` | `YyqzDs2jpDf_...jpg` | JPEG | 2316 × 1080 | 2.14 (Ultrawide) | 251.4 KB | Anime Illustration | Ultra-Wide HD | **KM 0: Highway Start Banner** & Autopilot Panoramic Cockpit windshield backdrop |
+| **14** | `public/assets/illustrations/anime-coder-4k-workstation.jpg` | `Y_h-Xz8o-upx...jpg` | JPEG | 3840 × 2160 | 1.78 (4K UHD) | 451.0 KB | Anime Illustration | **Master 4K Ultra** | **Hero Banner (Full Screen)**, Desktop Wallpaper showcase & 3D Billboards master texture |
+
+---
+
+## 3. Directory Distribution Structure
+
+To maximize cache locality, Vite bundling speed, and asset organization, files are placed in `public/assets/`:
 
 ```
-public/images/
-├── avatar/                  # Original anime developer character states
-│   ├── avatar-idle.webp     # Default standing pose (observant, calm)
-│   ├── avatar-thinking.webp # Problem analysis pose (hand on chin, focused)
-│   ├── avatar-coding.webp   # Workstation pose (typing at keyboard with dual monitors)
-│   ├── avatar-achievement.webp # Project victory pose (thumbs up / celebrating milestone)
-│   ├── avatar-exploring.webp # Hologram interaction pose (gesturing at glowing UI node)
-│   └── avatar-future.webp   # Horizon pose (looking toward futuristic city skyline)
-├── scenes/                  # Layered atmospheric background environments
-│   ├── scene-beginning.webp # Cyber city command desk at twilight
-│   ├── scene-origin.webp    # Personal study and development workshop
-│   ├── scene-arsenal.webp   # Holographic skill laboratory
-│   ├── scene-missions.webp  # Mission control telemetry hub
-│   ├── scene-evolution.webp # Cybernetic milestone pathway
-│   └── scene-finale.webp    # Open sky observation horizon
-├── decorations/             # Technical HUD overlays & vector decals
-│   ├── hud-corner-reticles.svg
-│   ├── telemetry-grid-matrix.svg
-│   └── circuit-bus-lines.svg
-└── santhosh-kumar.jpg       # Authentic professional photograph (Preserved)
+public/assets/
+├── profile/
+│   └── santhosh-profile-formal.jpg          (Authentic portrait, 970x1300)
+├── illustrations/
+│   ├── anime-coder-4k-workstation.jpg       (Master 4K artwork, 3840x2160)
+│   ├── anime-coder-panoramic-red.jpg        (Ultrawide HUD cockpit, 2316x1080)
+│   ├── anime-coder-neon-looking-back.jpg    (Neon study glance, 1024x576)
+│   ├── anime-coder-sunset-cat.jpg           (Sunset lo-fi rest stop, 919x517)
+│   └── anime-coder-purple-study.jpg         (Night study workstation, 1000x561)
+├── ai-interface/
+│   ├── san-ai-keynote-telemetry.jpg         (Keynote AI sphere, 1536x1024)
+│   ├── san-ai-crimson-hud-reference.jpg     (Tactical crimson HUD ring, 1000x533)
+│   └── avatar-wireframe-diagnostics.jpg     (Avatar wireframe telemetry, 1080x608)
+├── cybersecurity/
+│   └── cyber-soc-threat-command.jpg         (SOC command wall, 600x340)
+├── projects/
+│   ├── ai-brain-neural-architecture.jpg     (Neural brain fiber optics, 1024x576)
+│   └── systems-lab-optical-bus.jpg          (Photonic processor bus, 1024x576)
+└── backgrounds/
+    ├── jarvis-holographic-lab.jpg           (Holographic Stark lab, 884x442)
+    └── curved-workstation-reference.jpg     (Curved triple-monitor desk, 1000x563)
 ```
 
 ---
 
-## 3. Character Visual Design Constraints
+## 4. Texture Preloading & WebGL Buffer Optimization
 
-- **Original Character Design**: The character must be a 100% original anime design. Never copy copyrighted anime characters (e.g., from Naruto, Demon Slayer, Jujutsu Kaisen, etc.).
-- **Consistent Proportions & Clothing**:
-  - Young male developer, dark hair with modern style, sharp and approachable expression.
-  - Attire: Minimalist dark cyber-hoodie or technical jacket with subtle lime (`#C7FF45`) stitching or trims matching the website theme.
-  - Consistent across all six expression states so the character feels like the same person in every chapter.
-- **Reference to Real Identity**: The character styling and facial structure will subtly reflect Santhosh Kumar M's actual portrait while remaining artistic and anime-stylized.
-- **Strict Integrity Rule**: Never replace Santhosh's actual professional photograph with an AI avatar. Both assets exist synergistically: the actual photo serves recruiter verification in the About section and modal, while the anime character acts as the interactive narrator.
-
----
-
-## 4. Procedural & Lightweight SVG Fallback Strategy
-
-To guarantee that the application **never** breaks if an external image fails to load or during offline testing:
-1. Every character state will have an inline SVG fallback component (`AnimeAvatarSvg.tsx`) with vector layers for head, hair, eyes, and cyber-jacket.
-2. All environmental backgrounds will have rich CSS gradient and SVG mesh fallbacks defined in `src/design-system/tokens.ts`.
-3. Image loading errors will automatically degrade gracefully to the SVG vector illustrations without layout shifts.
-
+For the Three.js 3D Highway environment:
+1. **Mipmapping & Anisotropy**: Textures mapped onto 3D Billboards (`anime-coder-4k-workstation.jpg`, `santhosh-profile-formal.jpg`, `ai-brain-neural-architecture.jpg`) use `texture.minFilter = THREE.LinearMipmapLinearFilter` and `texture.anisotropy = renderer.capabilities.getMaxAnisotropy()`.
+2. **Color Space**: Explicitly tagged `texture.colorSpace = THREE.SRGBColorSpace` to prevent washed-out dark reds or clipped contrast on HDR/sRGB monitors.
+3. **Lazy Buffer Allocation**: Billboards initialize with placeholder solid black material + glowing wireframe border; full-resolution image textures load asynchronously as the camera approaches within 120 meters.

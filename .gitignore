@@ -31,3 +31,7 @@ pnpm-debug.log*
 *.sw?
 .DS_Store
 
+# Temporary extracted archive assets
+extracted_assets/
+
+
