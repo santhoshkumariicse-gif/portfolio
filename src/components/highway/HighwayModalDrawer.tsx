@@ -128,53 +128,95 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
 
             {/* Custom Content Sections based on Category */}
             {milestone.category === 'profile' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-center text-xs">
-                <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                  <div className="text-slate-400 text-[10px]">Degree</div>
-                  <div className="text-white font-bold mt-1">B.E. CSE</div>
+              <div className="space-y-4 pt-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
+                  <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-slate-400 text-[10px]">Degree</div>
+                    <div className="text-white font-bold mt-1">B.E. CSE</div>
+                  </div>
+                  <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-slate-400 text-[10px]">CGPA</div>
+                    <div className="text-[#00E5FF] font-bold mt-1">7.2 / 10</div>
+                  </div>
+                  <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-slate-400 text-[10px]">Specialization</div>
+                    <div className="text-white font-bold mt-1">Full-Stack / AI</div>
+                  </div>
+                  <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-slate-400 text-[10px]">Location</div>
+                    <div className="text-white font-bold mt-1">Karaikal, India</div>
+                  </div>
                 </div>
-                <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                  <div className="text-slate-400 text-[10px]">CGPA</div>
-                  <div className="text-[#C7FF45] font-bold mt-1">7.2 / 10</div>
-                </div>
-                <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                  <div className="text-slate-400 text-[10px]">Specialization</div>
-                  <div className="text-white font-bold mt-1">Full-Stack / AI</div>
-                </div>
-                <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                  <div className="text-slate-400 text-[10px]">Location</div>
-                  <div className="text-white font-bold mt-1">Karaikal, India</div>
+
+                <div className="flex justify-center pt-2">
+                  <button
+                    type="button"
+                    onClick={onOpenClassicView}
+                    className="px-5 py-2.5 bg-[#FF1E40] hover:bg-[#FF3366] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-[0_0_20px_rgba(255,30,64,0.4)] transition-all flex items-center gap-2"
+                  >
+                    <span>Explore Full About Section</span>
+                  </button>
                 </div>
               </div>
             )}
 
-            {milestone.projects && (
+            {milestone.projectDetails && (
               <div className="space-y-3 pt-2">
                 <div className="text-xs font-bold uppercase tracking-wider text-[#00E5FF]">
-                  Featured Architectures:
+                  Project Specifications & Features:
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {milestone.projects.map((proj, pIdx) => (
-                    <div
-                      key={pIdx}
-                      className="p-3.5 bg-white/5 rounded-lg border border-white/10 hover:border-[#FF1E40]/50 transition-colors space-y-2"
+                <div className="p-4 bg-white/5 rounded-lg border border-white/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-base font-bold text-white">{milestone.projectDetails.name}</span>
+                    <span className="text-[10px] px-2 py-0.5 bg-[#FF1E40]/20 text-[#FF1E40] rounded font-bold border border-[#FF1E40]/30">
+                      {milestone.projectDetails.badge}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 font-sans">{milestone.projectDetails.desc}</p>
+
+                  <div className="space-y-1.5 pt-1">
+                    <div className="text-[10px] font-bold text-slate-400 uppercase">Architecture Highlights:</div>
+                    <ul className="space-y-1 text-xs text-slate-200">
+                      {milestone.projectDetails.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" />
+                          <span className="font-sans text-slate-300">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {milestone.projectDetails.tags.map((t, tIdx) => (
+                      <span key={tIdx} className="text-[10px] px-2 py-0.5 bg-black/60 text-slate-300 rounded border border-white/10">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-3">
+                    <a
+                      href={milestone.projectDetails.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded border border-white/20 transition-all flex items-center gap-2"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-bold text-white">{proj.name}</span>
-                        <span className="text-[9px] px-1.5 py-0.5 bg-[#FF1E40]/20 text-[#FF1E40] rounded font-bold border border-[#FF1E40]/30">
-                          {proj.badge}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-300 font-sans">{proj.desc}</p>
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {proj.tags.map((t, tIdx) => (
-                          <span key={tIdx} className="text-[9px] px-1.5 py-0.5 bg-black/50 text-slate-400 rounded">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      <span>Repository</span>
+                    </a>
+                    {milestone.projectDetails.demoUrl && (
+                      <a
+                        href={milestone.projectDetails.demoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-3.5 py-1.5 bg-[#FF1E40]/20 hover:bg-[#FF1E40]/30 text-[#FF1E40] text-xs font-bold rounded border border-[#FF1E40]/40 transition-all flex items-center gap-1.5"
+                      >
+                        <span>Live Verification</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             )}

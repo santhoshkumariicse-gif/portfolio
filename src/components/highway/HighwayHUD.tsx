@@ -19,17 +19,20 @@ import {
   Camera,
   Mic,
   MicOff,
-  Maximize2
+  Maximize2,
+  Globe
 } from 'lucide-react';
 
 export interface HighwayHUDProps {
   onExitHighway: () => void;
+  onReturnToUniverse?: () => void;
   onOpenSANAI: () => void;
   onInspectMilestone: (km: number) => void;
 }
 
 export const HighwayHUD: React.FC<HighwayHUDProps> = ({
   onExitHighway,
+  onReturnToUniverse,
   onOpenSANAI,
   onInspectMilestone
 }) => {
@@ -171,6 +174,19 @@ export const HighwayHUD: React.FC<HighwayHUDProps> = ({
               {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#FFB347]" />}
             </button>
 
+            {/* Universe Home Button */}
+            {onReturnToUniverse && (
+              <button
+                type="button"
+                onClick={onReturnToUniverse}
+                className="px-2.5 py-1 sm:px-3 sm:py-1.5 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/25 text-[#00E5FF] rounded-md font-bold text-[10px] uppercase tracking-wider border border-[#00E5FF]/40 shadow-sm transition-all flex items-center gap-1 backdrop-blur-md"
+                title="Return to 3D Universe Home"
+              >
+                <Globe className="w-3 h-3 text-[#00E5FF]" />
+                <span className="hidden sm:inline">Universe</span>
+              </button>
+            )}
+
             {/* 2D Classic Portfolio Fallback */}
             <button
               type="button"
@@ -178,7 +194,7 @@ export const HighwayHUD: React.FC<HighwayHUDProps> = ({
               className="px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-md font-bold text-[10px] uppercase tracking-wider border border-white/20 shadow-sm transition-all flex items-center gap-1 backdrop-blur-md"
               title="Switch to Traditional 2D Portfolio View"
             >
-              <Layers className="w-3 h-3 text-[#00E5FF]" />
+              <Layers className="w-3 h-3 text-slate-300" />
               <span className="hidden sm:inline">2D Classic</span>
             </button>
           </div>

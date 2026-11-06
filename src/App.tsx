@@ -36,7 +36,7 @@ const TechnicalBlogSection = lazy(() => import('./components/TechnicalBlogSectio
 const EngineeringDocCenter = lazy(() => import('./components/EngineeringDocCenter').then(m => ({ default: m.EngineeringDocCenter })));
 const CareerResumeCenter = lazy(() => import('./components/CareerResumeCenter').then(m => ({ default: m.CareerResumeCenter })));
 const ProjectDetailModal = lazy(() => import('./components/ProjectDetailModal').then(m => ({ default: m.ProjectDetailModal })));
-const UniverseStage = lazy(() => import('./components/universe/UniverseStage').then(m => ({ default: m.UniverseStage })));
+const UniverseHomepage = lazy(() => import('./components/universe/UniverseHomepage').then(m => ({ default: m.UniverseHomepage })));
 const HighwayStage = lazy(() => import('./components/highway/HighwayStage').then(m => ({ default: m.HighwayStage })));
 
 const FallbackLoader: React.FC = () => (
@@ -51,7 +51,7 @@ export const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedDetailProject, setSelectedDetailProject] = useState<ProjectItem | null>(null);
-  const [portfolioMode, setPortfolioMode] = useState<'classic' | 'highway' | 'universe'>('highway');
+  const [portfolioMode, setPortfolioMode] = useState<'classic' | 'highway' | 'universe'>('universe');
   const [visitorPath, setVisitorPath] = useState<VisitorPath>(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -139,18 +139,24 @@ export const App: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  if (portfolioMode === 'highway') {
+  if (portfolioMode === 'universe') {
     return (
       <Suspense fallback={<FallbackLoader />}>
-        <HighwayStage onExitHighway={() => setPortfolioMode('classic')} />
+        <UniverseHomepage
+          onViewJourney={() => setPortfolioMode('highway')}
+          onExplorePortfolio2D={() => setPortfolioMode('classic')}
+        />
       </Suspense>
     );
   }
 
-  if (portfolioMode === 'universe') {
+  if (portfolioMode === 'highway') {
     return (
       <Suspense fallback={<FallbackLoader />}>
-        <UniverseStage onExitUniverse={() => setPortfolioMode('classic')} />
+        <HighwayStage
+          onExitHighway={() => setPortfolioMode('classic')}
+          onReturnToUniverse={() => setPortfolioMode('universe')}
+        />
       </Suspense>
     );
   }

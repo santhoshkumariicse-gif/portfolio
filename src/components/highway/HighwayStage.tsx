@@ -12,6 +12,7 @@ import { AICore, AIConversationPanel, useSanAI } from '../../ai';
 
 export interface HighwayStageProps {
   onExitHighway: () => void;
+  onReturnToUniverse?: () => void;
 }
 
 interface HighwayCanvasInnerProps {
@@ -46,7 +47,7 @@ const HighwayCanvasInner: React.FC<HighwayCanvasInnerProps> = ({ onSelectMilesto
   );
 };
 
-const HighwayStageContent: React.FC<HighwayStageProps> = ({ onExitHighway }) => {
+const HighwayStageContent: React.FC<HighwayStageProps> = ({ onExitHighway, onReturnToUniverse }) => {
   const { toggleExpand } = useSanAI();
   const { currentKM } = useHighwayState();
   const [selectedMilestone, setSelectedMilestone] = useState<HighwayMilestoneData | null>(null);
@@ -97,6 +98,7 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onExitHighway }) => 
       {/* 3. Responsive JARVIS-inspired HUD */}
       <HighwayHUD
         onExitHighway={onExitHighway}
+        onReturnToUniverse={onReturnToUniverse}
         onOpenSANAI={toggleExpand}
         onInspectMilestone={handleInspectMilestone}
       />

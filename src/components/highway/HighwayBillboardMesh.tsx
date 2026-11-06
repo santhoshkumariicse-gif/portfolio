@@ -51,10 +51,10 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
     let offsetVector = new THREE.Vector3();
     let yPos = h / 2 + 3.0;
 
-    if (data.side === 'left') {
-      offsetVector = right.clone().multiplyScalar(-14.0);
-    } else if (data.side === 'right') {
-      offsetVector = right.clone().multiplyScalar(14.0);
+    const lateral = data.lateralOffset ?? (data.side === 'left' ? -14.0 : 14.0);
+
+    if (data.side === 'left' || data.side === 'right') {
+      offsetVector = right.clone().multiplyScalar(lateral);
     } else {
       // Overhead Gantry spanning across the highway
       yPos = 11.5;
@@ -68,9 +68,9 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
     let rotY = angle + Math.PI;
 
     if (data.side === 'left') {
-      rotY += 0.25; // angled 14 degrees inward toward the driver
+      rotY += 0.22; // angled inward toward driver
     } else if (data.side === 'right') {
-      rotY -= 0.25; // angled 14 degrees inward toward the driver
+      rotY -= 0.22; // angled inward toward driver
     }
 
     return {
@@ -87,7 +87,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
 
     // Calculate distance to camera
     const dist = camera.position.distanceTo(meshRef.current.position);
-    const isNearby = dist < 70;
+    const isNearby = dist < 75;
 
     // Pulse glow when nearby
     if (glowRef.current) {
@@ -120,6 +120,8 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
     document.body.style.cursor = 'auto';
     setHovered(false);
   };
+
+  const isKM1Personal = data.id === 'km-1';
 
   return (
     <group
@@ -168,6 +170,17 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
           />
         )}
       </mesh>
+
+      {/* Dedicated Spotlights for KM 1 Personal Photo Billboard */}
+      {isKM1Personal && (
+        <group position={[0, height / 2 + 1.5, 3]}>
+          <pointLight color="#FF1E40" intensity={3.5} distance={25} />
+          <mesh>
+            <sphereGeometry args={[0.2, 8, 8]} />
+            <meshBasicMaterial color="#FF1E40" />
+          </mesh>
+        </group>
+      )}
 
       {/* 4. Top Gantry Indicator Bar with Milestone Code */}
       <group position={[0, height / 2 + 0.6, 0.1]}>
@@ -243,4 +256,3 @@ export const HighwayBillboardsMesh: React.FC<HighwayBillboardsMeshProps> = ({ on
     </group>
   );
 };
-

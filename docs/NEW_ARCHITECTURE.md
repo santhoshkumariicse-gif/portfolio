@@ -1,100 +1,75 @@
-# TECHNICAL ARCHITECTURE: THE ROAD OF SANTHOSH × SAN AI
-**Cinematic 3D Highway Portfolio with JARVIS-Inspired AI Interface**
+# MASTER ARCHITECTURE: 3D UNIVERSE HOMEPAGE → VIEW JOURNEY → HIGHWAY PORTFOLIO
+**Project**: THE ROAD OF SANTHOSH — Powered by SAN AI  
+**Specification Version**: 3.0.0  
+**Date**: November 2026 | **Architect**: Principal 3D Web Architect & UI/UX Director  
 
 ---
 
-## 1. System Vision
-**THE ROAD OF SANTHOSH** reimagines the developer portfolio as an endless futuristic highway spanning **KM 0 to KM 7**. The user drives or cruises on autopilot along an asphalt highway illuminated by crimson and amber holographic guide markers, passing 3D milestone structures and billboards that present verified software engineering achievements.
+## 1. Core User Flow & Screen Sequence
 
----
-
-## 2. Highway Milestone Blueprint (KM 0 — KM 7)
+The website strictly follows a linear, cinematic narrative progression where the explorable 3D Universe acts as the grand entrance, launching into the 3D Highway via the central "VIEW JOURNEY" dispatch:
 
 ```
-[KM 0.0] === START POINT: Holographic Neon Welcome Gantry & Identity Brief
-   │
-[KM 1.0] === ABOUT ME: Karaikal Coastal Origin, Philosophy & Personal Dossier
-   │
-[KM 2.0] === EDUCATION: Gnanamani College of Technology, B.E. CSE, 7.2 GPA
-   │
-[KM 3.0] === SKILLS JUNCTION: 7 Radial Overhead Gantries (Full-Stack, AI, Mobile)
-   │
-[KM 4.0] === PROJECT HIGHWAY: 3D Billboards for LorryBook, NexusATS, Recall AI
-   │
-[KM 5.0] === EXPERIENCE TOLL GATE: Cybernaut & ELITA Internship Checkpoints
-   │
-[KM 6.0] === REST STOP: Systems Lab, Terminal Simulator & Technical Articles
-   │
-[KM 7.0] === DESTINATION: Contact Terminal, ATS Resume Transmission & Dispatch
+┌────────────────────────────────────────────────────────┐
+│               SCREEN 1: 3D UNIVERSE HOMEPAGE           │
+│  - Deep space environment with central cinematic planet │
+│  - Stars, crimson holographic particles & SAN AI core  │
+│  - Santhosh Kumar M | Full-Stack & AI Systems Engineer  │
+│  - Prominent Primary Action: [ VIEW JOURNEY ]          │
+│  - Secondary: [ Explore Portfolio (2D) ] | Sound Toggle│
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│           SCREEN 2: CINEMATIC WARP TRANSITION          │
+│  - SAN AI voice transmission: "Engaging Speedway Bus"  │
+│  - Camera accelerates forward into hyperdrive warp     │
+│  - Title reveal: "THE ROAD OF SANTHOSH"                │
+│  - Sequential road luminaire activation into KM 0      │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│               SCREEN 3: THE 3D HIGHWAY PORTFOLIO       │
+│                                                        │
+│  [KM 0: Welcome Gate]                                  │
+│  - Origin Portal & Speedway Ingress                    │
+│                                                        │
+│  [KM 1: Personal Photo Billboard (FIRST BILLBOARD)]    │
+│  - Santhosh's authentic suit portrait (uncropped)      │
+│  - B.E. CSE, Gnanamani College of Technology (7.2 GPA) │
+│  - [ Explore About Me ] interaction                    │
+│                                                        │
+│  [KM 2: Academic Overpass (Education)]                 │
+│  - Nirmala R.C. School + Gnanamani College timeline    │
+│                                                        │
+│  [KM 3: Skills Junction (Direction Signboards)]        │
+│  - Multi-lane overhead highway gantry signboards       │
+│  - Languages, Frontend, Backend, DBs, Android, AI      │
+│                                                        │
+│  [KM 4: Project Highway (Alternating Billboards)]      │
+│  - Billboard 4A (Left): LorryBook / RDA Logistics      │
+│  - Billboard 4B (Right): NexusATS Hiring Engine        │
+│  - Billboard 4C (Left): Recall AI Autonomous RAG       │
+│  - GitHub & Verified Live Demo links + Detail Panels   │
+│                                                        │
+│  [KM 5: Experience Toll Gate]                          │
+│  - Cybernaut (Python Intern) & ELITA (Web/App Intern)  │
+│                                                        │
+│  [KM 6: Rest Stop Sanctuary]                           │
+│  - Hobbies, lo-fi companion, continuous learning flow  │
+│                                                        │
+│  [KM 7: Destination City (Hire Me)]                    │
+│  - Contact form, email dispatch, verified ATS resume   │
+└────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Mathematical & 3D Road Architecture
+## 2. Strict Highway Preservation Contract
 
-### Spline Geometry (`THREE.CatmullRomCurve3`):
-- Defined across 8 key spatial knots in world coordinates $(X, Y, Z)$:
-  - $P_0$ (KM 0): `(0, 0, 0)`
-  - $P_1$ (KM 1): `(0, 0, -200)`
-  - $P_2$ (KM 2): `(25, 2, -450)` (gentle curved incline)
-  - $P_3$ (KM 3): `(40, 5, -750)` (Skills junction bridge)
-  - $P_4$ (KM 4): `(10, 8, -1100)` (Project Highway straightaway)
-  - $P_5$ (KM 5): `(-25, 5, -1450)` (Experience toll approach)
-  - $P_6$ (KM 6): `(-10, 2, -1800)` (Rest stop observation plateau)
-  - $P_7$ (KM 7): `(0, 0, -2200)` (Destination beacon terminal)
-- Curve Type: Centripetal Catmull-Rom with tension $0.25$ for gentle banking.
-- Total Road Length: $2,200\text{ world units}$ ($\approx 314.3\text{ units per KM}$).
-
-### Road Extrusion & Mesh:
-- Road width: $14.0\text{ units}$ (3 lanes: left shoulder, center cruising lane, right passing lane).
-- Surface Material: Deep charcoal asphalt (`#0C0D0B`) with subtle roughness and metallic sheen.
-- Road Markings:
-  - White solid edge lines (`#E2E8F0`).
-  - Dashed amber center dividing dashes (`#FFB347`).
-  - Guardrail barriers with retroreflective crimson studs (`#FF3366`).
-  - Instanced highway light poles every 40 units casting directional cones.
-
----
-
-## 4. Single Authoritative Navigation State Machine
-
-Located in `src/components/highway/HighwayStateContext.tsx`:
-```typescript
-interface HighwayNavigationState {
-  progress: number;       // 0.0 to 1.0 along CatmullRom curve
-  currentKM: number;      // progress * 7.0 (0.00 km to 7.00 km)
-  speed: number;          // Current virtual velocity in km/h (0 to 140 km/h)
-  targetKM: number | null;// When navigating to a specific milestone
-  mode: 'manual' | 'autopilot';
-  isMuted: boolean;
-  activeBillboardId: string | null;
-}
-```
-
-### Input Fusion (Zero Stutter):
-- **Mouse Wheel**: Adds delta to target velocity.
-- **Keyboard (W / Up)**: Accelerates forward ($a = +35\text{ km/h/s}$).
-- **Keyboard (S / Down)**: Brakes / reverses ($a = -45\text{ km/h/s}$).
-- **Keyboard (A / D / Left / Right)**: Subtle lane steering offset ($\pm 3.5\text{ units}$).
-- **Touch Swipe (Mobile)**: Vertical drag controls speed and forward progression.
-- **SAN AI / Roadmap Click**: Sets `targetKM`; autopilot smooth-damps progress to target with cubic ease-in-out curve.
-
----
-
-## 5. Camera Follow Rig
-- The camera follows behind the virtual vehicle / traveler position:
-  - $\vec{P}_{\text{cam}} = \vec{P}(t) - \vec{T}(t) \cdot 18.0 + \vec{U}(t) \cdot 5.5$
-  - Where $\vec{T}(t)$ is the road tangent vector and $\vec{U}(t)$ is the up normal vector.
-  - Camera `lookAt` focuses $25\text{ units}$ ahead along the tangent: $\vec{P}(t) + \vec{T}(t) \cdot 25.0$.
-  - Damping: Smooth exponential lerp eliminates jitter.
-
----
-
-## 6. HUD Specification (JARVIS Design)
-- **Top Left**: SAN AI status widget (IDLE, CRUISE, AUTOPILOT, NAVIGATING) with animated concentric SVG rings.
-- **Top Right**: KM Marker (`KM 0.00 / 7.00`), active chapter title, and mode badge (`[MANUAL]` / `[AUTOPILOT]`).
-- **Bottom Center**:
-  - Speedometer readout (`000 KM/H`).
-  - Interactive roadmap milestone scrub bar (KM 0 to KM 7 clickable checkpoints).
-  - Audio mute toggle and Classic 2D view switcher.
-
+The existing 3D Highway implementation is officially locked:
+1. **Road Pavement & Geometry**: The 2,200-unit Catmull-Rom spline, 4-lane striping, solid white emergency lines, amber dashed center striping, and crimson laser edge rails (`#FF1E40`) are preserved without regression.
+2. **Navigation & Physics**: The authoritative `HighwayStateContext` (velocity calculation, rolling friction, lane steering, autopilot smoothing) remains the central physics arbiter.
+3. **Cockpit HUD & Telemetry**: The speedometer, odometer (KM 0 to 7), 8-node roadmap scrubber, and camera view toggle (`CHASE` vs `COCKPIT`) remain fully functional.
+4. **No Full Page Reloads**: Transitions between Universe and Highway occur completely in-memory using React state and Three.js camera interpolation.
