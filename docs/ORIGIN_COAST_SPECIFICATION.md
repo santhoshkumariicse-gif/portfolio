@@ -106,3 +106,4 @@ Clicking either POI opens `OriginCoastModal.tsx`, giving visitors the ability to
 - Inspect detailed coursework and GPA metrics.
 - Ask SAN AI targeted questions about Santhosh's academic background.
 - Fast travel to the next narrative zone: **Zone 02 — Skill Forest**.
+

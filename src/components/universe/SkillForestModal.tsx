@@ -316,3 +316,4 @@ export const SkillForestModal: React.FC<SkillForestModalProps> = ({
     </AnimatePresence>
   );
 };
+

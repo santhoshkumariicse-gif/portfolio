@@ -290,3 +290,4 @@ export const ExperienceMountainScene: React.FC<ExperienceMountainSceneProps> = (
     </group>
   );
 };
+

@@ -75,3 +75,4 @@ The `CommandProcessor` parses natural language phrases with fuzzy intent matchin
 | **Apple Safari (macOS / iOS)** | ⚠️ Limited / Permission | ✅ Full Support | Prompts user for speech permission; keyboard fallback if denied |
 | **Mozilla Firefox** | ❌ Flag Gated | ✅ Full Support | Automatically provides text terminal with quick chips |
 | **Brave / Privacy Browsers** | ⚠️ Shield Dependent | ✅ Full Support | Displays gentle notice to use text terminal if shields block STT |
+

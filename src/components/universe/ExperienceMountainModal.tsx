@@ -292,3 +292,4 @@ export const ExperienceMountainModal: React.FC<ExperienceMountainModalProps> = (
     </AnimatePresence>
   );
 };
+

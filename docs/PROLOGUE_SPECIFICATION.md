@@ -35,3 +35,4 @@ The Prologue serves as the atmospheric gateway into Santhosh Kumar M's universe,
 - **Zero Audio Autoplay**: Sound effects and voice synthesis remain muted until visitor explicitly enables audio.
 - **Framer Motion + Three.js**: Synchronized React Three Fiber procedural rendering with GPU-accelerated CSS letterbox overlays.
 - **Performance Budget**: Entire space prologue renders in **under 4ms per frame** on Intel Iris Xe graphics.
+

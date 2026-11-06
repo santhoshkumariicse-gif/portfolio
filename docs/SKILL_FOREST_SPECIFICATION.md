@@ -87,3 +87,4 @@ Visitors can click any individual crystal or the central obelisk to open `SkillF
 - Review verified technology badges and descriptions.
 - Click "Audit" or "Ask SAN AI" to query Santhosh's specific experience with that tool.
 - Fast-travel directly to **Zone 03 — Project City**.
+

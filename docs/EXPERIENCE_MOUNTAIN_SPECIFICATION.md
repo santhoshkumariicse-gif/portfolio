@@ -90,3 +90,4 @@ When visitors reach Experience Mountain, SAN AI announces:
 > *"Welcome to Experience Mountain. As you ascend the mountain path, you will discover the checkpoints marking Santhosh's developer internships at Cybernaut and ELITA, his competitive CTF challenges, and his verified technical certifications. Click any checkpoint to inspect his track record."*
 
 The modal features direct navigation to the world's crowning horizon checkpoint: **Zone 05 — Contact Beacon**.
+

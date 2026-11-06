@@ -349,3 +349,4 @@ export const SkillForestScene: React.FC<SkillForestSceneProps> = ({ onSelectCate
     </group>
   );
 };
+

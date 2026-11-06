@@ -254,3 +254,4 @@ export const ContactBeaconScene: React.FC<ContactBeaconSceneProps> = ({ onSelect
     </group>
   );
 };
+

@@ -95,3 +95,4 @@ When visitors transition to Project City, SAN AI announces:
 > *"Welcome to Project City. Every neon skyscraper in this metropolis represents a real, verified software system engineered by Santhosh — including the LorryBook logistics dispatch platform, the NexusATS candidate parsing pipeline, and the Recall AI hackathon assistant. Click any skyscraper to inspect its architectural dossier."*
 
 Clicking any building or the top HUD `[INSPECT MISSIONS]` button opens the full dossier with fast-travel navigation to **Zone 04 — Experience Mountain**.
+

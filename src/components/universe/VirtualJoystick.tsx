@@ -101,3 +101,4 @@ export const VirtualJoystick: React.FC<VirtualJoystickProps> = ({ onMove, classN
     </div>
   );
 };
+

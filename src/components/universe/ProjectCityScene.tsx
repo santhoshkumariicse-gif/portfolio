@@ -360,3 +360,4 @@ export const ProjectCityScene: React.FC<ProjectCitySceneProps> = ({ onSelectProj
     </group>
   );
 };
+

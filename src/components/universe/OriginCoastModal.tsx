@@ -324,3 +324,4 @@ export const OriginCoastModal: React.FC<OriginCoastModalProps> = ({
     </AnimatePresence>
   );
 };
+

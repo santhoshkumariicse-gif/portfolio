@@ -75,3 +75,4 @@ Located in `src/components/universe/GuidedTourController.tsx`:
 - Entering Free Roam initializes player coordinates at Origin Coast (`[0, 1.5, 75]`).
 - Exiting Free Roam restores OrbitControls with smooth target damping.
 - Tour transitions update the active zone in `useSanAI()` so SAN AI vocalizes zone greetings at each destination.
+
