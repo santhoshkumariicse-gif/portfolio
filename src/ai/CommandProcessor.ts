@@ -124,7 +124,37 @@ export class CommandProcessor {
       };
     }
 
-    // 4. View Switching (3D Universe vs 2D Classic Portfolio)
+    // 4. View Switching (3D Highway vs 3D Universe vs 2D Classic Portfolio)
+    if (raw.includes('highway') || raw.includes('road of santhosh') || raw.includes('highway mode')) {
+      return {
+        text: `Engaging THE ROAD OF SANTHOSH. Entering the 3D cinematic highway across KM 0 to KM 7.`,
+        action: { type: 'toggle_view', target: 'highway' }
+      };
+    }
+
+    if (raw.includes('autopilot') || raw.includes('cruise')) {
+      return {
+        text: `Enabling SAN AI Autopilot Cruise. Sit back and enjoy the cinematic road journey.`,
+        action: { type: 'set_mode', target: 'autopilot' }
+      };
+    }
+
+    if (raw.includes('manual drive') || raw.includes('manual mode')) {
+      return {
+        text: `Engaging Manual Driving mode. Use W/S or mouse wheel to accelerate and brake, and A/D to steer.`,
+        action: { type: 'set_mode', target: 'manual' }
+      };
+    }
+
+    const kmMatch = raw.match(/km\s*([0-7])/i) || raw.match(/kilometer\s*([0-7])/i);
+    if (kmMatch) {
+      const targetKm = parseInt(kmMatch[1], 10);
+      return {
+        text: `Autopilot targeting KM ${targetKm}. Navigating now along the highway.`,
+        action: { type: 'navigate_zone', target: `km-${targetKm}` }
+      };
+    }
+
     if (raw.includes('classic') || raw.includes('2d') || raw.includes('standard') || raw.includes('html') || raw.includes('simple view')) {
       return {
         text: `Switching display interface to the Traditional 2D Portfolio view.`,

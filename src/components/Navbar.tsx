@@ -8,6 +8,7 @@ interface NavbarProps {
   isMobileMenuOpen: boolean;
   onToggleMobileMenu: () => void;
   onOpenCommandPalette?: () => void;
+  onEnterHighway?: () => void;
   onEnterUniverse?: () => void;
   navItems: { id: string; label: string }[];
 }
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isMobileMenuOpen,
   onToggleMobileMenu,
   onOpenCommandPalette,
+  onEnterHighway,
   onEnterUniverse,
   navItems
 }) => {
@@ -96,6 +98,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <kbd className="hidden lg:inline text-[0.65rem] px-1.5 py-0.5 bg-[var(--raised)] border border-[var(--border)] text-[var(--muted)]">
                   ⌘K
                 </kbd>
+              </button>
+            )}
+
+            {onEnterHighway && (
+              <button
+                type="button"
+                onClick={onEnterHighway}
+                className="min-h-[38px] px-3 py-1.5 border border-[#FF3366]/60 bg-[#FF3366]/15 text-[#FF3366] hover:bg-[#FF3366] hover:text-white font-[var(--mono)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-sm transition-all shadow-[0_0_12px_rgba(255,51,102,0.3)] cursor-pointer"
+                title="Enter 3D Highway: The Road of Santhosh"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF3366] animate-ping" />
+                <span>3D Highway</span>
               </button>
             )}
 

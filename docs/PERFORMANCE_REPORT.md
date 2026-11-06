@@ -63,3 +63,4 @@ Tested on standard test hardware configurations:
 | **1024px** | iPad Pro / Small Laptop | ✅ Fullscreen | ✅ WASD / Pointer | ✅ Dual Column |
 | **1366px** | Standard HD Laptop | ✅ Fullscreen | ✅ WASD / Pointer | ✅ Full HUD |
 | **1920px** | Full HD Desktop Monitor | ✅ Fullscreen | ✅ WASD / Pointer | ✅ Full HUD |
+

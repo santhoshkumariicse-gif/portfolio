@@ -63,3 +63,4 @@ To guarantee 100% offline reliability, zero external asset network requests, and
 - **Vignette Overlay**: Subtle radial gradient darkening viewport perimeters for focused cinematic depth.
 - **Holographic Transition Toast**: An animated modal banner that announces upcoming vector coordinates when warping across the island archipelago.
 - **Atmospheric Fog**: Exponential height fog blending terrain geometry seamlessly into the oceanic horizon.
+

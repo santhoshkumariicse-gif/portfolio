@@ -37,6 +37,7 @@ const EngineeringDocCenter = lazy(() => import('./components/EngineeringDocCente
 const CareerResumeCenter = lazy(() => import('./components/CareerResumeCenter').then(m => ({ default: m.CareerResumeCenter })));
 const ProjectDetailModal = lazy(() => import('./components/ProjectDetailModal').then(m => ({ default: m.ProjectDetailModal })));
 const UniverseStage = lazy(() => import('./components/universe/UniverseStage').then(m => ({ default: m.UniverseStage })));
+const HighwayStage = lazy(() => import('./components/highway/HighwayStage').then(m => ({ default: m.HighwayStage })));
 
 const FallbackLoader: React.FC = () => (
   <div className="py-16 flex items-center justify-center font-[var(--mono)] text-xs text-[var(--muted)]">
@@ -50,7 +51,7 @@ export const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedDetailProject, setSelectedDetailProject] = useState<ProjectItem | null>(null);
-  const [portfolioMode, setPortfolioMode] = useState<'classic' | 'universe'>('classic');
+  const [portfolioMode, setPortfolioMode] = useState<'classic' | 'highway' | 'universe'>('highway');
   const [visitorPath, setVisitorPath] = useState<VisitorPath>(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -138,6 +139,14 @@ export const App: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  if (portfolioMode === 'highway') {
+    return (
+      <Suspense fallback={<FallbackLoader />}>
+        <HighwayStage onExitHighway={() => setPortfolioMode('classic')} />
+      </Suspense>
+    );
+  }
+
   if (portfolioMode === 'universe') {
     return (
       <Suspense fallback={<FallbackLoader />}>
@@ -171,6 +180,7 @@ export const App: React.FC = () => {
         isMobileMenuOpen={isMobileMenuOpen}
         onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        onEnterHighway={() => setPortfolioMode('highway')}
         onEnterUniverse={() => setPortfolioMode('universe')}
         navItems={navItems}
       />
