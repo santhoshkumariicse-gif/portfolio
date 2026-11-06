@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UniverseCanvas } from './UniverseCanvas';
+import { UniverseCanvas, ExplorationMode } from './UniverseCanvas';
 import { WorldMinimap } from './WorldMinimap';
 import { PrologueOverlay } from './PrologueOverlay';
 import { OriginCoastModal } from './OriginCoastModal';
@@ -8,9 +8,28 @@ import { SkillForestModal } from './SkillForestModal';
 import { ProjectCityModal } from './ProjectCityModal';
 import { ExperienceMountainModal } from './ExperienceMountainModal';
 import { ContactBeaconModal } from './ContactBeaconModal';
+import { VirtualJoystick } from './VirtualJoystick';
+import { TOUR_WAYPOINTS } from './GuidedTourController';
 import { ZONE_COORDINATES, ZoneCoordinate } from './WorldCoordinates';
 import { AICore, AIConversationPanel, useSanAI } from '../../ai';
-import { Layers, X, Sparkles, Navigation, FileText, Cpu, Building2, Mountain, Radio } from 'lucide-react';
+import {
+  Layers,
+  X,
+  Sparkles,
+  Navigation,
+  FileText,
+  Cpu,
+  Building2,
+  Mountain,
+  Radio,
+  Eye,
+  Gamepad2,
+  Video,
+  Play,
+  Pause,
+  SkipForward,
+  SkipBack
+} from 'lucide-react';
 
 export interface UniverseStageProps {
   onExitUniverse: () => void;
@@ -18,6 +37,12 @@ export interface UniverseStageProps {
 
 export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) => {
   const [activeZone, setActiveZone] = useState<ZoneCoordinate>(ZONE_COORDINATES['prologue']);
+  const [explorationMode, setExplorationMode] = useState<ExplorationMode>('orbit');
+  const [tourIndex, setTourIndex] = useState(0);
+  const [isTourPlaying, setIsTourPlaying] = useState(true);
+  const [joystickInput, setJoystickInput] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [proximityPOI, setProximityPOI] = useState<string | null>(null);
+
   const [showMinimap, setShowMinimap] = useState(true);
   const [originModalOpen, setOriginModalOpen] = useState(false);
   const [originModalTab, setOriginModalTab] = useState<'workspace' | 'education'>('workspace');
@@ -33,6 +58,42 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
 
   const { announce } = useSanAI();
   const zonesList = Object.values(ZONE_COORDINATES).filter((z) => z.id !== 'prologue');
+
+  const handleInspectPOI = (poiId: string) => {
+    switch (poiId) {
+      case 'origin-coast':
+      case 'workspace':
+        setOriginModalTab('workspace');
+        setOriginModalOpen(true);
+        break;
+      case 'education':
+        setOriginModalTab('education');
+        setOriginModalOpen(true);
+        break;
+      case 'skill-forest':
+        setSkillModalOpen(true);
+        break;
+      case 'project-city':
+        setProjectModalOpen(true);
+        break;
+      case 'exp-mountain':
+        setExpModalOpen(true);
+        break;
+      case 'contact-beacon':
+        setContactModalOpen(true);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleTourWaypointChange = (index: number) => {
+    setTourIndex(index);
+    const waypoint = TOUR_WAYPOINTS[index];
+    if (waypoint && ZONE_COORDINATES[waypoint.id]) {
+      setActiveZone(ZONE_COORDINATES[waypoint.id]);
+    }
+  };
 
   // Trigger contextual SAN AI audio & textual briefings upon arriving in zones
   useEffect(() => {
@@ -70,6 +131,17 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
       <div className="absolute inset-0 z-0">
         <UniverseCanvas
           activeZone={activeZone}
+          mode={explorationMode}
+          joystickInput={joystickInput}
+          tourIndex={tourIndex}
+          isTourPlaying={isTourPlaying}
+          onTourWaypointChange={handleTourWaypointChange}
+          onTourComplete={() => {
+            setIsTourPlaying(false);
+            setContactModalOpen(true);
+          }}
+          onProximityPOI={setProximityPOI}
+          onInspectPOI={handleInspectPOI}
           onSelectOriginPOI={(poi) => {
             setOriginModalTab(poi);
             setOriginModalOpen(true);
@@ -96,35 +168,92 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
       {/* 2. Prologue Mode Cinematic Overlay */}
       {activeZone.id === 'prologue' ? (
         <PrologueOverlay
-          onBeginJourney={() => setActiveZone(ZONE_COORDINATES['origin-coast'])}
-          onStartTour={() => setActiveZone(ZONE_COORDINATES['origin-coast'])}
-          onEnterFreeRoam={() => setActiveZone(ZONE_COORDINATES['origin-coast'])}
+          onBeginJourney={() => {
+            setActiveZone(ZONE_COORDINATES['origin-coast']);
+            setExplorationMode('orbit');
+          }}
+          onStartTour={() => {
+            setActiveZone(ZONE_COORDINATES['origin-coast']);
+            setExplorationMode('guided-tour');
+            setTourIndex(0);
+            setIsTourPlaying(true);
+          }}
+          onEnterFreeRoam={() => {
+            setActiveZone(ZONE_COORDINATES['origin-coast']);
+            setExplorationMode('free-roam');
+          }}
           onEnterSimplePortfolio={onExitUniverse}
         />
       ) : (
         <>
           {/* Top HUD Banner */}
-          <div className="absolute top-0 left-0 right-0 z-20 p-3 sm:p-5 flex items-center justify-between pointer-events-none">
+          <div className="absolute top-0 left-0 right-0 z-20 p-3 sm:p-5 flex items-center justify-between pointer-events-none gap-2">
             {/* Left: Project & Universe Badge */}
             <div className="pointer-events-auto flex items-center gap-2.5 bg-[#0A0B09]/85 border border-white/20 p-2 sm:px-3 sm:py-2 rounded-sm backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse" />
               <div className="font-mono text-xs">
                 <span className="text-[#00E5FF] font-bold block sm:inline mr-2">SAN AI // UNIVERSE</span>
-                <span className="text-[var(--secondary-text)] text-[10px] hidden md:inline">
-                  EXPLORABLE 3D ISLAND PROTOTYPE
+                <span className="text-[var(--secondary-text)] text-[10px] hidden lg:inline">
+                  EXPLORABLE 3D ISLAND
                 </span>
               </div>
             </div>
 
+            {/* Exploration Mode Switcher */}
+            <div className="pointer-events-auto flex items-center bg-[#0A0B09]/85 border border-white/20 p-1 rounded-sm backdrop-blur-md gap-1">
+              <button
+                type="button"
+                onClick={() => setExplorationMode('orbit')}
+                className={`px-2.5 py-1 rounded-sm font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
+                  explorationMode === 'orbit'
+                    ? 'bg-[#C7FF45] text-[#0A0B09] shadow-sm'
+                    : 'text-[var(--secondary-text)] hover:text-white'
+                }`}
+                title="Free Orbit Camera"
+              >
+                <Eye className="w-3 h-3" />
+                <span className="hidden sm:inline">Orbit</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setExplorationMode('free-roam')}
+                className={`px-2.5 py-1 rounded-sm font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
+                  explorationMode === 'free-roam'
+                    ? 'bg-[#C7FF45] text-[#0A0B09] shadow-sm'
+                    : 'text-[var(--secondary-text)] hover:text-white'
+                }`}
+                title="WASD / Joystick Third-Person Roam"
+              >
+                <Gamepad2 className="w-3 h-3" />
+                <span className="hidden sm:inline">Free Roam</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setExplorationMode('guided-tour');
+                  setTourIndex(0);
+                  setIsTourPlaying(true);
+                  setActiveZone(ZONE_COORDINATES['origin-coast']);
+                }}
+                className={`px-2.5 py-1 rounded-sm font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
+                  explorationMode === 'guided-tour'
+                    ? 'bg-[#C7FF45] text-[#0A0B09] shadow-sm'
+                    : 'text-[var(--secondary-text)] hover:text-white'
+                }`}
+                title="Automated Cinematic Tour"
+              >
+                <Video className="w-3 h-3" />
+                <span className="hidden sm:inline">Tour</span>
+              </button>
+            </div>
+
             {/* Center: Current Zone HUD Pillar + Inspect Action */}
-            <div className="pointer-events-auto hidden sm:flex items-center gap-3">
+            <div className="pointer-events-auto hidden md:flex items-center gap-3">
               <div className="flex items-center gap-2 bg-[#0A0B09]/85 border border-white/20 px-3 py-1.5 rounded-sm backdrop-blur-md font-mono text-xs">
                 <Navigation className="w-3.5 h-3.5 text-[#C7FF45]" />
                 <span className="text-[var(--primary-text)] font-bold">{activeZone.name}</span>
-                <span className="text-[var(--muted)]">·</span>
-                <span className="text-[10px] text-[#C7FF45]">
-                  [{activeZone.center[0]}, {activeZone.center[1]}, {activeZone.center[2]}]
-                </span>
               </div>
 
               {activeZone.id === 'origin-coast' && (
@@ -200,32 +329,109 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
             </div>
           </div>
 
-          {/* Bottom Zone Quick-Travel Bar */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 max-w-2xl w-[92%] pointer-events-auto">
-            <div className="p-1.5 bg-[#0A0B09]/90 border border-white/20 rounded-sm backdrop-blur-md flex items-center justify-between gap-1 overflow-x-auto shadow-2xl">
-              {zonesList.map((zone) => {
-                const isCurrent = activeZone.id === zone.id;
-                return (
+          {/* Bottom Controls: Guided Tour Bar vs Normal Quick-Travel Bar */}
+          {explorationMode === 'guided-tour' ? (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 max-w-xl w-[92%] pointer-events-auto">
+              <div className="p-2.5 bg-[#0A0B09]/95 border border-[#C7FF45]/60 rounded-sm backdrop-blur-md flex items-center justify-between gap-3 shadow-[0_0_25px_rgba(199,255,69,0.25)]">
+                <div className="flex items-center gap-1.5">
                   <button
-                    key={zone.id}
                     type="button"
-                    onClick={() => setActiveZone(zone)}
-                    className={`px-2.5 py-1.5 rounded-sm font-mono text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-                      isCurrent
-                        ? 'bg-[#C7FF45] text-[#0A0B09] font-bold shadow-[0_0_10px_rgba(199,255,69,0.4)]'
-                        : 'text-[var(--secondary-text)] hover:text-white hover:bg-white/5'
-                    }`}
+                    onClick={() => handleTourWaypointChange(Math.max(0, tourIndex - 1))}
+                    disabled={tourIndex === 0}
+                    className="p-1.5 rounded-sm bg-white/5 hover:bg-white/15 disabled:opacity-30 text-white transition-all"
+                    title="Previous Chapter"
                   >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: isCurrent ? '#0A0B09' : zone.color }}
-                    />
-                    <span>{zone.name.replace('Zone 0', 'Z0').replace(': ', ' ')}</span>
+                    <SkipBack className="w-4 h-4" />
                   </button>
-                );
-              })}
+
+                  <button
+                    type="button"
+                    onClick={() => setIsTourPlaying(!isTourPlaying)}
+                    className="p-1.5 rounded-sm bg-[#C7FF45] text-[#0A0B09] font-bold shadow-sm hover:bg-[#D2FF5E] transition-all"
+                    title={isTourPlaying ? 'Pause Tour' : 'Play Tour'}
+                  >
+                    {isTourPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleTourWaypointChange(Math.min(TOUR_WAYPOINTS.length - 1, tourIndex + 1))
+                    }
+                    disabled={tourIndex === TOUR_WAYPOINTS.length - 1}
+                    className="p-1.5 rounded-sm bg-white/5 hover:bg-white/15 disabled:opacity-30 text-white transition-all"
+                    title="Next Chapter"
+                  >
+                    <SkipForward className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="flex-1 font-mono text-center">
+                  <div className="text-[10px] text-[#C7FF45] font-bold">
+                    {TOUR_WAYPOINTS[tourIndex]?.title}
+                  </div>
+                  <div className="text-[9px] text-[var(--muted)] truncate">
+                    {TOUR_WAYPOINTS[tourIndex]?.subtitle}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setExplorationMode('orbit')}
+                  className="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white font-mono text-[10px] font-bold rounded-sm transition-all"
+                >
+                  Exit Tour
+                </button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 max-w-2xl w-[92%] pointer-events-auto">
+              <div className="p-1.5 bg-[#0A0B09]/90 border border-white/20 rounded-sm backdrop-blur-md flex items-center justify-between gap-1 overflow-x-auto shadow-2xl">
+                {zonesList.map((zone) => {
+                  const isCurrent = activeZone.id === zone.id;
+                  return (
+                    <button
+                      key={zone.id}
+                      type="button"
+                      onClick={() => setActiveZone(zone)}
+                      className={`px-2.5 py-1.5 rounded-sm font-mono text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                        isCurrent
+                          ? 'bg-[#C7FF45] text-[#0A0B09] font-bold shadow-[0_0_10px_rgba(199,255,69,0.4)]'
+                          : 'text-[var(--secondary-text)] hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: isCurrent ? '#0A0B09' : zone.color }}
+                      />
+                      <span>{zone.name.replace('Zone 0', 'Z0').replace(': ', ' ')}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Virtual Touch Joystick for Mobile / Tablet in Free Roam */}
+          {explorationMode === 'free-roam' && (
+            <div className="block lg:hidden fixed bottom-6 right-6 z-30 pointer-events-auto">
+              <VirtualJoystick onMove={setJoystickInput} />
+            </div>
+          )}
+
+          {/* Proximity POI Interaction Toast */}
+          {explorationMode === 'free-roam' && proximityPOI && (
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+              <button
+                type="button"
+                onClick={() => handleInspectPOI(proximityPOI)}
+                className="px-4 py-2 bg-[#C7FF45] text-[#0A0B09] font-mono text-xs font-black uppercase tracking-wider rounded-sm shadow-[0_0_20px_rgba(199,255,69,0.5)] animate-bounce flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>PRESS [E] OR TAP TO INSPECT: {proximityPOI.replace('-', ' ')}</span>
+              </button>
+            </div>
+          )}
 
           {/* Bottom-Left Collapsible Radar Minimap */}
           <div className="absolute bottom-16 sm:bottom-6 left-3 sm:left-6 z-20 pointer-events-auto">
@@ -258,13 +464,29 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
           <div className="hidden lg:block absolute bottom-6 right-6 z-20 pointer-events-none p-3 bg-[#0A0B09]/80 border border-white/10 rounded-sm font-mono text-[10px] text-[var(--secondary-text)] backdrop-blur-md">
             <div className="text-[#C7FF45] font-bold mb-1 flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
-              <span>PROTOTYPE CONTROLS</span>
+              <span>{explorationMode.toUpperCase()} CONTROLS</span>
             </div>
-            <div>• Left Click + Drag: Rotate Orbit</div>
-            <div>• Right Click + Drag: Pan Camera</div>
-            <div>• Scroll Wheel: Zoom Altitude</div>
-            <div>• Minimap / Quick-Bar: Fast Travel</div>
-            <div>• Desk & Monument: Click to Inspect</div>
+            {explorationMode === 'free-roam' ? (
+              <>
+                <div>• W / A / S / D or Arrows: Move Avatar</div>
+                <div>• Shift: Sprint / Run</div>
+                <div>• E: Inspect Nearby POI</div>
+                <div>• Camera follows avatar automatically</div>
+              </>
+            ) : explorationMode === 'guided-tour' ? (
+              <>
+                <div>• Automated cinematic flight across island</div>
+                <div>• Play / Pause / Skip via timeline bar</div>
+                <div>• Click any POI anytime to inspect</div>
+              </>
+            ) : (
+              <>
+                <div>• Left Click + Drag: Rotate Orbit</div>
+                <div>• Right Click + Drag: Pan Camera</div>
+                <div>• Scroll Wheel: Zoom Altitude</div>
+                <div>• Minimap / Quick-Bar: Fast Travel</div>
+              </>
+            )}
           </div>
 
           {/* Floating SAN AI Holographic Core */}

@@ -10,7 +10,11 @@ import { ProjectCityScene } from './ProjectCityScene';
 import { ExperienceMountainScene } from './ExperienceMountainScene';
 import { ContactBeaconScene } from './ContactBeaconScene';
 import { AvatarController } from './AvatarController';
+import { FreeRoamController } from './FreeRoamController';
+import { GuidedTourController, TOUR_WAYPOINTS } from './GuidedTourController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
+
+export type ExplorationMode = 'orbit' | 'free-roam' | 'guided-tour';
 
 interface CameraRigProps {
   targetZone: ZoneCoordinate;
@@ -37,6 +41,14 @@ const CameraRig: React.FC<CameraRigProps> = ({ targetZone }) => {
 
 export interface UniverseCanvasProps {
   activeZone: ZoneCoordinate;
+  mode?: ExplorationMode;
+  joystickInput?: { x: number; y: number };
+  tourIndex?: number;
+  isTourPlaying?: boolean;
+  onTourWaypointChange?: (index: number) => void;
+  onTourComplete?: () => void;
+  onProximityPOI?: (poiId: string | null) => void;
+  onInspectPOI?: (poiId: string) => void;
   onSelectOriginPOI?: (poiId: 'workspace' | 'education') => void;
   onSelectSkillCategory?: (categoryId: string) => void;
   onSelectProject?: (projectId: string) => void;
@@ -46,6 +58,14 @@ export interface UniverseCanvasProps {
 
 export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
   activeZone,
+  mode = 'orbit',
+  joystickInput = { x: 0, y: 0 },
+  tourIndex = 0,
+  isTourPlaying = true,
+  onTourWaypointChange,
+  onTourComplete,
+  onProximityPOI,
+  onInspectPOI,
   onSelectOriginPOI,
   onSelectSkillCategory,
   onSelectProject,
@@ -92,18 +112,29 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
           speed={0.8}
         />
 
-        {/* Camera Lerp Controller */}
-        <CameraRig targetZone={activeZone} />
+        {/* Camera Control: Orbit Mode vs Guided Tour (Free Roam uses internal camera) */}
+        {mode === 'orbit' && (
+          <>
+            <CameraRig targetZone={activeZone} />
+            <OrbitControls
+              enablePan={true}
+              enableZoom={true}
+              maxPolarAngle={Math.PI / 2 - 0.05} // Never look below ocean horizon
+              minDistance={10}
+              maxDistance={220}
+              dampingFactor={0.08}
+            />
+          </>
+        )}
 
-        {/* Navigable Orbit Controls */}
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          maxPolarAngle={Math.PI / 2 - 0.05} // Never look below ocean horizon
-          minDistance={10}
-          maxDistance={220}
-          dampingFactor={0.08}
-        />
+        {mode === 'guided-tour' && (
+          <GuidedTourController
+            currentIndex={tourIndex}
+            isPlaying={isTourPlaying}
+            onWaypointChange={onTourWaypointChange || (() => {})}
+            onTourComplete={onTourComplete || (() => {})}
+          />
+        )}
 
         {/* Scene Staging: Orbital Space Prologue vs Island Terrain */}
         {activeZone.id === 'prologue' ? (
@@ -129,10 +160,29 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
             <ContactBeaconScene onSelectPOI={onSelectContactPOI} />
 
             {/* Santhosh Developer Avatar 3D Presence */}
-            <AvatarController
-              position={[activeZone.center[0], activeZone.center[1], activeZone.center[2]]}
-              initialState="idle"
-            />
+            {mode === 'free-roam' ? (
+              <FreeRoamController
+                initialPosition={[activeZone.center[0], activeZone.center[1], activeZone.center[2]]}
+                joystickInput={joystickInput}
+                onProximityPOI={onProximityPOI}
+                onInspectPOI={onInspectPOI}
+              />
+            ) : (
+              <AvatarController
+                position={[
+                  mode === 'guided-tour' && TOUR_WAYPOINTS[tourIndex]
+                    ? TOUR_WAYPOINTS[tourIndex].target[0]
+                    : activeZone.center[0],
+                  mode === 'guided-tour' && TOUR_WAYPOINTS[tourIndex]
+                    ? TOUR_WAYPOINTS[tourIndex].target[1]
+                    : activeZone.center[1],
+                  mode === 'guided-tour' && TOUR_WAYPOINTS[tourIndex]
+                    ? TOUR_WAYPOINTS[tourIndex].target[2]
+                    : activeZone.center[2]
+                ]}
+                initialState={mode === 'guided-tour' ? 'thinking' : 'idle'}
+              />
+            )}
           </>
         )}
       </Canvas>
