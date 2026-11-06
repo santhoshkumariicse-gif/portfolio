@@ -6,6 +6,7 @@ import { IslandTerrain } from './IslandTerrain';
 import { PrologueScene } from './PrologueScene';
 import { OriginCoastScene } from './OriginCoastScene';
 import { SkillForestScene } from './SkillForestScene';
+import { ProjectCityScene } from './ProjectCityScene';
 import { AvatarController } from './AvatarController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
 
@@ -36,12 +37,14 @@ export interface UniverseCanvasProps {
   activeZone: ZoneCoordinate;
   onSelectOriginPOI?: (poiId: 'workspace' | 'education') => void;
   onSelectSkillCategory?: (categoryId: string) => void;
+  onSelectProject?: (projectId: string) => void;
 }
 
 export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
   activeZone,
   onSelectOriginPOI,
-  onSelectSkillCategory
+  onSelectSkillCategory,
+  onSelectProject
 }) => {
   return (
     <div className="relative w-full h-full bg-[#0A0B09]">
@@ -109,6 +112,9 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
 
             {/* Zone 02: Skill Forest Bioluminescent Tech Sanctuary */}
             <SkillForestScene onSelectCategory={onSelectSkillCategory} />
+
+            {/* Zone 03: Project City Cyber Metropolis */}
+            <ProjectCityScene onSelectProject={onSelectProject} />
 
             {/* Santhosh Developer Avatar 3D Presence */}
             <AvatarController

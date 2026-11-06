@@ -59,31 +59,6 @@ export const IslandTerrain: React.FC = () => {
       {/* ZONE LANDMARKS & PROCEDURAL MONUMENTS                   */}
       {/* ======================================================== */}
 
-      {/* ZONE 03: Project City Cyber Neon Towers */}
-      <group position={[60, 8, -25]}>
-        {/* Tower A (LorryBook / RDA) */}
-        <mesh position={[-8, 8, 4]}>
-          <boxGeometry args={[6, 16, 6]} />
-          <meshStandardMaterial color="#101311" roughness={0.2} metalness={0.8} />
-        </mesh>
-        <mesh position={[-8, 16.5, 4]}>
-          <cylinderGeometry args={[0.2, 0.2, 3, 8]} />
-          <meshStandardMaterial color="#FF3358" emissive="#FF3358" emissiveIntensity={2} />
-        </mesh>
-
-        {/* Tower B (NexusATS) */}
-        <mesh position={[5, 12, -4]}>
-          <boxGeometry args={[8, 24, 7]} />
-          <meshStandardMaterial color="#151916" roughness={0.2} metalness={0.8} />
-        </mesh>
-
-        {/* Tower C (Recall AI Archive) */}
-        <mesh position={[8, 6, 8]}>
-          <boxGeometry args={[6, 12, 6]} />
-          <meshStandardMaterial color="#0F120F" roughness={0.2} metalness={0.8} />
-        </mesh>
-      </group>
-
       {/* ZONE 04: Experience Mountain Observation Station */}
       <group position={[-35, 32, -85]}>
         <mesh position={[0, 1, 0]}>

@@ -5,9 +5,10 @@ import { WorldMinimap } from './WorldMinimap';
 import { PrologueOverlay } from './PrologueOverlay';
 import { OriginCoastModal } from './OriginCoastModal';
 import { SkillForestModal } from './SkillForestModal';
+import { ProjectCityModal } from './ProjectCityModal';
 import { ZONE_COORDINATES, ZoneCoordinate } from './WorldCoordinates';
 import { AICore, AIConversationPanel, useSanAI } from '../../ai';
-import { Layers, X, Sparkles, Navigation, FileText, Cpu } from 'lucide-react';
+import { Layers, X, Sparkles, Navigation, FileText, Cpu, Building2 } from 'lucide-react';
 
 export interface UniverseStageProps {
   onExitUniverse: () => void;
@@ -20,6 +21,8 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
   const [originModalTab, setOriginModalTab] = useState<'workspace' | 'education'>('workspace');
   const [skillModalOpen, setSkillModalOpen] = useState(false);
   const [selectedSkillId, setSelectedSkillId] = useState('programming-languages');
+  const [projectModalOpen, setProjectModalOpen] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState('rda-lorrybook');
   const [announcedZones, setAnnouncedZones] = useState<Set<string>>(new Set());
 
   const { announce } = useSanAI();
@@ -37,6 +40,11 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
       announce(
         "Welcome to the Skill Forest. Here lie the 7 foundational technology crystals of Santhosh's developer arsenal — from Full-Stack React and Python automation to Android engineering and defensive security. Click any crystal to inspect verified proficiencies."
       );
+    } else if (activeZone.id === 'project-city' && !announcedZones.has('project-city')) {
+      setAnnouncedZones((prev) => new Set(prev).add('project-city'));
+      announce(
+        "Welcome to Project City. Every neon skyscraper in this metropolis represents a real, verified software system engineered by Santhosh — including the LorryBook logistics dispatch platform, the NexusATS candidate parsing pipeline, and the Recall AI hackathon assistant. Click any skyscraper to inspect its architectural dossier."
+      );
     }
   }, [activeZone.id, announcedZones, announce]);
 
@@ -53,6 +61,10 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
           onSelectSkillCategory={(catId) => {
             setSelectedSkillId(catId);
             setSkillModalOpen(true);
+          }}
+          onSelectProject={(projId) => {
+            setSelectedProjectId(projId);
+            setProjectModalOpen(true);
           }}
         />
       </div>
@@ -113,6 +125,17 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
                 >
                   <Cpu className="w-3.5 h-3.5" />
                   <span>INSPECT ARSENAL</span>
+                </button>
+              )}
+
+              {activeZone.id === 'project-city' && (
+                <button
+                  type="button"
+                  onClick={() => setProjectModalOpen(true)}
+                  className="px-2.5 py-1.5 bg-[#FF3358]/15 border border-[#FF3358]/60 text-[#FF3358] font-mono text-xs font-bold rounded-sm hover:bg-[#FF3358]/30 transition-all flex items-center gap-1.5 backdrop-blur-md shadow-[0_0_12px_rgba(255,51,88,0.3)] animate-pulse"
+                >
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>INSPECT MISSIONS</span>
                 </button>
               )}
             </div>
@@ -219,6 +242,14 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
         initialCategoryId={selectedSkillId}
         onClose={() => setSkillModalOpen(false)}
         onTravelToNextZone={() => setActiveZone(ZONE_COORDINATES['project-city'])}
+      />
+
+      {/* Project City Missions & Architectures Modal */}
+      <ProjectCityModal
+        isOpen={projectModalOpen}
+        initialProjectId={selectedProjectId}
+        onClose={() => setProjectModalOpen(false)}
+        onTravelToNextZone={() => setActiveZone(ZONE_COORDINATES['exp-mountain'])}
       />
 
       {/* Global AI Conversation Panel */}
