@@ -109,3 +109,4 @@ public/images/
 │   └── telemetry-grid.svg
 └── santhosh-kumar.jpg (Authentic Photo)
 ```
+

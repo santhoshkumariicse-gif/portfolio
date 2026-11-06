@@ -136,3 +136,4 @@ Rather than leaning into cartoonish tropes or cluttered gaming interfaces, the v
    - Applied to button hovers, tab toggles, and speech bubble appearances.
 3. **Reduced Motion Fallback**:
    - All transforms and spring physics instantly reduce to opacity transitions (`duration: 0.01ms`) when `prefers-reduced-motion: reduce` is active.
+

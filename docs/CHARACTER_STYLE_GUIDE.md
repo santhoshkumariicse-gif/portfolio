@@ -89,3 +89,4 @@ When the avatar speaks or comments on a chapter section, dialogue is rendered vi
 - **Message Font**: `Inter`, `0.85rem`, color `#F0F0E9`, leading relaxed.
 - **Corner Notches**: Reticle brackets anchoring the speech bubble to the avatar's position.
 - **Animation**: Smooth vertical slide-up (`y: 8 -> 0`, `opacity: 0 -> 1`) in 250ms with subtle dismissible interaction.
+
