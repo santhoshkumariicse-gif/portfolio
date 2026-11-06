@@ -16,11 +16,14 @@ interface SanAIContextType {
   isMuted: boolean;
   isExpanded: boolean;
   activeZoneId: string;
+  lastAction: CommandResult['action'] | null;
+  clearLastAction: () => void;
   setActiveZoneId: (zoneId: string) => void;
   sendMessage: (text: string) => void;
   toggleListening: () => void;
   toggleMute: () => void;
   toggleExpand: () => void;
+  interruptSpeech: () => void;
   speakText: (text: string) => void;
   announce: (text: string) => void;
 }
@@ -29,25 +32,45 @@ const SanAIContext = createContext<SanAIContextType | null>(null);
 
 export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<AIAssistantState>('idle');
-  const [isMuted, setIsMuted] = useState(true); // Default muted so no unprompted audio plays
+  const [isMuted, setIsMuted] = useState(true); // Default muted to respect browser autoplay policies
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeZoneId, setActiveZoneId] = useState('origin-coast');
+  const [lastAction, setLastAction] = useState<CommandResult['action'] | null>(null);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+
   const [messages, setMessages] = useState<AIMessage[]>([
     {
       id: 'greeting-01',
       sender: 'san-ai',
-      text: "Welcome to Santhosh Kumar's Digital Universe. I am SAN AI, your personal guide. How may I help you explore?",
+      text: "Greetings. I am SAN AI, Santhosh's interactive digital copilot. How may I assist your exploration of the Developer Universe today?",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
 
-  // Clean up speech synthesis on unmount
+  // Load available speech synthesis voices
   useEffect(() => {
-    return () => {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const updateVoices = () => {
+      const available = window.speechSynthesis.getVoices();
+      if (available.length > 0) {
+        setVoices(available);
       }
     };
+
+    updateVoices();
+    window.speechSynthesis.onvoiceschanged = updateVoices;
+
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  const interruptSpeech = useCallback(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setState(prev => (prev === 'speaking' ? 'idle' : prev));
+    }
   }, []);
 
   const speakText = useCallback((text: string) => {
@@ -58,12 +81,24 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     utterance.rate = 1.05;
     utterance.pitch = 1.0;
 
+    // Prefer high quality English voice if found
+    if (voices.length > 0) {
+      const preferred = voices.find(v =>
+        (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('David') || v.name.includes('Zira')) &&
+        v.lang.startsWith('en')
+      ) || voices.find(v => v.lang.startsWith('en'));
+
+      if (preferred) {
+        utterance.voice = preferred;
+      }
+    }
+
     utterance.onstart = () => setState('speaking');
     utterance.onend = () => setState('idle');
     utterance.onerror = () => setState('idle');
 
     window.speechSynthesis.speak(utterance);
-  }, [isMuted]);
+  }, [isMuted, voices]);
 
   const announce = useCallback((text: string) => {
     const aiMsg: AIMessage = {
@@ -76,8 +111,15 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     speakText(text);
   }, [speakText]);
 
+  const clearLastAction = useCallback(() => {
+    setLastAction(null);
+  }, []);
+
   const sendMessage = useCallback((text: string) => {
     if (!text.trim()) return;
+
+    // Interrupt any ongoing speech synthesis first
+    interruptSpeech();
 
     const userMsg: AIMessage = {
       id: `usr-${Date.now()}`,
@@ -102,25 +144,31 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setMessages(prev => [...prev, aiMsg]);
       setState(result.action?.type === 'navigate_zone' ? 'navigation' : 'idle');
 
-      if (result.action?.type === 'navigate_zone') {
-        setActiveZoneId(result.action.target);
+      if (result.action) {
+        setLastAction(result.action);
+        if (result.action.type === 'navigate_zone') {
+          setActiveZoneId(result.action.target);
+        }
       }
 
       speakText(result.text);
-    }, 400);
-  }, [speakText]);
+    }, 350);
+  }, [interruptSpeech, speakText]);
 
   const toggleListening = useCallback(() => {
     if (typeof window === 'undefined') return;
 
-    // Check for Web Speech API
+    // Interrupt voice playback immediately when listening starts
+    interruptSpeech();
+
+    // Check for Web Speech Recognition API
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
       const errNotice: AIMessage = {
         id: `err-${Date.now()}`,
         sender: 'san-ai',
-        text: "Web Speech recognition is not supported in this browser. Please use text commands instead.",
+        text: "Web Speech recognition is not supported in this browser environment. Please type commands directly in this terminal.",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, errNotice]);
@@ -147,7 +195,7 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } catch {
       setState('idle');
     }
-  }, [sendMessage]);
+  }, [interruptSpeech, sendMessage]);
 
   return (
     <SanAIContext.Provider
@@ -157,11 +205,14 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         isMuted,
         isExpanded,
         activeZoneId,
+        lastAction,
+        clearLastAction,
         setActiveZoneId,
         sendMessage,
         toggleListening,
         toggleMute: () => setIsMuted(prev => !prev),
         toggleExpand: () => setIsExpanded(prev => !prev),
+        interruptSpeech,
         speakText,
         announce
       }}
@@ -178,4 +229,3 @@ export const useSanAI = (): SanAIContextType => {
   }
   return context;
 };
-

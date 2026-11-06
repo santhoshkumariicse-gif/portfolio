@@ -56,8 +56,43 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
   const [contactModalTab, setContactModalTab] = useState<'transmit' | 'resume'>('transmit');
   const [announcedZones, setAnnouncedZones] = useState<Set<string>>(new Set());
 
-  const { announce } = useSanAI();
+  const { announce, lastAction, clearLastAction } = useSanAI();
   const zonesList = Object.values(ZONE_COORDINATES).filter((z) => z.id !== 'prologue');
+
+  // React to voice/text command actions dispatched by SAN AI
+  useEffect(() => {
+    if (!lastAction) return;
+
+    if (lastAction.type === 'navigate_zone') {
+      const targetCoord = ZONE_COORDINATES[lastAction.target];
+      if (targetCoord) {
+        setActiveZone(targetCoord);
+      }
+    } else if (lastAction.type === 'set_mode') {
+      if (lastAction.target === 'guided-tour' || lastAction.target === 'free-roam' || lastAction.target === 'orbit') {
+        setExplorationMode(lastAction.target as ExplorationMode);
+        if (lastAction.target === 'guided-tour') {
+          setIsTourPlaying(true);
+        }
+      }
+    } else if (lastAction.type === 'open_modal') {
+      if (lastAction.target === 'rda-lorrybook' || lastAction.target === 'nexusats' || lastAction.target === 'recall-ai' || lastAction.target === 'cybernaut-defense') {
+        setSelectedProjectId(lastAction.target);
+        setProjectModalOpen(true);
+      } else if (lastAction.target === 'contact-beacon-resume') {
+        setContactModalTab('resume');
+        setContactModalOpen(true);
+      } else {
+        handleInspectPOI(lastAction.target);
+      }
+    } else if (lastAction.type === 'toggle_view') {
+      if (lastAction.target === 'classic') {
+        onExitUniverse();
+      }
+    }
+
+    clearLastAction();
+  }, [lastAction, clearLastAction, onExitUniverse]);
 
   const handleInspectPOI = (poiId: string) => {
     switch (poiId) {

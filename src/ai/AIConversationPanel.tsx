@@ -23,7 +23,8 @@ export const AIConversationPanel: React.FC = () => {
     sendMessage,
     toggleListening,
     toggleMute,
-    toggleExpand
+    toggleExpand,
+    interruptSpeech
   } = useSanAI();
 
   const [inputVal, setInputVal] = useState('');
@@ -44,11 +45,16 @@ export const AIConversationPanel: React.FC = () => {
   };
 
   const quickPrompts = [
-    'Who is Santhosh?',
-    'Show Projects',
-    'List Skills',
-    'Internships',
-    'Contact Info'
+    'Hey SAN',
+    'Introduce Santhosh',
+    'Start Guided Tour',
+    'Enter Free Roam',
+    'Show Skills',
+    'Open Projects',
+    'Explain LorryBook',
+    'Show Education',
+    'Show Achievements',
+    'Go to Contact'
   ];
 
   return (
@@ -81,8 +87,21 @@ export const AIConversationPanel: React.FC = () => {
               </div>
             </div>
 
-            {/* Controls: Mute, Minimize, Close */}
-            <div className="flex items-center gap-1 text-[var(--secondary-text)]">
+            {/* Controls: Mute, Stop Speaking, Minimize, Close */}
+            <div className="flex items-center gap-1.5 text-[var(--secondary-text)]">
+              {state === 'speaking' && (
+                <button
+                  type="button"
+                  onClick={interruptSpeech}
+                  className="px-2 py-0.5 rounded text-[9px] font-mono bg-[#FF3366]/20 border border-[#FF3366]/40 text-[#FF3366] hover:bg-[#FF3366]/30 flex items-center gap-1"
+                  title="Stop speaking"
+                  aria-label="Stop speech playback"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF3366] animate-ping" />
+                  <span>HALT</span>
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={toggleMute}
