@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import { IslandTerrain } from './IslandTerrain';
+import { AvatarController } from './AvatarController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
 
 interface CameraRigProps {
@@ -88,6 +89,12 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({ activeZone }) =>
 
         {/* Procedural Connected Island */}
         <IslandTerrain />
+
+        {/* Santhosh Developer Avatar 3D Presence */}
+        <AvatarController
+          position={[activeZone.center[0], activeZone.center[1], activeZone.center[2]]}
+          initialState="idle"
+        />
       </Canvas>
     </div>
   );

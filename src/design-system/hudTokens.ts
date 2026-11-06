@@ -58,3 +58,4 @@ export const HUD_MOTION = {
     scan: 0.8
   }
 } as const;
+

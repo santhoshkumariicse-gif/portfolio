@@ -42,3 +42,4 @@ export const HoloChapterNav: React.FC<HoloChapterNavProps> = ({
     </div>
   );
 };
+

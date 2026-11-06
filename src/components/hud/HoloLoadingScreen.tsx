@@ -64,3 +64,4 @@ export const HoloLoadingScreen: React.FC<HoloLoadingScreenProps> = ({
     </div>
   );
 };
+
