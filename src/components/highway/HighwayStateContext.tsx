@@ -4,18 +4,21 @@ import { HIGHWAY_MILESTONES, HighwayMilestone, getNearestMilestone } from './Hig
 import { SoundFX } from '../../utils/SoundFX';
 
 export type TravelMode = 'manual' | 'autopilot';
+export type CameraViewMode = 'chase' | 'cockpit';
 
 export interface HighwayStateContextType {
   progress: number;
   currentKM: number;
   speed: number;
   mode: TravelMode;
+  cameraView: CameraViewMode;
   steerOffset: number;
   targetKM: number | null;
   activeMilestone: HighwayMilestone;
   isMuted: boolean;
   setMode: (mode: TravelMode) => void;
   toggleMode: () => void;
+  toggleCameraView: () => void;
   setTargetKM: (km: number) => void;
   toggleMute: () => void;
   accelerate: (amount?: number) => void;
@@ -34,6 +37,7 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [currentKM, setCurrentKM] = useState(0.0);
   const [speed, setSpeed] = useState(0.0); // km/h
   const [mode, setModeState] = useState<TravelMode>('manual');
+  const [cameraView, setCameraViewState] = useState<CameraViewMode>('chase');
   const [steerOffset, setSteerOffset] = useState(0.0);
   const [targetKM, setTargetKMState] = useState<number | null>(null);
   const [activeMilestone, setActiveMilestone] = useState<HighwayMilestone>(HIGHWAY_MILESTONES[0]);
@@ -45,6 +49,7 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const steerRef = useRef(0.0);
   const targetKMRef = useRef<number | null>(null);
   const modeRef = useRef<TravelMode>('manual');
+  const cameraViewRef = useRef<CameraViewMode>('chase');
 
   const setMode = useCallback((newMode: TravelMode) => {
     modeRef.current = newMode;
@@ -56,6 +61,13 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
     const next = modeRef.current === 'manual' ? 'autopilot' : 'manual';
     setMode(next);
   }, [setMode]);
+
+  const toggleCameraView = useCallback(() => {
+    const next = cameraViewRef.current === 'chase' ? 'cockpit' : 'chase';
+    cameraViewRef.current = next;
+    setCameraViewState(next);
+    SoundFX.playClick();
+  }, []);
 
   const setTargetKM = useCallback((km: number) => {
     const clamped = THREE.MathUtils.clamp(km, 0, 7.0);
@@ -97,7 +109,6 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
       // 1. Process Input into Speed
       if (modeRef.current === 'autopilot') {
-        // Autopilot cruising logic
         const targetProgress = targetKMRef.current !== null ? targetKMRef.current / 7.0 : 1.0;
         const diff = targetProgress - progressRef.current;
 
@@ -141,10 +152,9 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
       }
 
       // 2. Advance road progress
-      // Total road length = 2200 units = 7.0 KM -> 1 KM = ~314.3 units.
-      // speed in km/h -> km/s = speed / 3600
+      // Total road length = 2200 units = 7.0 KM
       const kmPerSec = speedRef.current / 3600.0;
-      const progressDelta = (kmPerSec * dt) / 7.0 * 20.0; // Scaled for engaging responsive game-feel
+      const progressDelta = (kmPerSec * dt) / 7.0 * 20.0;
 
       progressRef.current = THREE.MathUtils.clamp(progressRef.current + progressDelta, 0.0, 1.0);
 
@@ -173,12 +183,14 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
         currentKM,
         speed,
         mode,
+        cameraView,
         steerOffset,
         targetKM,
         activeMilestone,
         isMuted,
         setMode,
         toggleMode,
+        toggleCameraView,
         setTargetKM,
         toggleMute,
         accelerate,
@@ -199,4 +211,3 @@ export const useHighwayState = (): HighwayStateContextType => {
   }
   return context;
 };
-
