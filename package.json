@@ -4,8 +4,8 @@
   "version": "3.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "node scripts/setup-build.cjs && vite",
+    "build": "node scripts/setup-build.cjs && tsc && vite build && node scripts/sync-dist.cjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santhoshkumariicse-gif.github.io/portfolio/sitemap.xml
+
