@@ -59,14 +59,6 @@ export const IslandTerrain: React.FC = () => {
       {/* ZONE LANDMARKS & PROCEDURAL MONUMENTS                   */}
       {/* ======================================================== */}
 
-      {/* ZONE 04: Experience Mountain Observation Station */}
-      <group position={[-35, 32, -85]}>
-        <mesh position={[0, 1, 0]}>
-          <cylinderGeometry args={[5, 6, 2, 8]} />
-          <meshStandardMaterial color="#C7FF45" emissive="#C7FF45" emissiveIntensity={0.8} wireframe />
-        </mesh>
-      </group>
-
       {/* ZONE 05: Contact Beacon (The Oceanic Lighthouse & Light Beam) */}
       <group position={[10, 36, -135]}>
         {/* Lighthouse Core Structure */}

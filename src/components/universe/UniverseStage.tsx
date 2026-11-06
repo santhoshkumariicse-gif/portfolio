@@ -6,9 +6,10 @@ import { PrologueOverlay } from './PrologueOverlay';
 import { OriginCoastModal } from './OriginCoastModal';
 import { SkillForestModal } from './SkillForestModal';
 import { ProjectCityModal } from './ProjectCityModal';
+import { ExperienceMountainModal } from './ExperienceMountainModal';
 import { ZONE_COORDINATES, ZoneCoordinate } from './WorldCoordinates';
 import { AICore, AIConversationPanel, useSanAI } from '../../ai';
-import { Layers, X, Sparkles, Navigation, FileText, Cpu, Building2 } from 'lucide-react';
+import { Layers, X, Sparkles, Navigation, FileText, Cpu, Building2, Mountain } from 'lucide-react';
 
 export interface UniverseStageProps {
   onExitUniverse: () => void;
@@ -23,6 +24,8 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
   const [selectedSkillId, setSelectedSkillId] = useState('programming-languages');
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState('rda-lorrybook');
+  const [expModalOpen, setExpModalOpen] = useState(false);
+  const [expModalTab, setExpModalTab] = useState<'roles' | 'certifications'>('roles');
   const [announcedZones, setAnnouncedZones] = useState<Set<string>>(new Set());
 
   const { announce } = useSanAI();
@@ -45,6 +48,11 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
       announce(
         "Welcome to Project City. Every neon skyscraper in this metropolis represents a real, verified software system engineered by Santhosh — including the LorryBook logistics dispatch platform, the NexusATS candidate parsing pipeline, and the Recall AI hackathon assistant. Click any skyscraper to inspect its architectural dossier."
       );
+    } else if (activeZone.id === 'exp-mountain' && !announcedZones.has('exp-mountain')) {
+      setAnnouncedZones((prev) => new Set(prev).add('exp-mountain'));
+      announce(
+        "Welcome to Experience Mountain. As you ascend the mountain path, you will discover the checkpoints marking Santhosh's developer internships at Cybernaut and ELITA, his competitive CTF challenges, and his verified technical certifications. Click any checkpoint to inspect his track record."
+      );
     }
   }, [activeZone.id, announcedZones, announce]);
 
@@ -65,6 +73,10 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
           onSelectProject={(projId) => {
             setSelectedProjectId(projId);
             setProjectModalOpen(true);
+          }}
+          onSelectExperiencePOI={(tab) => {
+            setExpModalTab(tab);
+            setExpModalOpen(true);
           }}
         />
       </div>
@@ -136,6 +148,17 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
                 >
                   <Building2 className="w-3.5 h-3.5" />
                   <span>INSPECT MISSIONS</span>
+                </button>
+              )}
+
+              {activeZone.id === 'exp-mountain' && (
+                <button
+                  type="button"
+                  onClick={() => setExpModalOpen(true)}
+                  className="px-2.5 py-1.5 bg-[#C7FF45]/15 border border-[#C7FF45]/60 text-[#C7FF45] font-mono text-xs font-bold rounded-sm hover:bg-[#C7FF45]/30 transition-all flex items-center gap-1.5 backdrop-blur-md shadow-[0_0_12px_rgba(199,255,69,0.3)] animate-pulse"
+                >
+                  <Mountain className="w-3.5 h-3.5" />
+                  <span>INSPECT EXPERIENCE</span>
                 </button>
               )}
             </div>
@@ -250,6 +273,14 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
         initialProjectId={selectedProjectId}
         onClose={() => setProjectModalOpen(false)}
         onTravelToNextZone={() => setActiveZone(ZONE_COORDINATES['exp-mountain'])}
+      />
+
+      {/* Experience Mountain Progression Modal */}
+      <ExperienceMountainModal
+        isOpen={expModalOpen}
+        initialTab={expModalTab}
+        onClose={() => setExpModalOpen(false)}
+        onTravelToNextZone={() => setActiveZone(ZONE_COORDINATES['contact-beacon'])}
       />
 
       {/* Global AI Conversation Panel */}

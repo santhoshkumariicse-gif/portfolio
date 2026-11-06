@@ -7,6 +7,7 @@ import { PrologueScene } from './PrologueScene';
 import { OriginCoastScene } from './OriginCoastScene';
 import { SkillForestScene } from './SkillForestScene';
 import { ProjectCityScene } from './ProjectCityScene';
+import { ExperienceMountainScene } from './ExperienceMountainScene';
 import { AvatarController } from './AvatarController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
 
@@ -38,13 +39,15 @@ export interface UniverseCanvasProps {
   onSelectOriginPOI?: (poiId: 'workspace' | 'education') => void;
   onSelectSkillCategory?: (categoryId: string) => void;
   onSelectProject?: (projectId: string) => void;
+  onSelectExperiencePOI?: (tab: 'roles' | 'certifications') => void;
 }
 
 export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
   activeZone,
   onSelectOriginPOI,
   onSelectSkillCategory,
-  onSelectProject
+  onSelectProject,
+  onSelectExperiencePOI
 }) => {
   return (
     <div className="relative w-full h-full bg-[#0A0B09]">
@@ -115,6 +118,9 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({
 
             {/* Zone 03: Project City Cyber Metropolis */}
             <ProjectCityScene onSelectProject={onSelectProject} />
+
+            {/* Zone 04: Experience Mountain Ascent & Summit Observatory */}
+            <ExperienceMountainScene onSelectPOI={onSelectExperiencePOI} />
 
             {/* Santhosh Developer Avatar 3D Presence */}
             <AvatarController
