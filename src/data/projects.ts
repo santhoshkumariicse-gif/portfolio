@@ -22,7 +22,7 @@ export const projectsData: ProjectItem[] = [
     ],
     contribution: 'Architected backend data schemas in PostgreSQL, implemented FastAPI endpoint specifications, and prototyped dispatch queue logic.',
     evidenceNote: 'Conceptual architecture prototype. Core data schema and route dispatch logic drafted in repository notes; live deployment link is not yet publicly hosted.',
-    repoUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
+    repoUrl: 'https://github.com/santhoshkumariicse-gif/rda',
     architectureType: 'rda'
   },
   {
@@ -70,7 +70,7 @@ export const projectsData: ProjectItem[] = [
     ],
     contribution: 'Built the core document segmentation script in Python, formatted embedding payloads, and tested semantic lookup queries during hackathon prototyping.',
     evidenceNote: 'Architecture exploration and local retrieval scripts built for technical study and hackathon prototyping. External API integrations remain in local sandbox.',
-    repoUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
+    repoUrl: 'https://github.com/santhoshkumariicse-gif/iqoo-hackathon',
     architectureType: 'recall-ai'
   },
   {

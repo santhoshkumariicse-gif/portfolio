@@ -1,4 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgress } from './motion/ScrollProgress';
 import { PageTransition } from './motion/PageTransition';
 import { SectionDivider } from './components/SectionDivider';
@@ -7,7 +8,7 @@ import { MobileNavigation } from './components/MobileNavigation';
 import { CommandPalette } from './components/CommandPalette';
 import { HeroSection } from './components/HeroSection';
 import { DeveloperCommandCenter } from './components/DeveloperCommandCenter';
-import { ProjectCard } from './components/ProjectCard';
+import { MissionsSection } from './components/MissionsSection';
 import { GitHubActivitySection } from './components/GitHubActivitySection';
 import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
@@ -20,7 +21,6 @@ import { CircuitBackground } from './components/CircuitBackground';
 import { VisitorIntentSelector } from './components/VisitorIntentSelector';
 import { projectsData } from './data/projects';
 import { ProjectItem, VisitorPath } from './types';
-import { motion, useReducedMotion } from 'framer-motion';
 
 // Code-split heavy interactive laboratories and modals for peak initial Core Web Vitals
 const InsideTheSystemsLab = lazy(() => import('./components/InsideTheSystemsLab').then(m => ({ default: m.InsideTheSystemsLab })));
@@ -61,7 +61,6 @@ export const App: React.FC = () => {
     }
     return 'general';
   });
-  const shouldReduceMotion = useReducedMotion();
 
   const handleSelectPath = (path: VisitorPath) => {
     setVisitorPath(path);
@@ -149,6 +148,9 @@ export const App: React.FC = () => {
       {/* Scroll Progress Bar */}
       <ScrollProgress />
 
+      {/* Desktop Precision Custom Cursor */}
+      <CustomCursor />
+
       {/* Ambient Circuit Trace Background (Framer Motion) */}
       <CircuitBackground />
 
@@ -188,43 +190,8 @@ export const App: React.FC = () => {
 
           <SectionDivider label="SECTION // 02" sub="SELECTED CASE STUDIES" />
 
-          {/* 03. Selected Projects Section */}
-          <section id="projects" className="py-20 md:py-28 border-b border-[var(--border)]">
-            <div className="max-w-[1180px] mx-auto px-4 sm:px-6">
-              <motion.div
-                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6 }}
-                className="mb-14"
-              >
-                <p className="font-[var(--mono)] text-xs font-bold text-[var(--accent)] tracking-widest uppercase mb-3">
-                  02 / Selected Work
-                </p>
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--primary-text)]">
-                  Practice becomes{' '}
-                  <span className="font-[var(--serif)] italic font-normal text-[var(--accent)]">
-                    proof.
-                  </span>
-                </h2>
-                <p className="mt-4 text-sm sm:text-base text-[var(--secondary-text)] max-w-[620px] leading-relaxed">
-                  Project case studies spanning logistics coordination, workflow automation, semantic recall, defensive web testing, and Python security scripts.
-                </p>
-              </motion.div>
-
-              {/* Project List */}
-              <div className="space-y-4">
-                {projectsData.map((project, index) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    index={index}
-                    onOpenDetail={setSelectedDetailProject}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
+          {/* 03. Chapter 04: The Missions */}
+          <MissionsSection onOpenDetail={setSelectedDetailProject} />
 
           {/* 03b. Verifiable Project Demo Center (Prompt 44) */}
           <Suspense fallback={<FallbackLoader />}>
