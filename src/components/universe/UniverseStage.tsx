@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UniverseCanvas } from './UniverseCanvas';
 import { WorldMinimap } from './WorldMinimap';
 import { PrologueOverlay } from './PrologueOverlay';
+import { OriginCoastModal } from './OriginCoastModal';
 import { ZONE_COORDINATES, ZoneCoordinate } from './WorldCoordinates';
-import { AICore, AIConversationPanel } from '../../ai';
-import { Layers, X, Sparkles, Navigation } from 'lucide-react';
+import { AICore, AIConversationPanel, useSanAI } from '../../ai';
+import { Layers, X, Sparkles, Navigation, FileText } from 'lucide-react';
 
 export interface UniverseStageProps {
   onExitUniverse: () => void;
@@ -14,14 +15,34 @@ export interface UniverseStageProps {
 export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) => {
   const [activeZone, setActiveZone] = useState<ZoneCoordinate>(ZONE_COORDINATES['prologue']);
   const [showMinimap, setShowMinimap] = useState(true);
+  const [originModalOpen, setOriginModalOpen] = useState(false);
+  const [originModalTab, setOriginModalTab] = useState<'workspace' | 'education'>('workspace');
+  const [announcedZones, setAnnouncedZones] = useState<Set<string>>(new Set());
 
+  const { announce } = useSanAI();
   const zonesList = Object.values(ZONE_COORDINATES).filter((z) => z.id !== 'prologue');
+
+  // Trigger contextual SAN AI audio & textual briefings upon arriving in zones
+  useEffect(() => {
+    if (activeZone.id === 'origin-coast' && !announcedZones.has('origin-coast')) {
+      setAnnouncedZones((prev) => new Set(prev).add('origin-coast'));
+      announce(
+        "Welcome to Origin Coast. Here are Santhosh's academic foundations at Gnanamani College of Technology and his origin story from Karaikal. Click the study workspace or the collegiate monument to inspect his verified records."
+      );
+    }
+  }, [activeZone.id, announcedZones, announce]);
 
   return (
     <div className="relative w-full h-screen bg-[#0A0B09] overflow-hidden select-none">
       {/* 1. Main 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0">
-        <UniverseCanvas activeZone={activeZone} />
+        <UniverseCanvas
+          activeZone={activeZone}
+          onSelectOriginPOI={(poi) => {
+            setOriginModalTab(poi);
+            setOriginModalOpen(true);
+          }}
+        />
       </div>
 
       {/* 2. Prologue Mode Cinematic Overlay */}
@@ -47,14 +68,30 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
               </div>
             </div>
 
-            {/* Center: Current Zone HUD Pillar */}
-            <div className="pointer-events-auto hidden sm:flex items-center gap-2 bg-[#0A0B09]/85 border border-white/20 px-3 py-1.5 rounded-sm backdrop-blur-md font-mono text-xs">
-              <Navigation className="w-3.5 h-3.5 text-[#C7FF45]" />
-              <span className="text-[var(--primary-text)] font-bold">{activeZone.name}</span>
-              <span className="text-[var(--muted)]">·</span>
-              <span className="text-[10px] text-[#C7FF45]">
-                [{activeZone.center[0]}, {activeZone.center[1]}, {activeZone.center[2]}]
-              </span>
+            {/* Center: Current Zone HUD Pillar + Inspect Action */}
+            <div className="pointer-events-auto hidden sm:flex items-center gap-3">
+              <div className="flex items-center gap-2 bg-[#0A0B09]/85 border border-white/20 px-3 py-1.5 rounded-sm backdrop-blur-md font-mono text-xs">
+                <Navigation className="w-3.5 h-3.5 text-[#C7FF45]" />
+                <span className="text-[var(--primary-text)] font-bold">{activeZone.name}</span>
+                <span className="text-[var(--muted)]">·</span>
+                <span className="text-[10px] text-[#C7FF45]">
+                  [{activeZone.center[0]}, {activeZone.center[1]}, {activeZone.center[2]}]
+                </span>
+              </div>
+
+              {activeZone.id === 'origin-coast' && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOriginModalTab('workspace');
+                    setOriginModalOpen(true);
+                  }}
+                  className="px-2.5 py-1.5 bg-[#FFB347]/15 border border-[#FFB347]/60 text-[#FFB347] font-mono text-xs font-bold rounded-sm hover:bg-[#FFB347]/30 transition-all flex items-center gap-1.5 backdrop-blur-md shadow-[0_0_12px_rgba(255,179,71,0.3)] animate-pulse"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>INSPECT DOSSIER</span>
+                </button>
+              )}
             </div>
 
             {/* Right: Exit / Classic View Switcher */}
@@ -134,7 +171,8 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
             <div>• Left Click + Drag: Rotate Orbit</div>
             <div>• Right Click + Drag: Pan Camera</div>
             <div>• Scroll Wheel: Zoom Altitude</div>
-            <div>• Minimap: Click zones to travel</div>
+            <div>• Minimap / Quick-Bar: Fast Travel</div>
+            <div>• Desk & Monument: Click to Inspect</div>
           </div>
 
           {/* Floating SAN AI Holographic Core */}
@@ -143,6 +181,14 @@ export const UniverseStage: React.FC<UniverseStageProps> = ({ onExitUniverse }) 
           </div>
         </>
       )}
+
+      {/* Origin Coast Academic & Workspace Modal */}
+      <OriginCoastModal
+        isOpen={originModalOpen}
+        initialTab={originModalTab}
+        onClose={() => setOriginModalOpen(false)}
+        onTravelToNextZone={() => setActiveZone(ZONE_COORDINATES['skill-forest'])}
+      />
 
       {/* Global AI Conversation Panel */}
       <AIConversationPanel />

@@ -22,6 +22,7 @@ interface SanAIContextType {
   toggleMute: () => void;
   toggleExpand: () => void;
   speakText: (text: string) => void;
+  announce: (text: string) => void;
 }
 
 const SanAIContext = createContext<SanAIContextType | null>(null);
@@ -63,6 +64,17 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     window.speechSynthesis.speak(utterance);
   }, [isMuted]);
+
+  const announce = useCallback((text: string) => {
+    const aiMsg: AIMessage = {
+      id: `ai-ann-${Date.now()}`,
+      sender: 'san-ai',
+      text,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    setMessages(prev => [...prev, aiMsg]);
+    speakText(text);
+  }, [speakText]);
 
   const sendMessage = useCallback((text: string) => {
     if (!text.trim()) return;
@@ -150,7 +162,8 @@ export const SanAIProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         toggleListening,
         toggleMute: () => setIsMuted(prev => !prev),
         toggleExpand: () => setIsExpanded(prev => !prev),
-        speakText
+        speakText,
+        announce
       }}
     >
       {children}

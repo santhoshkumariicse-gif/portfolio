@@ -63,19 +63,6 @@ export const IslandTerrain: React.FC = () => {
       {/* ZONE LANDMARKS & PROCEDURAL MONUMENTS                   */}
       {/* ======================================================== */}
 
-      {/* ZONE 01: Origin Coast Landmark (Study Desk Platform) */}
-      <group position={[0, 1.2, 75]}>
-        <mesh position={[0, 0.3, 0]}>
-          <boxGeometry args={[8, 0.6, 6]} />
-          <meshStandardMaterial color="#1A1C18" />
-        </mesh>
-        {/* Holographic Pedestal Indicator */}
-        <mesh position={[0, 1.2, 0]}>
-          <cylinderGeometry args={[2.5, 2.5, 0.2, 16]} />
-          <meshStandardMaterial color="#FFB347" emissive="#FFB347" emissiveIntensity={0.6} transparent opacity={0.7} />
-        </mesh>
-      </group>
-
       {/* ZONE 02: Skill Forest Floating Bioluminescent Crystals */}
       <group ref={crystalsRef} position={[-65, 5, 20]}>
         <mesh position={[0, 0, 0]}>
