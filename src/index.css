@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Art Direction Palette */
+  --bg: #0A0B09;
+  --surface: #131512;
+  --surface-subtle: #171A16;
+  --raised: #1D211C;
+  --primary-text: #F0F0E9;
+  --secondary-text: #9BA195;
+  --muted: #585F53;
+  --accent: #C7FF45;
+  --accent-dim: rgba(199, 255, 69, 0.12);
+  --accent-glow: rgba(199, 255, 69, 0.28);
+  --border: rgba(240, 240, 233, 0.11);
+  --border-strong: rgba(240, 240, 233, 0.22);
+  --active-border: rgba(199, 255, 69, 0.65);
+
+  /* Fonts */
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--primary-text);
+  font-family: var(--sans);
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--primary-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Technical Subtle Dot Grid Texture */
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.028;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(240, 240, 233, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 240, 233, 0.4) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 20%, black 30%, transparent 85%);
+}
+
+/* Focus Ring Accessibility (WCAG 2.2 AA SC 2.4.7 & 2.4.11) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print Specific Styles & A4 Optimization (Prompt 46) */
+@page {
+  size: A4 portrait;
+  margin: 12mm 14mm;
+}
+
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body::before,
+  nav,
+  footer,
+  #command-center,
+  #projects,
+  #demo-center,
+  #systems-lab,
+  #security-playground,
+  #api-lab,
+  #terminal,
+  #knowledge-graph,
+  #journey-timeline,
+  #blog,
+  #engineering,
+  #contact,
+  .print-hide {
+    display: none !important;
+  }
+
+  #resume-center {
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  .break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+    color: #000000 !important;
+  }
+}
+
