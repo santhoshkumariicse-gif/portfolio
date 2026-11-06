@@ -55,3 +55,4 @@ All non-critical interactive laboratories are deferred via `React.lazy()` with l
    - Cyber dust particles strictly constrained to 8 elements in Hero.
    - Continuous background loops avoided.
    - `IntersectionObserver` halts idle rendering outside the viewport.
+

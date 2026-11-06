@@ -40,3 +40,4 @@ const shouldReduceMotion = useReducedMotion();
 - **Anime Avatars**: Pure SVG vectors include `role="img"` and descriptive `aria-label="Anime Developer Avatar - [Expression] Pose"`.
 - **Verified Photograph**: `alt="Santhosh Kumar M - Computer Science Engineering Student"` present on all image tags.
 - **Interactive Toggles**: `aria-pressed` attributes bound to active view modes.
+

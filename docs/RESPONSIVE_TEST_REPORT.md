@@ -32,3 +32,4 @@
 3. **Horizontal Scroll Prevention**:
    - All code snippets, emails, and headlines utilize `break-words`, `break-all`, or overflow scrolling containers (`overflow-x-auto`).
    - `overflow-hidden` applied to section boundaries to prevent layout shifts.
+

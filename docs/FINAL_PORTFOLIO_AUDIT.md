@@ -62,3 +62,4 @@ Every piece of information has been verified against authenticated records with 
 - **Dual-Mode Sync**: The custom `scripts/setup-build.cjs` and `scripts/sync-dist.cjs` pipeline automatically compiled and mirrored fresh production bundles from `dist/` directly into the repository root (`index.html`, `assets/`, `images/`), ensuring zero white screens when deployed on GitHub Pages.
 - **Production Bundle Metrics**: Total critical JavaScript payload: ~255 kB (gzip ~59.2 kB), CSS: ~53.6 kB (gzip ~10.1 kB).
 - **TypeScript**: 0 compilation errors across all 6 narrative chapters.
+

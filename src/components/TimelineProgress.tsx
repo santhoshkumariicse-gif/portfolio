@@ -29,3 +29,4 @@ export const TimelineProgress: React.FC<TimelineProgressProps> = ({
     </div>
   );
 };
+
