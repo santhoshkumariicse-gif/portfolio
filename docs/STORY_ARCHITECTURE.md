@@ -175,3 +175,4 @@ export interface MissionSceneProps {
    - When `prefers-reduced-motion: reduce` is active, particle systems and continuous camera drifts are disabled; all narrative content is displayed instantly without motion gating.
 3. **Hardware Budget Constraint**:
    - Designed to run at 60 FPS on mid-range hardware (e.g., Intel Core i5-1334U with Intel Iris Xe Graphics).
+

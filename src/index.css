@@ -18,6 +18,14 @@
   --border-strong: rgba(240, 240, 233, 0.22);
   --active-border: rgba(199, 255, 69, 0.65);
 
+  /* Anime Cyber Accents (Atmospheric Storytelling) */
+  --anime-crimson: #FF3358;
+  --anime-crimson-dim: rgba(255, 51, 88, 0.12);
+  --anime-crimson-glow: rgba(255, 51, 88, 0.28);
+  --anime-cyan: #00E5FF;
+  --anime-cyan-dim: rgba(0, 229, 255, 0.12);
+  --anime-cyan-glow: rgba(0, 229, 255, 0.28);
+
   /* Fonts */
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -69,6 +77,58 @@ select:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+/* Anime-Tech HUD Utilities */
+.anime-hud-panel {
+  background-color: rgba(19, 21, 18, 0.88);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.anime-reticle-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+.anime-reticle-top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+.anime-reticle-bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+.anime-reticle-bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
 }
 
 /* Reduced Motion Fallback */

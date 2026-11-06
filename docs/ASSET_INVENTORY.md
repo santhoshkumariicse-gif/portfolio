@@ -87,3 +87,4 @@ To guarantee that the application **never** breaks if an external image fails to
 1. Every character state will have an inline SVG fallback component (`AnimeAvatarSvg.tsx`) with vector layers for head, hair, eyes, and cyber-jacket.
 2. All environmental backgrounds will have rich CSS gradient and SVG mesh fallbacks defined in `src/design-system/tokens.ts`.
 3. Image loading errors will automatically degrade gracefully to the SVG vector illustrations without layout shifts.
+
