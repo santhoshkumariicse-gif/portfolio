@@ -50,3 +50,4 @@ export const AvatarSprite: React.FC<AvatarSpriteProps> = ({
     </group>
   );
 };
+

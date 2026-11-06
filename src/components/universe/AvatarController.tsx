@@ -30,3 +30,4 @@ export const AvatarController: React.FC<AvatarControllerProps> = ({
     />
   );
 };
+

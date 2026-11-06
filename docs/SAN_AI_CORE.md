@@ -75,3 +75,4 @@ Queries are evaluated locally using structured regular-expression intent recogni
 1. **No Autoplay Audio**: Speech synthesis begins muted by default (`isMuted: true`). Visitors click the volume icon to enable spoken narration.
 2. **No Stealth Recording**: The microphone is accessed exclusively upon explicit visitor click of the microphone button.
 3. **Hardware Independence**: Full keyboard and touch navigation supported across all browsers without requiring microphone hardware.
+

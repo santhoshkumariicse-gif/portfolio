@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import { IslandTerrain } from './IslandTerrain';
+import { PrologueScene } from './PrologueScene';
 import { AvatarController } from './AvatarController';
 import { WORLD_ATMOSPHERE, ZoneCoordinate } from './WorldCoordinates';
 
@@ -87,14 +88,21 @@ export const UniverseCanvas: React.FC<UniverseCanvasProps> = ({ activeZone }) =>
           dampingFactor={0.08}
         />
 
-        {/* Procedural Connected Island */}
-        <IslandTerrain />
+        {/* Scene Staging: Orbital Space Prologue vs Island Terrain */}
+        {activeZone.id === 'prologue' ? (
+          <PrologueScene />
+        ) : (
+          <>
+            {/* Procedural Connected Island */}
+            <IslandTerrain />
 
-        {/* Santhosh Developer Avatar 3D Presence */}
-        <AvatarController
-          position={[activeZone.center[0], activeZone.center[1], activeZone.center[2]]}
-          initialState="idle"
-        />
+            {/* Santhosh Developer Avatar 3D Presence */}
+            <AvatarController
+              position={[activeZone.center[0], activeZone.center[1], activeZone.center[2]]}
+              initialState="idle"
+            />
+          </>
+        )}
       </Canvas>
     </div>
   );

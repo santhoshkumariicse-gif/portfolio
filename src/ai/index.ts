@@ -5,3 +5,4 @@ export { AIConversationPanel } from './AIConversationPanel';
 export { CommandProcessor } from './CommandProcessor';
 export type { CommandResult } from './CommandProcessor';
 export { PortfolioKnowledgeBase } from './PortfolioKnowledgeBase';
+

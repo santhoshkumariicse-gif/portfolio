@@ -146,3 +146,4 @@ export const AICore: React.FC<AICoreProps> = ({ size = 96, className = '' }) => 
     </div>
   );
 };
+

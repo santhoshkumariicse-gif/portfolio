@@ -43,3 +43,4 @@ To guarantee 100% visual fidelity matching authentic photographs:
    - For ultra-low-power devices or when WebGL performance drops below 30 FPS, the character automatically switches to an SVG billboard sprite using our verified vector asset catalog.
 3. **No Copyrighted IP**:
    - The design is an authentic stylized developer representation of Santhosh Kumar M.
+
