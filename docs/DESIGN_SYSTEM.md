@@ -1,114 +1,91 @@
-# JARVIS-INSPIRED 3D HIGHWAY DESIGN SYSTEM
-**Project**: THE ROAD OF SANTHOSH — Powered by SAN AI  
-**Specification Version**: 2.0.0  
-**Date**: November 2026 | **Creative Director**: Lead 3D Web Architect & UI/UX Designer  
+# Design System: Green + Black JARVIS Core
+**Project:** Santhosh Kumar M — Professional Portfolio  
+**Architecture:** 3D Universe Homepage × 3D Highway Portfolio  
+**Design Standard:** Anti-Slop Discipline // Recruiter-First Information Architecture  
 
 ---
 
-## 1. Visual Philosophy & Art Direction
+## 1. Color Palette & 60-30-10 Distribution
 
-"The Road of Santhosh" blends high-performance automotive telemetry with Tony Stark-inspired holographic engineering interfaces. It deliberately departs from generic blue-purple SaaS themes in favor of an **Obsidian, Crimson, and Tactical Cyan** palette that conveys technical authority, focus, and cinematic drama.
-
-### 1.1 Strict Negative Directives (What We Explicitly Avoid)
-- **NO generic purple/violet AI gradients**: We ban generic `#8A2BE2` / `#7B2CBF` gradients.
-- **NO excessive blinding neon**: Every glow is soft, functional, and calibrated for contrast.
-- **NO unanchored floating cards**: Every billboard and HUD element is anchored to a physical 3D truss, gantry, or cockpit viewport.
-- **NO generic templates**: All HUD reticles, speedometers, and odometer scrubbers are bespoke vector SVG designs.
-
----
-
-## 2. Color Tokens & Theme Architecture
+The portfolio enforces a strict **60-30-10 color hierarchy** to prevent visual fatigue, eliminate generic AI neon glow soup, and guarantee WCAG 2.2 AA accessibility contrast across all screens.
 
 ```
-OBSIDIAN BACKGROUND       CRIMSON TELEMETRY         TACTICAL CYAN          AMBER WARNING
-┌─────────────────────┐  ┌─────────────────────┐  ┌─────────────────────┐  ┌─────────────────────┐
-│  #050706 / #0A0D0B  │  │  #FF1E40 / #FF3366  │  │  #00E5FF / #00B4D8  │  │  #FFB347 / #C7FF45  │
-│  Asphalt / Deep Void│  │  Holograms / HUD    │  │  Data / System Bus  │  │  Speed / Milestones │
-└─────────────────────┘  └─────────────────────┘  └─────────────────────┘  └─────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│  60% DEEP SPACE BLACK (#030806, #07120D)               │
+│  Base background, 3D world fog, asphalt, canvas body   │
+├────────────────────────────────────────┬───────────────┤
+│  30% DARK EMERALD SURFACES             │ 10% EMERALD   │
+│  (#0A1710, #0F2117)                    │ HIGHLIGHTS    │
+│  Cards, panels, headers, borders       │ Active state, │
+│                                        │ badges, CTAs  │
+└────────────────────────────────────────┴───────────────┘
 ```
 
-| Token Name | Hex Code | Tailwind Equivalent | Role & Application |
+### Palette Tokens
+
+| Token | Hex Value | Role | Usage |
 | :--- | :--- | :--- | :--- |
-| `--color-bg-void` | `#050706` | `bg-[#050706]` | Primary canvas clear color, deep space void, background base. |
-| `--color-bg-surface` | `#0B0F0D` | `bg-[#0B0F0D]` | Modal drawers, billboard backings, terminal chassis. |
-| `--color-road-asphalt`| `#111413` | `bg-[#111413]` | 3D Highway pavement ribbon material diffuse color. |
-| `--color-road-curb` | `#1E2320` | `border-[#1E2320]` | Highway shoulder, concrete barriers, metallic trusses. |
-| `--color-crimson-core`| `#FF1E40` | `text-[#FF1E40]` | SAN AI core, active HUD reticle, milestone billboard borders. |
-| `--color-crimson-glow`| `rgba(255,30,64,0.35)` | `shadow-[0_0_25px_rgba(255,30,64,0.35)]` | Laser borders, holographic bloom highlights, active buttons. |
-| `--color-cyan-data` | `#00E5FF` | `text-[#00E5FF]` | Data buses, optical telemetry, live terminal output. |
-| `--color-amber-active`| `#FFB347` | `text-[#FFB347]` | Speedometer numbers, milestone markers, warning indicators. |
-| `--color-text-main` | `#F0F4F2` | `text-slate-100` | High-contrast body copy, headings, and profile details. |
-| `--color-text-muted`| `#7E8C86` | `text-slate-400` | Telemetry metadata, timestamps, secondary labels. |
+| `color-bg-primary` | `#030806` | Primary Canvas | 3D space background, highway asphalt, body root. |
+| `color-bg-secondary` | `#07120D` | Secondary Surface | Card outer backgrounds, HUD headers, modal backings. |
+| `color-surface` | `#0A1710` | Interactive Surface | Sub-cards, technology tags, active selection panels. |
+| `color-primary-green` | `#00E676` | Primary Accent | Main CTA buttons, active milestone nodes, key highlights. |
+| `color-holographic-green` | `#39FF88` | Secondary Accent | Subtitles, status indicators, animated progress bars. |
+| `color-secondary-teal` | `#00BFA5` | Tertiary Accent | Orbital planetary rings, technical badge borders. |
+| `color-text-primary` | `#E7F5EC` | Primary Text | Headings, card titles, verified credentials (4.5:1+ contrast). |
+| `color-text-secondary` | `#91A99A` | Secondary Text | Descriptions, dates, metadata labels. |
+| `color-border-subtle` | `rgba(255, 255, 255, 0.10)` | Surface Structure | Clean structural borders without fluorescent distraction. |
+| `color-border-active` | `rgba(0, 230, 118, 0.35)` | Active Border | Active section indicators, focused cards. |
 
 ---
 
-## 3. Typography Hierarchy
+## 2. Typography Hierarchy
 
-| Level | Typeface Family | Weight | Letter Spacing | Case | Role |
-| :--- | :--- | :---: | :---: | :---: | :--- |
-| **Display 01** | `Orbitron`, sans-serif | 800 (Extrabold) | `tracking-widest` | UPPERCASE | Main Milestone Billboard Titles (e.g., "KM 1: ABOUT SANTHOSH") |
-| **HUD Readout** | `Rajdhani`, sans-serif | 700 (Bold) | `tracking-wider` | UPPERCASE | Speedometer, KM Counter, Lat/Long Coordinates |
-| **Section Head**| `Space Grotesk`, sans-serif | 700 (Bold) | `tracking-tight` | Normal | Modal drawer titles, project names, certification badges |
-| **Body Copy** | `Inter`, -apple-system | 400 (Regular) | `tracking-normal`| Normal | Bio paragraphs, job descriptions, technical explanations |
-| **Code / Data** | `JetBrains Mono`, monospace | 500 (Medium) | `tracking-normal`| Normal | Terminal commands, JSON schemas, API payloads |
+To eliminate the common AI antipattern of rendering every string in uppercase monospace, the typography strictly separates human communication from machine telemetry:
 
----
-
-## 4. Holographic HUD Primitives & SVG Tokens
-
-All HUD components are rendered in high-framerate vector SVG to guarantee zero pixelation on 4K/Retina displays:
-
-### 4.1 Concentric Rotating Rings (SAN AI Core)
-- **Inner Ring**: 36-segment dashed circle rotating clockwise at 12s per revolution.
-- **Middle Reticle**: 4 angular targeting brackets with crosshair tick marks at 0°, 90°, 180°, 270°.
-- **Outer Compass**: 72-tick degree scale rotating counter-clockwise at 28s per revolution.
-- **Audio Pulse Ring**: Dynamic scaling radius tied to Web Audio API analyzer frequency data.
-
-### 4.2 Highway Cockpit Telemetry
-- **Digital Speedometer**: Procedural arc sweep gauge displaying virtual velocity (0 to 180 km/h).
-- **Milestone Scrubber**: 8 interactive waypoint nodes (KM 0 through KM 7) with instant click-to-teleport and progress fill.
-- **Drive Mode Toggle**: Segmented pill switch toggling between `AUTOPILOT (CINEMATIC)` and `MANUAL (WASD / TOUCH)`.
-- **Audio Synthesizer Bar**: Frequency spectrum equalizer responding to Web Audio oscillator output.
+| Layer | Font Family | Size / Leading | Weight | Role & Application |
+| :--- | :--- | :--- | :--- | :--- |
+| **Display Heading** | `Inter`, sans-serif | `48px–72px` / `1.0` | `Black (900)` | Developer Name on Universe Hero. |
+| **Section Title** | `Inter`, sans-serif | `16px–24px` / `1.2` | `Bold (700)` | Section titles (e.g. "About Santhosh", "Featured Projects"). |
+| **Body Prose** | `Inter`, sans-serif | `12px–14px` / `1.6` | `Regular (400)` | Descriptions, bullet points, bios, project details. |
+| **Telemetry / Code** | `JetBrains Mono`, mono | `10px–12px` / `1.4` | `Bold (700)` | Section indices (`01 / 07`), KM odometer, dates, tech chips. |
+| **Micro Badges** | `JetBrains Mono`, mono | `9px–10px` / `1.2` | `Bold (700)` | Status pills, GPA metrics, degrees, coordinates. |
 
 ---
 
-## 5. 3D Highway Environment & Lighting Standards
+## 3. Spatial Layout & Layout Rules
 
-### 5.1 Highway Spline Geometry
-- **Curve Type**: Catmull-Rom cubic spline (`THREE.CatmullRomCurve3`) in 3D Euclidean space.
-- **Length**: 2200 units extending from `Z = 0` to `Z = -2200`.
-- **Road Width**: 14.0 units with 4 standard lanes:
-  - Outer solid emergency borders: 0.25 units width (`#FF1E40` crimson glow).
-  - Center lane divider: Dashed amber line (`#FFB347`, 4-unit dashes with 4-unit gaps).
-  - Pavement: Textured asphalt with specular bump map (`roughness: 0.82`, `metalness: 0.15`).
-
-### 5.2 Environmental Lighting & Post-Processing
-- **Ambient Light**: `color: #070B09`, `intensity: 0.45` (Prevents pitch black shadows while maintaining contrast).
-- **Directional Moonlight / City Sky**: `color: #1A2824`, `intensity: 0.75`, `position: [50, 100, -50]`.
-- **Streetlight Gantries**: Sodium amber / crimson point lights every 40 units along the highway shoulder with distance falloff `distance: 60`, `decay: 2`.
-- **Post-Processing Pass**:
-  - **Selective Bloom**: Luminance threshold `0.65`, smoothing `0.4`, intensity `0.85` (Gives crimson and cyan laser elements a holographic aura without blowing out the asphalt or text).
-  - **Vignette**: Darkness `0.6`, offset `0.3` (Directs visual focus toward the center road horizon).
+1. **Unobstructed Viewports**:
+   - The active section presentation card is docked at `ml-0 sm:ml-4 lg:ml-8` with a restrained width (`max-w-md lg:max-w-lg`).
+   - This guarantees that 3D billboards (including Santhosh's authentic photograph at KM 1) remain clearly visible and unoccluded.
+2. **Responsive Max Heights**:
+   - Desktop: `max-h-[64vh]` with custom smooth scrollbars.
+   - Mobile: `max-h-[52vh]` to prevent overlap with top headers or bottom navigation docks.
+3. **Z-Index Layering**:
+   - Layer 0: Three.js 3D WebGL Canvas (`z-0`).
+   - Layer 10: Vignette and subtle atmospheric overlays (`z-10`).
+   - Layer 20: 3D Billboards & Spatial anchors.
+   - Layer 30: HUD Navigation Dock, Header, and Section Presentation Card (`z-30`).
 
 ---
 
-## 6. Motion Standards & GSAP Timing Curves
+## 4. Component Design & Anti-Slop Rules
 
-| Motion Action | Duration | Easing Curve | Description |
-| :--- | :---: | :--- | :--- |
-| **Milestone Approach** | 0.8s | `power3.out` | Billboard elevates from road gantry and scales to full opacity |
-| **Camera Teleport** | 1.4s | `power2.inOut` | Smooth spline acceleration and deceleration between milestones |
-| **Modal Open** | 0.35s | `cubic-bezier(0.16, 1, 0.3, 1)` | Holographic modal expands from center with 10px backdrop blur |
-| **HUD Pulse** | 2.0s | `easeInOutSine` | SAN AI core ambient breathing oscillation |
-| **Speed Acceleration** | 0.4s | `power1.out` | Responsive throttle response when pressing W / ArrowUp |
+1. **Restraint Over Excess**:
+   - **No Glow Everywhere**: Glow is capped at 1–2 focal elements per screen (e.g., active section pip, primary CTA button). All sub-cards and pills stay matte.
+   - **No Perpetual Line Clutter**: Decorative SVG lines across full viewports are avoided; only subtle concentric planetary rings (opacity `< 18%`) are allowed.
+   - **No Meaningless Jargon**: Tech names are direct, descriptive, and human-friendly (e.g., "About Santhosh" instead of "SEC-01 // PERSONAL_DOSSIER").
+2. **Tactile Interaction**:
+   - Hover states provide immediate, subtle feedback (`scale(1.02)` and border transition) without jitter or layout shifts.
+   - Active controls indicate current status through fill color and clear text labels.
 
 ---
 
-## 7. Procedural Sound Design Tokens (Web Audio API)
+## 5. Motion & Animation Principles
 
-No large `.mp3` files are downloaded. The audio system synthesizes sound in real time using `AudioContext`:
-- **Engine Acceleration**: Low-frequency sawtooth oscillator (45Hz – 95Hz) modulated by a lowpass filter.
-- **Milestone Arrival Chime**: High sine wave chime chord (C5 + G5, 523Hz + 784Hz) with 1.2s exponential decay.
-- **HUD Click / Beep**: Dual-tone square wave pulse (1200Hz + 2400Hz) lasting 35 milliseconds.
-- **SAN AI Activation Sweep**: Upward frequency sweep (200Hz -> 1800Hz) across 0.4 seconds.
-- **Mute Safety**: Master volume defaults to enabled with explicit HUD toggle and persistent `localStorage` preference.
+1. **Purpose-Driven Movement**:
+   - Camera movement along the Catmull-Rom spline occurs only during navigation between sections.
+   - Camera damping factor of `4.2` ensures smooth, cinematic glide without nausea or disorientation.
+2. **Transition Locks**:
+   - `isTransitioning` state locks out rapid duplicate clicks during flight, ensuring the camera completes its arrival before the next section can be triggered.
+3. **Accessibility**:
+   - Fully respects `prefers-reduced-motion`: animation damping times collapse to instant transitions for visitors with vestibular sensitivities.

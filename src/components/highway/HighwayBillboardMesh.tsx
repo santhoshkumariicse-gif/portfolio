@@ -177,13 +177,14 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
         )}
       </mesh>
 
-      {/* Dedicated Spotlights for KM 1 Personal Photo Billboard */}
+      {/* Dedicated High-CRI Natural Spotlight for KM 1 Personal Photo Billboard */}
       {isKM1Personal && (
         <group position={[0, height / 2 + 1.5, 3]}>
-          <pointLight color="#00E676" intensity={3.8} distance={28} />
+          <pointLight color="#F4FBF7" intensity={2.6} distance={24} />
+          <pointLight color="#00E676" intensity={1.2} distance={16} position={[0, -height, 1]} />
           <mesh>
-            <sphereGeometry args={[0.2, 8, 8]} />
-            <meshBasicMaterial color="#00E676" />
+            <sphereGeometry args={[0.18, 8, 8]} />
+            <meshBasicMaterial color="#E7F5EC" />
           </mesh>
         </group>
       )}

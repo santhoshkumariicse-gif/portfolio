@@ -136,7 +136,7 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
     if (isWarping) return;
     setIsWarping(true);
     SoundFX.playWarp();
-    announce("SAN AI online. Calibrating speedway telemetry. Ingressing into The Road of Santhosh.");
+    announce("Welcome to The Road of Santhosh. Initiating interactive portfolio journey.");
 
     // Animate progress bar across 2.4s
     const startTime = Date.now();
@@ -177,26 +177,24 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
       {/* 2. Vignette and Ambient Radial Overlay */}
       <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(3,8,6,0.88)_100%)]" />
 
-      {/* 2b. Background Rotating Technical Schematics & Radar Crosshairs */}
-      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-25">
+      {/* 2b. Ambient Technical Orbital Ring (Subtle & Non-Intrusive) */}
+      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-15">
         <svg
           viewBox="0 0 800 800"
-          className="w-[90vw] max-w-[760px] h-auto animate-[spin_60s_linear_infinite]"
+          className="w-[85vw] max-w-[700px] h-auto animate-[spin_120s_linear_infinite]"
         >
-          <circle cx="400" cy="400" r="380" fill="none" stroke="#00E676" strokeWidth="1" strokeDasharray="6 8" opacity="0.4" />
-          <circle cx="400" cy="400" r="300" fill="none" stroke="#39FF88" strokeWidth="1.2" strokeDasharray="30 14 10 14" opacity="0.35" />
-          <circle cx="400" cy="400" r="220" fill="none" stroke="#00BFA5" strokeWidth="0.8" opacity="0.3" />
-          <line x1="400" y1="20" x2="400" y2="780" stroke="#00E676" strokeWidth="0.75" strokeDasharray="4 6" opacity="0.25" />
-          <line x1="20" y1="400" x2="780" y2="400" stroke="#00E676" strokeWidth="0.75" strokeDasharray="4 6" opacity="0.25" />
+          <circle cx="400" cy="400" r="380" fill="none" stroke="#00E676" strokeWidth="0.8" strokeDasharray="6 12" opacity="0.3" />
+          <circle cx="400" cy="400" r="300" fill="none" stroke="#39FF88" strokeWidth="1" strokeDasharray="24 16" opacity="0.25" />
+          <circle cx="400" cy="400" r="220" fill="none" stroke="#00BFA5" strokeWidth="0.75" opacity="0.2" />
         </svg>
       </div>
 
-      {/* 3. Top Cinematic Header Bar */}
-      <header className="pointer-events-auto absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 py-3.5 sm:py-5 border-b border-[#00E676]/20 bg-[#030806]/80 backdrop-blur-md">
+      {/* 3. Top Clean Header Bar */}
+      <header className="pointer-events-auto absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 py-3.5 sm:py-4 border-b border-white/10 bg-[#030806]/85 backdrop-blur-md">
         <div className="flex items-center gap-2.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#00E676] animate-ping" />
-          <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#00E676]">
-            SAN AI // JARVIS CORE ORBITAL INGRESS
+          <span className="w-2 h-2 rounded-full bg-[#00E676]" />
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#E7F5EC] uppercase">
+            SANTHOSH KUMAR M <span className="text-[#39FF88] hidden sm:inline">· 2026 PORTFOLIO</span>
           </span>
         </div>
 
@@ -208,7 +206,7 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
             className={`p-2 rounded-lg border text-xs transition-all backdrop-blur-md ${
               !isMuted
                 ? 'bg-[#00E676]/20 border-[#00E676] text-[#00E676]'
-                : 'bg-black/50 border-[#00E676]/20 text-[#91A99A] hover:text-[#E7F5EC]'
+                : 'bg-black/50 border-white/10 text-[#91A99A] hover:text-[#E7F5EC]'
             }`}
             title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
             aria-label={isMuted ? 'Unmute Sound' : 'Mute Sound'}
@@ -218,19 +216,19 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
         </div>
       </header>
 
-      {/* 4. Center Cinematic Presentation Card */}
+      {/* 4. Center Presentation Hero */}
       {!isWarping && (
         <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-center p-4 sm:p-6 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl w-full flex flex-col items-center space-y-4 sm:space-y-6"
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl w-full flex flex-col items-center space-y-4 sm:space-y-5"
           >
-            {/* System Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E676]/10 border border-[#00E676]/40 text-[#39FF88] text-[10px] sm:text-xs font-black uppercase tracking-widest">
+            {/* Professional Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E676]/10 border border-[#00E676]/30 text-[#39FF88] text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
               <Sparkles className="w-3 h-3 text-[#00E676]" />
-              <span>ACT 00 // THE DEVELOPER UNIVERSE</span>
+              <span>INTERACTIVE 3D PRESENTATION</span>
             </div>
 
             {/* Developer Identity Heading */}
@@ -239,26 +237,21 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
             </h1>
 
             {/* Subheading / Profession from Resume */}
-            <div className="text-xs sm:text-sm md:text-base font-mono text-[#39FF88] font-black tracking-widest uppercase">
-              CYBERSECURITY ENTHUSIAST | COMPUTER SCIENCE ENGINEERING STUDENT
+            <div className="text-xs sm:text-sm font-mono text-[#39FF88] font-bold tracking-widest uppercase">
+              CYBERSECURITY ENTHUSIAST · COMPUTER SCIENCE ENGINEERING STUDENT
             </div>
 
-            {/* Tagline */}
-            <p className="text-sm sm:text-lg text-[#E7F5EC] font-sans italic max-w-xl leading-relaxed">
-              "Cybersecurity-focused Computer Science Engineering student interested in cybersecurity research, web application security, vulnerability assessment and software development."
-            </p>
-
-            {/* Short Bio */}
-            <p className="text-xs sm:text-sm text-[#91A99A] font-sans max-w-lg leading-relaxed hidden sm:block">
-              Gnanamani College of Technology, Namakkal · Expected Graduation: May 2027 · GPA: 7.2. Embark on a cinematic 3D journey through verified academic foundations, internships, and security labs.
+            {/* Clear, Non-Redundant Narrative Summary */}
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 font-sans max-w-lg leading-relaxed">
+              B.E. Computer Science student at Gnanamani College of Technology (GPA: 7.2, Exp. 2027). Specializing in web application security, vulnerability assessment, and Python automation.
             </p>
 
             {/* Primary Action CTA: VIEW JOURNEY */}
-            <div className="flex items-center justify-center pt-3 sm:pt-4 w-full max-w-md">
+            <div className="flex items-center justify-center pt-2 sm:pt-3 w-full max-w-xs">
               <button
                 type="button"
                 onClick={handleViewJourney}
-                className="w-full sm:w-auto px-8 py-4 bg-[#00E676] hover:bg-[#39FF88] text-[#030806] rounded-xl font-black text-xs sm:text-sm uppercase tracking-widest shadow-[0_0_35px_rgba(0,230,118,0.65)] hover:shadow-[0_0_55px_rgba(57,255,136,0.9)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 border border-[#39FF88]"
+                className="w-full px-8 py-3.5 bg-[#00E676] hover:bg-[#39FF88] text-[#030806] rounded-xl font-bold text-xs sm:text-sm uppercase tracking-widest shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5"
                 title="Launch the 3D Highway Experience"
               >
                 <Play className="w-4 h-4 fill-current text-[#030806]" />
