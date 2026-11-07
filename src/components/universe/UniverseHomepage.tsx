@@ -30,10 +30,10 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
     // Camera orbital sway
     if (!isWarping) {
       const t = state.clock.elapsedTime * 0.25;
-      state.camera.position.x = Math.sin(t) * 12;
-      state.camera.position.y = 8 + Math.cos(t * 0.8) * 2;
-      state.camera.position.z = 52 + Math.cos(t) * 4;
-      state.camera.lookAt(0, 3, 0);
+      state.camera.position.x = Math.sin(t) * 10;
+      state.camera.position.y = 8 + Math.cos(t * 0.8) * 1.5;
+      state.camera.position.z = 46 + Math.cos(t) * 3;
+      state.camera.lookAt(0, 6.5, 0);
     } else {
       // Rapid forward warp acceleration
       state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, -120, 2.5, delta);
@@ -59,10 +59,10 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
       />
 
       {/* 2. Central Cinematic Sculpture - Pure Deep Black Globe with Racing Red Accents */}
-      <group ref={planetGroupRef} position={[0, 3.5, 0]}>
+      <group ref={planetGroupRef} position={[0, 8.5, 0]}>
         {/* Core Globe - Solid Deep Black */}
         <mesh>
-          <sphereGeometry args={[14, 48, 48]} />
+          <sphereGeometry args={[10.5, 48, 48]} />
           <meshStandardMaterial
             color="#000000"
             roughness={0.7}
@@ -72,7 +72,7 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
         {/* Precision Obsidian Continental Geometry Wireframe */}
         <mesh>
-          <sphereGeometry args={[14.15, 32, 32]} />
+          <sphereGeometry args={[10.65, 32, 32]} />
           <meshStandardMaterial
             color="#090B0E"
             emissive="#000000"
@@ -84,7 +84,7 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
         {/* Subtle Dark Rim Atmosphere Silhouette */}
         <mesh ref={atmosphereRef}>
-          <sphereGeometry args={[14.7, 32, 32]} />
+          <sphereGeometry args={[11.1, 32, 32]} />
           <meshStandardMaterial
             color="#000000"
             emissive="#090B0E"
@@ -97,7 +97,7 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
         {/* Precision Telemetry Orbital Ring - Black & Racing Red */}
         <mesh ref={ringRef} rotation={[Math.PI / 3.2, 0, 0]}>
-          <ringGeometry args={[17.5, 21.5, 64]} />
+          <ringGeometry args={[13.5, 17, 64]} />
           <meshStandardMaterial
             color="#000000"
             emissive="#E10620"
@@ -218,21 +218,24 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
 
       {/* 4. Center Presentation Hero */}
       {!isWarping && (
-        <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-end pb-8 sm:pb-12 md:pb-14 p-4 sm:p-6 text-center">
+        <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-end pb-6 sm:pb-10 p-4 sm:p-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl w-full flex flex-col items-center space-y-3.5 sm:space-y-4 px-6 py-6 sm:px-8 sm:py-7 rounded-2xl sm:rounded-3xl bg-[#F2F4F7]/92 backdrop-blur-md border border-[rgba(9,11,14,0.14)] shadow-[0_16px_45px_rgba(9,11,14,0.10)]"
+            className="relative max-w-2xl w-full flex flex-col items-center space-y-3.5 sm:space-y-4 px-6 py-6 sm:px-8 sm:py-7 rounded-2xl sm:rounded-3xl bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] shadow-[0_20px_50px_rgba(9,11,14,0.12)] overflow-hidden"
           >
+            {/* Top Racing Red Accent Bar */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#A9081A] via-[#E10620] to-[#FF3548]" />
+
             {/* Technical Status Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DCE2E8] border border-[rgba(9,11,14,0.14)] text-black text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
               <Sparkles className="w-3 h-3 text-[#E10620]" />
               <span>INTERACTIVE 3D PRESENTATION</span>
             </div>
 
-            {/* Developer Identity Heading - BOLD SOLID BLACK */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-black uppercase font-sans leading-none">
+            {/* Developer Identity Heading - 100% READABLE BOLD BLACK */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-black uppercase font-sans leading-none select-text">
               SANTHOSH KUMAR M
             </h1>
 
