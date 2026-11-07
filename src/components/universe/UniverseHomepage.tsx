@@ -236,19 +236,19 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
               SANTHOSH KUMAR M
             </h1>
 
-            {/* Subheading / Profession */}
-            <div className="text-xs sm:text-sm md:text-base font-mono text-[#00E5FF] font-bold tracking-widest uppercase">
-              FULL-STACK DEVELOPER & AI SYSTEMS ENGINEER
+            {/* Subheading / Profession from Resume */}
+            <div className="text-xs sm:text-sm md:text-base font-mono text-[#FF1E40] font-black tracking-widest uppercase">
+              CYBERSECURITY ENTHUSIAST | COMPUTER SCIENCE ENGINEERING STUDENT
             </div>
 
             {/* Tagline */}
             <p className="text-sm sm:text-lg text-slate-300 font-sans italic max-w-xl leading-relaxed">
-              "Building Ideas Into Practical Digital Solutions · Exploring the Developer Universe."
+              "Cybersecurity-focused Computer Science Engineering student interested in cybersecurity research, web application security, vulnerability assessment and software development."
             </p>
 
             {/* Short Bio */}
             <p className="text-xs sm:text-sm text-slate-400 font-sans max-w-lg leading-relaxed hidden sm:block">
-              Welcome to my interactive universe. Embark on a cinematic 3D journey through real software architectures, verified engineering credentials, and production milestones.
+              Gnanamani College of Technology, Namakkal · Expected Graduation: May 2027 · GPA: 7.2. Embark on a cinematic 3D journey through verified academic foundations, internships, and security labs.
             </p>
 
             {/* Primary & Secondary Action CTAs */}

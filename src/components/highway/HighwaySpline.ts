@@ -16,21 +16,21 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     id: 'km-0',
     km: 0.0,
     progress: 0.0 / 7.0,
-    title: 'START POINT',
-    subtitle: 'Holographic Welcome Gantry',
+    title: 'WELCOME',
+    subtitle: 'System Ingress & Portal',
     codeName: 'ACT 00 // ORIGIN PORTAL',
-    color: '#00E5FF',
-    description: 'Welcome to the Developer Highway of Santhosh Kumar M. Prepare for acceleration.'
+    color: '#FF1E40',
+    description: 'Welcome to the Road of Santhosh. Ingressing at KM 0. Prepare for acceleration.'
   },
   {
     id: 'km-1',
     km: 1.0,
     progress: 1.0 / 7.0,
     title: 'ABOUT ME',
-    subtitle: 'Coastal Origin & Philosophy',
+    subtitle: 'Cybersecurity-Focused CSE Student',
     codeName: 'ACT 01 // PERSONAL DOSSIER',
-    color: '#FFB347',
-    description: 'Karaikal roots, practical engineering mindset, and passion for software architecture.'
+    color: '#FF1E40',
+    description: 'Santhosh Kumar M: B.E. CSE, Gnanamani College of Technology (Expected May 2027, GPA: 7.2).'
   },
   {
     id: 'km-2',
@@ -39,58 +39,58 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'EDUCATION',
     subtitle: 'Gnanamani College of Technology',
     codeName: 'ACT 02 // ACADEMIC OVERPASS',
-    color: '#C7FF45',
-    description: 'B.E. in Computer Science & Engineering (2023–2027), verified GPA 7.2 / 10.0.'
+    color: '#00E5FF',
+    description: 'B.E. Computer Science & Engineering (GPA 7.2). Coursework: Ethical Hacking, Networks, Operating Systems.'
   },
   {
     id: 'km-3',
     km: 3.0,
     progress: 3.0 / 7.0,
-    title: 'SKILLS JUNCTION',
-    subtitle: '7 Multi-Lane Route Signs',
+    title: 'SKILLS',
+    subtitle: 'Technical Direction Signboards',
     codeName: 'ACT 03 // ARSENAL INTERCHANGE',
-    color: '#00E5FF',
-    description: 'Frontend, Backend, AI Systems, Android Apps, Databases, DevOps, and Security.'
+    color: '#FFB347',
+    description: 'Programming: Python, Java, C. Cybersecurity: Web Security, CTFs, Vulnerability Assessment. Linux & Git.'
   },
   {
     id: 'km-4',
     km: 4.0,
     progress: 4.0 / 7.0,
-    title: 'PROJECT HIGHWAY',
-    subtitle: '3D Monumental Billboards',
+    title: 'PROJECTS',
+    subtitle: 'Verified Engineering Missions',
     codeName: 'ACT 04 // SOFTWARE MISSIONS',
-    color: '#FF3366',
-    description: 'Real architectures: LorryBook / RDA, NexusATS, Recall AI, and Security Lab.'
+    color: '#FF1E40',
+    description: 'Verified real architectures: LorryBook / RDA Logistics, NexusATS, and Recall AI RAG prototype.'
   },
   {
     id: 'km-5',
     km: 5.0,
     progress: 5.0 / 7.0,
-    title: 'EXPERIENCE TOLL GATE',
+    title: 'INTERNSHIPS',
     subtitle: 'Cybernaut & ELITA Toll Lanes',
     codeName: 'ACT 05 // PROFESSIONAL MILESTONES',
-    color: '#C7FF45',
-    description: 'Python developer internship at Cybernaut and web/app engineering at ELITA.'
+    color: '#FFB347',
+    description: 'Python Developer Intern at Cybernaut (Karur) & Web/App Development Intern at ELITA (Bangalore).'
   },
   {
     id: 'km-6',
     km: 6.0,
     progress: 6.0 / 7.0,
-    title: 'REST STOP',
-    subtitle: 'Systems Lab & Terminal Overlook',
-    codeName: 'ACT 06 // TECHNICAL OVERLOOK',
-    color: '#FFB347',
-    description: 'Interactive neural architectures, bash terminal simulator, and deep-dive engineering docs.'
+    title: 'SECURITY LAB',
+    subtitle: 'CTF Challenges & Cyber Club',
+    codeName: 'ACT 06 // SECURITY OVERLOOK',
+    color: '#00E5FF',
+    description: 'Web application security testing, lab vulnerability analysis, and Cybersecurity Club member at Gnanamani.'
   },
   {
     id: 'km-7',
     km: 7.0,
     progress: 7.0 / 7.0,
-    title: 'DESTINATION: HIRE ME',
-    subtitle: 'Contact Terminal & ATS Resume',
+    title: 'CONTACT',
+    subtitle: 'Direct Dispatch & Resume Terminal',
     codeName: 'ACT 07 // TERMINAL ZENITH',
-    color: '#C7FF45',
-    description: 'Transmit direct dispatch, download ATS resume, and connect on GitHub & LinkedIn.'
+    color: '#FF1E40',
+    description: 'Direct contact channels, phone (+91 9345402493), email, LinkedIn, GitHub, and resume download.'
   }
 ];
 

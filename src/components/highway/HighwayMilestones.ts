@@ -10,6 +10,14 @@ export interface MilestoneProjectItem {
   features: string[];
 }
 
+export interface MilestoneInternshipItem {
+  company: string;
+  role: string;
+  location: string;
+  period: string;
+  responsibilities: string[];
+}
+
 export interface HighwayMilestoneData {
   id: string;
   km: number;
@@ -18,15 +26,17 @@ export interface HighwayMilestoneData {
   subtitle: string;
   codeName: string;
   accentColor: string;
-  category: 'origin' | 'profile' | 'education' | 'skills' | 'project' | 'experience' | 'rest-stop' | 'destination';
+  category: 'origin' | 'profile' | 'education' | 'skills' | 'project' | 'experience' | 'cybersecurity' | 'destination';
   imageAsset: string;
   secondaryImage?: string;
   tagline: string;
   statBadge: { label: string; value: string };
   bulletPoints: string[];
   narration: string;
-  interactiveModalType?: 'about' | 'education' | 'skills' | 'projects' | 'experience' | 'resume' | 'terminal';
+  interactiveModalType?: 'about' | 'education' | 'skills' | 'projects' | 'experience' | 'cybersecurity' | 'resume' | 'terminal';
   projectDetails?: MilestoneProjectItem;
+  internships?: MilestoneInternshipItem[];
+  skillsCategories?: { category: string; skills: string[] }[];
   side: 'left' | 'right' | 'overhead';
   billboardSize: [number, number]; // [width, height]
   lateralOffset?: number; // Custom lateral offset from road center
@@ -42,17 +52,17 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     km: 0.0,
     progress: 0.0 / 7.0,
     title: 'WELCOME GATE',
-    subtitle: 'Act 00 // System Ingress & Departure',
+    subtitle: 'System Ingress // Deep Space Speedway',
     codeName: 'SAN-PORTAL-00',
     accentColor: '#FF1E40',
     category: 'origin',
     imageAsset: getAsset('assets/illustrations/anime-coder-4k-workstation.jpg'),
     secondaryImage: getAsset('assets/ai-interface/san-ai-keynote-telemetry.jpg'),
-    tagline: 'Enter the Developer Universe of Santhosh Kumar M.',
+    tagline: 'Santhosh Kumar M — Cybersecurity Enthusiast & Computer Science Engineering Student.',
     statBadge: { label: 'SPEEDWAY', value: '7.0 KM' },
     bulletPoints: [
-      'Full-Stack Developer & AI Systems Engineer',
-      'Dual Driving Modes: Cinematic Autopilot & Manual WASD/Touch Controls',
+      'Verified Developer & Cybersecurity Portfolio of Santhosh Kumar M',
+      'Dual Driving Modes: Autopilot Cruise & Manual WASD/Touch Controls',
       'Real-Time JARVIS HUD with SAN AI Copilot Telemetry'
     ],
     narration: 'System online. Welcome to the Road of Santhosh. Ingressing at KM 0. Prepare for acceleration.',
@@ -61,115 +71,139 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     billboardSize: [22, 10]
   },
 
-  // ── KM 1: About Santhosh (Authentic Suit Photo) ───────────────────
+  // ── KM 1: About Santhosh (First Billboard - Authentic Photo) ──────
   {
     id: 'km-1',
     km: 1.0,
     progress: 1.0 / 7.0,
     title: 'SANTHOSH KUMAR M',
-    subtitle: 'Act 01 // Identity, Roots & Engineering Philosophy',
+    subtitle: 'Cybersecurity Enthusiast | Computer Science Engineering Student',
     codeName: 'SAN-BIO-01',
     accentColor: '#FF1E40',
     category: 'profile',
     imageAsset: getAsset('assets/profile/santhosh-profile-formal.jpg'),
-    tagline: 'Practical engineering mindset rooted in Karaikal, built for enterprise impact.',
-    statBadge: { label: 'VERIFIED', value: 'B.E. CSE' },
+    tagline: 'Cybersecurity-focused Computer Science Engineering student interested in cybersecurity research, web application security, vulnerability assessment and software development.',
+    statBadge: { label: 'VERIFIED GPA', value: '7.2 / 10' },
     bulletPoints: [
-      'Santhosh Kumar M — Full-Stack Developer & AI Systems Specialist',
-      'Bachelor of Engineering in CSE at Gnanamani College of Technology (GPA 7.2 / 10)',
-      'Practical engineering roots in Karaikal, Tamil Nadu, India',
-      'Specialized in building resilient web architectures, autonomous AI pipelines, and defensive security systems'
+      'Cybersecurity-focused Computer Science Engineering student interested in cybersecurity research, web application security, vulnerability assessment and software development.',
+      'B.E. Computer Science and Engineering — Gnanamani College of Technology, Namakkal',
+      'Expected Graduation: May 2027 | GPA: 7.2 / 10.0',
+      'Location: Namakkal, India | Seeking entry-level cybersecurity, internship, or SOC analyst roles'
     ],
-    narration: 'Arriving at KM 1: Santhosh Kumar M. Verified computer science engineer specializing in scalable full-stack web and autonomous AI architectures.',
+    narration: 'Arriving at KM 1: Santhosh Kumar M. Cybersecurity-focused Computer Science Engineering student from Gnanamani College of Technology.',
     interactiveModalType: 'about',
     side: 'left',
     billboardSize: [12, 16],
     lateralOffset: -13.0
   },
 
-  // ── KM 2: Academic Overpass ──────────────────────────────────────
+  // ── KM 2: Education ──────────────────────────────────────────────
   {
     id: 'km-2',
     km: 2.0,
     progress: 2.0 / 7.0,
-    title: 'ACADEMIC OVERPASS',
-    subtitle: 'Act 02 // Computer Science & Engineering Foundation',
+    title: 'EDUCATION & ACADEMICS',
+    subtitle: 'Bachelor of Engineering in Computer Science & Engineering',
     codeName: 'SAN-EDU-02',
     accentColor: '#00E5FF',
     category: 'education',
     imageAsset: getAsset('assets/illustrations/anime-coder-neon-looking-back.jpg'),
-    tagline: 'Gnanamani College of Technology & Nirmala R.C. Higher Secondary School',
-    statBadge: { label: 'ACADEMIC GPA', value: '7.2 / 10' },
+    tagline: 'Gnanamani College of Technology, Namakkal — Expected Graduation: May 2027 (GPA: 7.2)',
+    statBadge: { label: 'DEGREE', value: 'B.E. CSE' },
     bulletPoints: [
-      'Gnanamani College of Technology, Namakkal — B.E. Computer Science & Engineering (2023–2027) | First Class (7.2 CGPA)',
-      'Nirmala R.C. Higher Secondary School — Higher Secondary Certificate (HSC: 67.5%)',
-      'Nirmala R.C. Higher Secondary School — Secondary School Leaving Certificate (SSLC: 69.4%)',
-      'Core Competencies: Data Structures, Analysis of Algorithms, Database Management, Operating Systems, Computer Networks'
+      'Degree: Bachelor of Engineering (B.E.) in Computer Science and Engineering',
+      'Institution: Gnanamani College of Technology, Namakkal',
+      'Expected Graduation: May 2027 | Verified GPA: 7.2',
+      'Relevant Coursework: Ethical Hacking and Penetration Testing',
+      'Relevant Coursework: Computer Networks',
+      'Relevant Coursework: Operating Systems'
     ],
-    narration: 'Passing KM 2: Academic Overpass. Bachelor of Engineering in Computer Science with verified 7.2 GPA and strong algorithmic foundations.',
+    narration: 'Passing KM 2: Academic Overpass. Bachelor of Engineering in CSE with specialized coursework in Ethical Hacking, Computer Networks, and Operating Systems.',
     interactiveModalType: 'education',
     side: 'right',
     billboardSize: [18, 10],
     lateralOffset: 13.5
   },
 
-  // ── KM 3: Skills Junction (Direction Signboards) ──────────────────
+  // ── KM 3: Technical Skills (Highway Signboards) ───────────────────
   {
     id: 'km-3',
     km: 3.0,
     progress: 3.0 / 7.0,
-    title: 'SKILLS JUNCTION',
-    subtitle: 'Act 03 // Multi-Lane Technology Direction Signs',
+    title: 'TECHNICAL SKILLS JUNCTION',
+    subtitle: 'Highway Direction Signboards // Core Competencies',
     codeName: 'SAN-SKILLS-03',
     accentColor: '#FFB347',
     category: 'skills',
     imageAsset: getAsset('assets/backgrounds/curved-workstation-reference.jpg'),
-    tagline: 'Overhead highway signboards directing traffic across 7 technical disciplines.',
-    statBadge: { label: 'TECH ARSENAL', value: '25+ TOOLS' },
+    tagline: 'Categorized technical signboards without fabricated percentages or subjective ratings.',
+    statBadge: { label: 'DOMAINS', value: '4 AREAS' },
     bulletPoints: [
-      'Lane 1 (Languages): Python, JavaScript (ES6+), TypeScript, Java, C, C++, SQL',
-      'Lane 2 (Frontend): React 18, Next.js, Three.js, React Three Fiber, Tailwind CSS, HTML5, CSS3',
-      'Lane 3 (Backend): Node.js, Express.js, FastAPI, REST APIs, Microservices Architecture',
-      'Lane 4 (Databases): PostgreSQL, MongoDB, MySQL, Redis, Vector Databases (Pinecone/Qdrant)',
-      'Lane 5 (Mobile): Android Application Development, Java/Kotlin, XML Layouts',
-      'Lane 6 (Developer Tools): Git, GitHub, Docker, Postman, Linux/Bash, Vite, VS Code',
-      'Lane 7 (AI & ML): LLM Integration, LangChain, RAG Pipelines, Prompt Engineering'
+      'Programming Languages: Python, Java, C',
+      'Cybersecurity Skills: Web Application Security Basics, Vulnerability Assessment Concepts, CTF Challenges, SQL Injection concepts, Cross-Site Scripting (XSS), Authentication Flaws',
+      'Operating Systems: Linux (Basic), Windows',
+      'Tools & Platforms: Git, Basic Command Line'
     ],
-    narration: 'Approaching KM 3: Skills Junction. Multi-lane technology direction signs across full-stack languages, backend microservices, and AI pipelines.',
+    skillsCategories: [
+      {
+        category: 'Programming Languages',
+        skills: ['Python', 'Java', 'C']
+      },
+      {
+        category: 'Cybersecurity Skills',
+        skills: [
+          'Web Application Security Basics',
+          'Vulnerability Assessment Concepts',
+          'CTF Challenges',
+          'SQL Injection concepts',
+          'Cross-Site Scripting (XSS)',
+          'Authentication Flaws'
+        ]
+      },
+      {
+        category: 'Operating Systems',
+        skills: ['Linux (Basic)', 'Windows']
+      },
+      {
+        category: 'Tools & Platforms',
+        skills: ['Git', 'Basic Command Line']
+      }
+    ],
+    narration: 'Approaching KM 3: Technical Skills Junction. Multi-lane direction signboards covering Python, Java, C, Web Security, Vulnerability Assessment, Linux, and Git.',
     interactiveModalType: 'skills',
     side: 'overhead',
     billboardSize: [22, 11]
   },
 
-  // ── KM 4A: Project Highway — LorryBook / RDA ──────────────────────
+  // ── KM 4A: Verified Project — LorryBook / RDA ─────────────────────
   {
     id: 'km-4a',
     km: 4.0,
     progress: 3.85 / 7.0,
     title: 'LORRYBOOK / RDA',
-    subtitle: 'Project 01 // Logistics Geofenced Route & Driver Platform',
+    subtitle: 'Verified Project // Logistics Route & Driver Queue Platform',
     codeName: 'SAN-PROJ-RDA',
     accentColor: '#FF1E40',
     category: 'project',
     imageAsset: getAsset('assets/projects/systems-lab-optical-bus.jpg'),
-    tagline: 'Full-stack logistics management platform for freight tracking, queue dispatch, and geofencing.',
-    statBadge: { label: 'DOMAIN', value: 'LOGISTICS' },
+    tagline: 'Transport route logistics and driver queue platform with automated dispatch and trip logging.',
+    statBadge: { label: 'STATUS', value: 'VERIFIED' },
     bulletPoints: [
-      'Built reactive frontend dashboards with real-time lorry driver queue status and route assignments',
-      'Engineered REST API endpoints for driver dispatch verification and automated trip logging',
-      'Integrated geofencing triggers to automatically record gate arrival and departure timestamps',
-      'Optimized SQL queries for fast fleet history lookups and bill of lading reconciliation'
+      'Full-stack platform managing lorry driver queues and automated route booking schedules',
+      'Engineered backend API endpoints for dispatch authorization and trip status tracking',
+      'Integrated geofenced check-in triggers to record arrival and departure events',
+      'Optimized database queries for fast fleet history lookups and load validation'
     ],
-    narration: 'Approaching Project Billboard 4A: LorryBook and RDA Logistics. End-to-end freight queue and route dispatch architecture.',
+    narration: 'Approaching Project Billboard 4A: LorryBook and RDA Logistics. End-to-end transport booking and driver queue platform.',
     interactiveModalType: 'projects',
     projectDetails: {
       id: 'rda-lorrybook',
       name: 'LorryBook / RDA Logistics',
-      badge: 'Full-Stack Fleet Logistics',
-      desc: 'Enterprise transport booking and driver queue platform with real-time dispatch and trip logging.',
+      badge: 'Full-Stack Fleet Platform',
+      desc: 'Transport route logistics and driver queue platform with automated dispatch and trip logging.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'REST API'],
       githubUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
-      demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio',
+      demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio/',
       image: getAsset('assets/projects/systems-lab-optical-bus.jpg'),
       features: [
         'Real-time driver queue management',
@@ -182,35 +216,35 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     lateralOffset: -13.5
   },
 
-  // ── KM 4B: Project Highway — NexusATS ─────────────────────────────
+  // ── KM 4B: Verified Project — NexusATS ────────────────────────────
   {
     id: 'km-4b',
     km: 4.3,
     progress: 4.3 / 7.0,
     title: 'NEXUS ATS',
-    subtitle: 'Project 02 // Intelligent Resume Parsing & Blind Hiring Engine',
+    subtitle: 'Verified Project // Resume Parsing & Blind Hiring Engine',
     codeName: 'SAN-PROJ-ATS',
     accentColor: '#00E5FF',
     category: 'project',
     imageAsset: getAsset('assets/ai-interface/avatar-wireframe-diagnostics.jpg'),
-    tagline: 'Modern Applicant Tracking System designed for objective talent screening and structured evaluations.',
-    statBadge: { label: 'DOMAIN', value: 'HR TECH' },
+    tagline: 'Modern Applicant Tracking System for structured candidate evaluation and blind screening.',
+    statBadge: { label: 'STATUS', value: 'VERIFIED' },
     bulletPoints: [
       'Automated resume parsing engine extracting candidate skills, experience duration, and education',
-      'Blind-review screening mode masking candidate demographic data to eliminate unconscious bias',
-      'Stage-gate recruitment pipeline: Applied -> Screening -> Technical -> Final Decision',
-      'Role-based access control for interviewers, hiring managers, and HR administrators'
+      'Blind-review screening filter masking demographic data to eliminate unconscious bias',
+      'Structured evaluation scorecards with role-based access for reviewers',
+      'Full-stack architecture built with TypeScript, React, and PostgreSQL'
     ],
     narration: 'Approaching Project Billboard 4B: NexusATS. Objective talent screening and automated resume parsing engine.',
     interactiveModalType: 'projects',
     projectDetails: {
       id: 'nexusats',
       name: 'NexusATS',
-      badge: 'Applicant Tracking System',
+      badge: 'Applicant Tracking Engine',
       desc: 'Modern applicant tracking and resume screening system with blind evaluation pipelines.',
       tags: ['TypeScript', 'React', 'FastAPI', 'PostgreSQL', 'Tailwind CSS'],
       githubUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
-      demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio',
+      demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio/',
       image: getAsset('assets/ai-interface/avatar-wireframe-diagnostics.jpg'),
       features: [
         'Automated PDF resume parser',
@@ -223,40 +257,40 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     lateralOffset: 13.5
   },
 
-  // ── KM 4C: Project Highway — Recall AI ────────────────────────────
+  // ── KM 4C: Verified Project — Recall AI ───────────────────────────
   {
     id: 'km-4c',
     km: 4.7,
     progress: 4.7 / 7.0,
     title: 'RECALL AI',
-    subtitle: 'Project 03 // Autonomous Multi-Agent RAG Orchestrator',
+    subtitle: 'Verified Project // Hackathon Multi-Agent RAG Prototype',
     codeName: 'SAN-PROJ-RAG',
     accentColor: '#FF1E40',
     category: 'project',
     imageAsset: getAsset('assets/projects/ai-brain-neural-architecture.jpg'),
     tagline: 'Intelligent multi-agent document analysis and vector memory retrieval prototype.',
-    statBadge: { label: 'DOMAIN', value: 'GEN AI' },
+    statBadge: { label: 'STATUS', value: 'VERIFIED' },
     bulletPoints: [
-      'Developed during collegiate AI hackathon for rapid retrieval over dense technical repositories',
-      'Retrieval-Augmented Generation (RAG) architecture chunking and indexing PDFs into vector stores',
+      'Developed during collegiate AI hackathon for rapid retrieval over dense technical documentation',
+      'Retrieval-Augmented Generation (RAG) architecture chunking and indexing text into vector stores',
       'Autonomous ReAct feedback loop validating model citations against ground-truth source chunks',
       'FastAPI asynchronous backend with streaming LLM completions and caching'
     ],
-    narration: 'Approaching Project Billboard 4C: Recall AI. Hackathon-tested autonomous multi-agent RAG orchestrator with vector memory.',
+    narration: 'Approaching Project Billboard 4C: Recall AI. Hackathon-tested autonomous multi-agent RAG prototype with vector memory.',
     interactiveModalType: 'projects',
     projectDetails: {
       id: 'recall-ai',
       name: 'Recall AI',
-      badge: 'Agentic RAG Engine',
+      badge: 'Agentic RAG Prototype',
       desc: 'Autonomous multi-agent document analysis engine with Pinecone/Qdrant vector retrieval and citation validation.',
       tags: ['Python', 'FastAPI', 'LangChain', 'OpenAI', 'Pinecone', 'React'],
       githubUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
-      demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio',
+      demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio/',
       image: getAsset('assets/projects/ai-brain-neural-architecture.jpg'),
       features: [
         'Hierarchical document vector chunking',
-        'Hallucination prevention citation verifier',
-        'Multi-agent debate consensus protocol'
+        'Citation verification mechanism',
+        'Multi-agent consensus synthesis'
       ]
     },
     side: 'left',
@@ -264,80 +298,114 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     lateralOffset: -13.5
   },
 
-  // ── KM 5: Experience Toll Gate ────────────────────────────────────
+  // ── KM 5: Internship Experience (Cybernaut & ELITA) ───────────────
   {
     id: 'km-5',
-    km: 5.0,
+    km: 5.1,
     progress: 5.1 / 7.0,
-    title: 'EXPERIENCE TOLL GATE',
-    subtitle: 'Act 05 // Verified Internships & Professional Milestones',
+    title: 'INTERNSHIP EXPERIENCE',
+    subtitle: 'Professional Engineering Internships at Cybernaut & ELITA',
     codeName: 'SAN-EXP-05',
     accentColor: '#FFB347',
     category: 'experience',
     imageAsset: getAsset('assets/cybersecurity/cyber-soc-threat-command.jpg'),
-    tagline: 'Practical engineering internships at Cybernaut and ELITA delivering real features.',
+    tagline: 'Verified software engineering internships at Cybernaut (Karur) and ELITA (Bangalore).',
     statBadge: { label: 'INDUSTRY', value: '2 FIRMS' },
     bulletPoints: [
-      'Cybernaut — Python Developer Intern (Jul 2024 – Present) | Automation scripts, data parsing, and test harnesses',
-      'ELITA — Web & App Developer Intern (Jul 2025 – Aug 2025) | Responsive frontend modules and RESTful endpoints',
-      'Collegiate Hackathons: Developed and presented Recall AI multi-agent prototype',
-      'Certifications: Python Development, Full-Stack Fundamentals, Cybersecurity Foundations'
+      'Cybernaut (Karur, Tamil Nadu) — Python Developer Intern | July 2024 – Present',
+      'Developed and maintained Python scripts with a focus on clean, efficient, and readable code.',
+      'Debugged applications and resolved logical and runtime errors.',
+      'Gained exposure to writing maintainable code practices relevant to security tooling and automation.',
+      'ELITA (Bangalore, India) — Web and App Development Intern | July 2025 – August 2025',
+      'Created reusable UI components, cutting development time for new pages by ~25%.',
+      'Learned fundamentals of client-server interaction and common web application structures.',
+      'Gained awareness of common web security issues through development exposure.'
     ],
-    narration: 'Crossing KM 5: Experience Toll Gate. Software engineering internships at Cybernaut and ELITA delivering real production features.',
+    internships: [
+      {
+        company: 'Cybernaut',
+        role: 'Python Developer Intern',
+        location: 'Karur, Tamil Nadu',
+        period: 'July 2024 – Present',
+        responsibilities: [
+          'Developed and maintained Python scripts with a focus on clean, efficient, and readable code.',
+          'Debugged applications and resolved logical and runtime errors.',
+          'Gained exposure to writing maintainable code practices relevant to security tooling and automation.'
+        ]
+      },
+      {
+        company: 'ELITA',
+        role: 'Web and App Development Intern',
+        location: 'Bangalore, India',
+        period: 'July 2025 – August 2025',
+        responsibilities: [
+          'Created reusable UI components, cutting development time for new pages by ~25%.',
+          'Learned fundamentals of client-server interaction and common web application structures.',
+          'Gained awareness of common web security issues through development exposure.'
+        ]
+      }
+    ],
+    narration: 'Crossing KM 5: Internship Experience. Software engineering internships at Cybernaut (Karur) and ELITA (Bangalore) with verified contributions.',
     interactiveModalType: 'experience',
     side: 'right',
     billboardSize: [18, 11],
     lateralOffset: 13.5
   },
 
-  // ── KM 6: Rest Stop Sanctuary ────────────────────────────────────
+  // ── KM 6: Cybersecurity Practical Exposure & Involvement ─────────
   {
     id: 'km-6',
     km: 6.0,
     progress: 6.0 / 7.0,
-    title: 'REST STOP SANCTUARY',
-    subtitle: 'Act 06 // Hobbies, Interests & Continuous Learning',
-    codeName: 'SAN-REST-06',
+    title: 'CYBERSECURITY LAB & INVOLVEMENT',
+    subtitle: 'Practical Exposure, CTF Challenges & Cybersecurity Club',
+    codeName: 'SAN-SEC-06',
     accentColor: '#00E5FF',
-    category: 'rest-stop',
-    imageAsset: getAsset('assets/illustrations/anime-coder-sunset-cat.jpg'),
-    secondaryImage: getAsset('assets/illustrations/anime-coder-purple-study.jpg'),
-    tagline: 'Creative reflection, late-night coding sanctuaries & continuous learning.',
-    statBadge: { label: 'FOCUS', value: 'FLOW STATE' },
+    category: 'cybersecurity',
+    imageAsset: getAsset('assets/cybersecurity/cyber-soc-threat-command.jpg'),
+    secondaryImage: getAsset('assets/illustrations/anime-coder-sunset-cat.jpg'),
+    tagline: 'Practical exposure and lab-based learning in web security, CTFs, and secure coding practices.',
+    statBadge: { label: 'SECURITY', value: 'CTF & LABS' },
     bulletPoints: [
-      'Hobbies: Exploring emerging open-source AI tools, building weekend side prototypes, and reading engineering blogs',
-      'Currently Learning: Advanced Three.js shaders, WebGL performance tuning, and Distributed Systems with Go',
-      'Passionate about clean code, ergonomic user interfaces, and robust software architecture',
-      'Music & Lo-Fi: Companion playlists for sustained deep-focus problem-solving sessions'
+      'Practical Exposure: Practiced web application security testing using intentionally vulnerable applications.',
+      'Explored common vulnerabilities such as SQL Injection, Cross-Site Scripting (XSS), and authentication flaws in lab environments.',
+      'Developed basic Python scripts useful for automation and security experimentation.',
+      'Cybersecurity Club Member — Gnanamani College of Technology, Namakkal (August 2022 – May 2024)',
+      'Participated in Capture The Flag (CTF) challenges focusing on web security and basic exploitation techniques.',
+      'Gained hands-on exposure to vulnerability identification and security fundamentals.',
+      'Actively explored ethical hacking concepts and secure system practices.',
+      'Interests: Cybersecurity Research | Languages: English, Tamil'
     ],
-    narration: 'Arriving at KM 6: Rest Stop Sanctuary. Deep focus, creative explorations, and continuous technological craftsmanship.',
-    interactiveModalType: 'terminal',
+    narration: 'Arriving at KM 6: Cybersecurity Practical Exposure and Club Involvement. CTF challenges, lab-based vulnerability assessment, and security research.',
+    interactiveModalType: 'cybersecurity',
     side: 'left',
     billboardSize: [18, 11],
     lateralOffset: -13.5
   },
 
-  // ── KM 7: Destination City (Hire Me) ─────────────────────────────
+  // ── KM 7: Destination & Contact Billboard ────────────────────────
   {
     id: 'km-7',
     km: 7.0,
     progress: 7.0 / 7.0,
-    title: 'DESTINATION: HIRE ME',
-    subtitle: 'Act 07 // Mission Control, Resume Download & Contact Beacon',
+    title: 'DESTINATION: CONTACT & CONNECT',
+    subtitle: 'Direct Dispatch // Resume & Recruiter Beacon',
     codeName: 'SAN-HIRE-07',
     accentColor: '#FF1E40',
     category: 'destination',
     imageAsset: getAsset('assets/backgrounds/jarvis-holographic-lab.jpg'),
     secondaryImage: getAsset('assets/profile/santhosh-profile-formal.jpg'),
-    tagline: 'Ready for high-impact software engineering roles. Let us build the future together.',
-    statBadge: { label: 'STATUS', value: 'AVAILABLE' },
+    tagline: 'Seeking entry-level cybersecurity, internship, or SOC analyst roles.',
+    statBadge: { label: 'CONTACT', value: 'DISPATCH' },
     bulletPoints: [
-      'Available for Full-Time Software Engineer, Full-Stack Developer, and AI Systems roles',
-      'Verified ATS Resume download and engineering credentials ready for review',
-      'Direct Contact: santhoshkumariicse@gmail.com | LinkedIn: /in/santhosh-kumar-m',
-      'GitHub Repositories: https://github.com/santhoshkumariicse-gif'
+      'Email: santhoshkumar160706@gmail.com',
+      'Phone: +91 9345402493',
+      'Location: Namakkal, India',
+      'LinkedIn: linkedin.com/in/santhosh-kumar-8681612a4/',
+      'GitHub: https://github.com/santhoshkumariicse-gif/',
+      'Portfolio: https://santhoshkumariicse-gif.github.io/portfolio/'
     ],
-    narration: 'Destination reached: KM 7 Mission Control. Santhosh Kumar M is available for software engineering roles. All systems ready for hire.',
+    narration: 'Destination reached: KM 7 Contact Beacon. Verified contact channels open for entry-level cybersecurity, internship, or SOC analyst roles.',
     interactiveModalType: 'resume',
     side: 'overhead',
     billboardSize: [22, 12]

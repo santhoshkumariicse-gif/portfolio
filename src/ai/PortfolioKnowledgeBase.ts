@@ -1,8 +1,5 @@
 import { personalProfileData } from '../data/profile';
-import { skillsData } from '../data/skills';
 import { projectsData } from '../data/projects';
-import { experienceData } from '../data/experience';
-import { certificationsData } from '../data/certifications';
 
 export interface KnowledgeItem {
   keywords: string[];
@@ -12,20 +9,19 @@ export interface KnowledgeItem {
 
 export class PortfolioKnowledgeBase {
   static getProfileSummary(): string {
-    return `Santhosh Kumar M is a Computer Science Engineering student at Gnanamani College of Technology, Namakkal (Expected graduation May 2027, GPA: 7.2/10). He is an aspiring software developer passionate about building practical software solutions across Full-Stack web development, Python automation, and Android applications.`;
+    return `Santhosh Kumar M is a Cybersecurity-focused Computer Science Engineering student at Gnanamani College of Technology, Namakkal (Expected graduation May 2027, GPA: 7.2/10). He is interested in cybersecurity research, web application security, vulnerability assessment, and software development.`;
   }
 
   static getEducationDetails(): string {
-    return `Santhosh is pursuing his Bachelor of Engineering in Computer Science and Engineering at Gnanamani College of Technology, Namakkal (2023–2027, current GPA 7.2/10). His core curriculum includes Data Structures, Algorithms, Relational DBMS, Operating Systems, and Computer Networks.`;
+    return `Santhosh is pursuing his Bachelor of Engineering in Computer Science and Engineering at Gnanamani College of Technology, Namakkal (Expected graduation May 2027, GPA: 7.2). Relevant coursework includes Ethical Hacking and Penetration Testing, Computer Networks, and Operating Systems.`;
   }
 
   static getSkillsSummary(): string {
-    const categories = skillsData.map(c => `${c.title} (${c.items.slice(0, 3).join(', ')})`).join('; ');
-    return `Santhosh has verified proficiencies across 7 core domains: ${categories}. He has zero fabricated skill percentages.`;
+    return `Santhosh's technical competencies from his verified resume include: Programming Languages (Python, Java, C); Cybersecurity (Web Application Security Basics, Vulnerability Assessment Concepts, CTF Challenges, SQL Injection concepts, Cross-Site Scripting, Authentication Flaws); Operating Systems (Linux basic, Windows); Tools & Platforms (Git, Basic Command Line).`;
   }
 
   static getProjectsSummary(): string {
-    return `Key projects include: 1) LorryBook/RDA (Acting driver and truck booking platform in FastAPI/PostgreSQL); 2) NexusATS (Candidate pipeline and resume parser); 3) Recall AI (Contextual document assistant hackathon prototype); 4) Python Security & Log Automation tooling developed during his Cybernaut internship.`;
+    return `Verified real projects from his portfolio include: 1) LorryBook / RDA Logistics (freight driver queue & dispatch platform); 2) NexusATS (applicant tracking & resume screening engine); 3) Recall AI (autonomous multi-agent RAG prototype); along with practical lab exposure in web vulnerability testing and Python security automation.`;
   }
 
   static getProjectByName(nameQuery: string): string | null {
@@ -38,13 +34,11 @@ export class PortfolioKnowledgeBase {
   }
 
   static getExperienceSummary(): string {
-    const roles = experienceData.map(e => `${e.role} at ${e.organization} (${e.period})`).join('; ');
-    const certs = certificationsData.map(c => c.title).join(', ');
-    return `Santhosh has verified developer experience: ${roles}. Verified certifications: ${certs}.`;
+    return `Internship Experience: 1) Python Developer Intern at Cybernaut (Karur, Tamil Nadu | July 2024 – Present) developing and maintaining clean Python scripts and security tooling automation; 2) Web and App Development Intern at ELITA (Bangalore, India | July 2025 – August 2025) creating reusable UI components improving development time by ~25%. Involvement: Cybersecurity Club Member at Gnanamani College of Technology (August 2022 – May 2024).`;
   }
 
   static getContactInfo(): string {
     const c = personalProfileData.contact;
-    return `You can reach Santhosh directly via Email at ${c.email}, by Phone at ${c.phone}, or connect on LinkedIn (santhosh-kumar-8681612a4) and GitHub (@santhoshkumariicse-gif). Located in Namakkal, Tamil Nadu, India.`;
+    return `You can reach Santhosh directly via Email at ${c.email}, by Phone at ${c.phone}, or connect on LinkedIn (santhosh-kumar-8681612a4) and GitHub (@santhoshkumariicse-gif). Located in Namakkal, India.`;
   }
 }
