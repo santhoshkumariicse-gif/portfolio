@@ -30,10 +30,10 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
     // Camera orbital sway
     if (!isWarping) {
       const t = state.clock.elapsedTime * 0.25;
-      state.camera.position.x = Math.sin(t) * 14;
-      state.camera.position.y = 12 + Math.cos(t * 0.8) * 3;
-      state.camera.position.z = 48 + Math.cos(t) * 6;
-      state.camera.lookAt(0, 0, 0);
+      state.camera.position.x = Math.sin(t) * 12;
+      state.camera.position.y = 8 + Math.cos(t * 0.8) * 2;
+      state.camera.position.z = 52 + Math.cos(t) * 4;
+      state.camera.lookAt(0, 3, 0);
     } else {
       // Rapid forward warp acceleration
       state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, -120, 2.5, delta);
@@ -58,64 +58,63 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
         speed={isWarping ? 7 : 0.8}
       />
 
-      {/* 2. Central Cinematic Automotive Sculpture - Carbon Black & Racing Red Precision Core */}
-      <group ref={planetGroupRef}>
-        {/* Core Sphere - Satin Carbon Black */}
+      {/* 2. Central Cinematic Sculpture - Pure Deep Black Globe with Racing Red Accents */}
+      <group ref={planetGroupRef} position={[0, 3.5, 0]}>
+        {/* Core Globe - Solid Deep Black */}
         <mesh>
-          <sphereGeometry args={[14, 32, 32]} />
+          <sphereGeometry args={[14, 48, 48]} />
           <meshStandardMaterial
-            color="#171B20"
-            roughness={0.4}
-            metalness={0.8}
+            color="#000000"
+            roughness={0.7}
+            metalness={0.1}
           />
         </mesh>
 
-        {/* Precision Obsidian Black Continental Geometry Wireframe */}
+        {/* Precision Obsidian Continental Geometry Wireframe */}
         <mesh>
-          <sphereGeometry args={[14.25, 24, 24]} />
+          <sphereGeometry args={[14.15, 32, 32]} />
           <meshStandardMaterial
             color="#090B0E"
-            emissive="#090B0E"
-            emissiveIntensity={0.2}
+            emissive="#000000"
             wireframe
             transparent
-            opacity={0.3}
+            opacity={0.35}
           />
         </mesh>
 
-        {/* Ice Grey Rim Atmosphere with Subtle Crimson Depth */}
+        {/* Subtle Dark Rim Atmosphere Silhouette */}
         <mesh ref={atmosphereRef}>
-          <sphereGeometry args={[15.2, 32, 32]} />
+          <sphereGeometry args={[14.7, 32, 32]} />
           <meshStandardMaterial
-            color="#C9D0D8"
-            emissive="#A9081A"
-            emissiveIntensity={0.4}
+            color="#000000"
+            emissive="#090B0E"
+            emissiveIntensity={0.2}
             transparent
             opacity={0.25}
             side={THREE.BackSide}
           />
         </mesh>
 
-        {/* Precision Telemetry Orbital Ring - Obsidian & Racing Red */}
+        {/* Precision Telemetry Orbital Ring - Black & Racing Red */}
         <mesh ref={ringRef} rotation={[Math.PI / 3.2, 0, 0]}>
-          <ringGeometry args={[18, 22, 64]} />
+          <ringGeometry args={[17.5, 21.5, 64]} />
           <meshStandardMaterial
-            color="#090B0E"
+            color="#000000"
             emissive="#E10620"
-            emissiveIntensity={0.7}
+            emissiveIntensity={0.4}
             side={THREE.DoubleSide}
             transparent
-            opacity={0.35}
+            opacity={0.3}
             wireframe
           />
         </mesh>
       </group>
 
-      {/* High-Key Automotive Studio Telemetry Lighting */}
-      <directionalLight position={[0, 40, 20]} intensity={1.4} color="#FFFFFF" />
-      <pointLight position={[35, 30, 45]} color="#FFFFFF" intensity={2.2} distance={140} />
-      <pointLight position={[-35, -20, -45]} color="#E10620" intensity={1.6} distance={140} />
-      <ambientLight intensity={1.2} color="#DCE2E8" />
+      {/* Sculpted Studio Telemetry Lighting */}
+      <directionalLight position={[25, 35, 25]} intensity={1.1} color="#FFFFFF" />
+      <pointLight position={[30, 20, 40]} color="#FFFFFF" intensity={0.9} distance={130} />
+      <pointLight position={[-35, -20, -45]} color="#E10620" intensity={1.2} distance={140} />
+      <ambientLight intensity={0.65} color="#DCE2E8" />
     </group>
   );
 };
@@ -194,8 +193,8 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
       <header className="pointer-events-auto absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 py-3.5 sm:py-4 border-b border-[rgba(9,11,14,0.12)] bg-[#F2F4F7]/90 backdrop-blur-md shadow-sm">
         <div className="flex items-center gap-2.5">
           <span className="w-2 h-2 rounded-full bg-[#E10620] shadow-[0_0_8px_#E10620]" />
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#090B0E] uppercase">
-            SANTHOSH KUMAR M <span className="text-[#626C78] hidden sm:inline">· 2026 PORTFOLIO</span>
+          <span className="text-[10px] sm:text-xs font-mono font-black tracking-widest text-black uppercase">
+            SANTHOSH KUMAR M <span className="text-[#626C78] hidden sm:inline font-normal">· 2026 PORTFOLIO</span>
           </span>
         </div>
 
@@ -219,36 +218,36 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
 
       {/* 4. Center Presentation Hero */}
       {!isWarping && (
-        <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-center p-4 sm:p-6 text-center">
+        <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-end pb-8 sm:pb-12 md:pb-14 p-4 sm:p-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl w-full flex flex-col items-center space-y-4 sm:space-y-5"
+            className="max-w-2xl w-full flex flex-col items-center space-y-3.5 sm:space-y-4 px-6 py-6 sm:px-8 sm:py-7 rounded-2xl sm:rounded-3xl bg-[#F2F4F7]/92 backdrop-blur-md border border-[rgba(9,11,14,0.14)] shadow-[0_16px_45px_rgba(9,11,14,0.10)]"
           >
             {/* Technical Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] text-[#090B0E] text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DCE2E8] border border-[rgba(9,11,14,0.14)] text-black text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
               <Sparkles className="w-3 h-3 text-[#E10620]" />
               <span>INTERACTIVE 3D PRESENTATION</span>
             </div>
 
-            {/* Developer Identity Heading */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#090B0E] uppercase font-sans leading-none drop-shadow-sm">
+            {/* Developer Identity Heading - BOLD SOLID BLACK */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-black uppercase font-sans leading-none">
               SANTHOSH KUMAR M
             </h1>
 
-            {/* Subheading / Profession from Resume */}
-            <div className="text-xs sm:text-sm font-mono text-[#171B20] font-bold tracking-widest uppercase">
+            {/* Subheading / Profession from Resume - CRISP BOLD BLACK */}
+            <div className="text-xs sm:text-sm font-mono text-black font-bold tracking-widest uppercase">
               CYBERSECURITY ENTHUSIAST · COMPUTER SCIENCE ENGINEERING STUDENT
             </div>
 
-            {/* Clear, Non-Redundant Recruiter Narrative */}
-            <p className="text-xs sm:text-sm md:text-base text-[#626C78] font-sans max-w-lg leading-relaxed">
+            {/* Clear, Non-Redundant Recruiter Narrative - HIGH CONTRAST */}
+            <p className="text-xs sm:text-sm md:text-base text-[#171B20] font-sans max-w-lg leading-relaxed font-medium">
               B.E. Computer Science student at Gnanamani College of Technology (GPA: 7.2, Exp. 2027). Specializing in web application security, vulnerability assessment, and Python automation.
             </p>
 
             {/* Primary Action CTA: VIEW JOURNEY */}
-            <div className="flex items-center justify-center pt-2 sm:pt-3 w-full max-w-xs">
+            <div className="flex items-center justify-center pt-1.5 w-full max-w-xs">
               <button
                 type="button"
                 onClick={handleViewJourney}
@@ -287,10 +286,10 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
                 transition={{ duration: 0.6 }}
                 className="space-y-2"
               >
-                <h2 className="text-3xl sm:text-5xl font-black text-[#090B0E] tracking-widest uppercase font-sans drop-shadow-[0_0_30px_rgba(225,6,32,0.35)]">
+                <h2 className="text-3xl sm:text-5xl font-black text-black tracking-widest uppercase font-sans">
                   THE ROAD OF SANTHOSH
                 </h2>
-                <div className="text-xs sm:text-sm text-[#171B20] font-mono tracking-widest font-bold">
+                <div className="text-xs sm:text-sm text-black font-mono tracking-widest font-bold">
                   POWERED BY SAN AI // INITIALIZING KM 0
                 </div>
               </motion.div>
