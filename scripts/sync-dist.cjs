@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.resolve(__dirname, '..');
+const parentDir = path.resolve(rootDir, '..');
 const distDir = path.join(rootDir, 'dist');
 
 if (!fs.existsSync(distDir)) {
@@ -9,37 +10,36 @@ if (!fs.existsSync(distDir)) {
   process.exit(1);
 }
 
-// 1. Copy dist/index.html to root index.html
-fs.copyFileSync(path.join(distDir, 'index.html'), path.join(rootDir, 'index.html'));
+// 1. Keep portfolio-main/index.html as the source entry for Vite dev server
+const sourceIndex = path.join(rootDir, 'index.source.html');
+const devIndex = path.join(rootDir, 'index.html');
+if (fs.existsSync(sourceIndex)) {
+  fs.copyFileSync(sourceIndex, devIndex);
+}
 
-// 2. Clean and copy dist/assets to root assets
+// 2. Sync production build artifacts to parent root (D:\portfolio) for direct static or GitHub Pages deployment
+const parentIndex = path.join(parentDir, 'index.html');
+fs.copyFileSync(path.join(distDir, 'index.html'), parentIndex);
+
 const distAssets = path.join(distDir, 'assets');
-const rootAssets = path.join(rootDir, 'assets');
-if (fs.existsSync(rootAssets)) {
-  fs.rmSync(rootAssets, { recursive: true, force: true });
+const parentAssets = path.join(parentDir, 'assets');
+if (fs.existsSync(parentAssets)) {
+  fs.rmSync(parentAssets, { recursive: true, force: true });
 }
 if (fs.existsSync(distAssets)) {
-  fs.cpSync(distAssets, rootAssets, { recursive: true, force: true });
+  fs.cpSync(distAssets, parentAssets, { recursive: true, force: true });
 }
 
-// 2b. Copy dist/images to root images
+// 3. Sync dist images to parent images
 const distImages = path.join(distDir, 'images');
-const rootImages = path.join(rootDir, 'images');
+const parentImages = path.join(parentDir, 'images');
 if (fs.existsSync(distImages)) {
-  fs.cpSync(distImages, rootImages, { recursive: true, force: true });
+  fs.cpSync(distImages, parentImages, { recursive: true, force: true });
 }
 
-// 3. Copy other public assets from dist to root if needed
-const filesToSync = ['404.html', 'manifest.json', 'robots.txt', 'sitemap.xml', 'sw.js'];
-for (const file of filesToSync) {
-  const src = path.join(distDir, file);
-  if (fs.existsSync(src)) {
-    fs.copyFileSync(src, path.join(rootDir, file));
-  }
-}
-
-// 4. Ensure .nojekyll exists in root and public
+// 4. Ensure .nojekyll exists in parent root, rootDir, and public
+fs.writeFileSync(path.join(parentDir, '.nojekyll'), '');
 fs.writeFileSync(path.join(rootDir, '.nojekyll'), '');
 fs.writeFileSync(path.join(rootDir, 'public', '.nojekyll'), '');
 
-console.log('[sync-dist] Successfully synchronized production build artifacts to root for direct GitHub Pages branch deployment.');
+console.log('[sync-dist] Successfully synchronized production build artifacts to root for direct GitHub Pages and static preview deployment.');
