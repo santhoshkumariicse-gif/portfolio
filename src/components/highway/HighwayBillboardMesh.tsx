@@ -3,6 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { DETAILED_HIGHWAY_MILESTONES, HighwayMilestoneData } from './HighwayMilestones';
 import { HIGHWAY_SPLINE } from './HighwaySpline';
+import { useHighwayState } from './HighwayStateContext';
 import { SoundFX } from '../../utils/SoundFX';
 
 interface SingleBillboardProps {
@@ -16,6 +17,9 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
   const [hovered, setHovered] = useState(false);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const { camera } = useThree();
+  const { currentSection } = useHighwayState();
+
+  const isActive = Math.abs(currentSection.km - data.km) < 0.45;
 
   // Load texture with standard Three.js TextureLoader to handle base URLs safely
   useEffect(() => {
@@ -93,13 +97,15 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
     if (glowRef.current) {
       const glowMat = glowRef.current.material as THREE.MeshBasicMaterial;
       if (glowMat) {
-        const targetOpacity = isNearby || hovered ? 0.45 + Math.sin(state.clock.elapsedTime * 4) * 0.15 : 0.15;
+        const targetOpacity = isActive || hovered
+          ? 0.75 + Math.sin(state.clock.elapsedTime * 4) * 0.2
+          : (isNearby ? 0.35 : 0.15);
         glowMat.opacity = THREE.MathUtils.damp(glowMat.opacity, targetOpacity, 6, delta);
       }
     }
 
-    // Subtle scale animation on hover
-    const targetScale = hovered ? 1.04 : 1.0;
+    // Subtle scale animation on hover or when active
+    const targetScale = hovered ? 1.05 : (isActive ? 1.025 : 1.0);
     meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 8);
   });
 

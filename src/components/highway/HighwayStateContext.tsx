@@ -1,82 +1,72 @@
 import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 import * as THREE from 'three';
-import { HIGHWAY_MILESTONES, HighwayMilestone, getNearestMilestone } from './HighwaySpline';
+import { PORTFOLIO_SECTIONS, PortfolioSection, getSectionByIndex } from './HighwaySections';
 import { SoundFX } from '../../utils/SoundFX';
 
-export type TravelMode = 'manual' | 'autopilot';
-export type CameraViewMode = 'chase' | 'cockpit';
-
 export interface HighwayStateContextType {
+  currentSectionIndex: number;
+  currentSection: PortfolioSection;
+  totalSections: number;
+  isTransitioning: boolean;
   progress: number;
   currentKM: number;
-  speed: number;
-  mode: TravelMode;
-  cameraView: CameraViewMode;
-  steerOffset: number;
-  targetKM: number | null;
-  activeMilestone: HighwayMilestone;
   isMuted: boolean;
-  setMode: (mode: TravelMode) => void;
-  toggleMode: () => void;
-  toggleCameraView: () => void;
-  setTargetKM: (km: number) => void;
+  goToNextSection: () => void;
+  goToPrevSection: () => void;
+  goToSection: (index: number) => void;
   toggleMute: () => void;
-  accelerate: (amount?: number) => void;
-  brake: (amount?: number) => void;
-  steer: (direction: number) => void;
-  stepFrame: (
-    delta: number,
-    input: { forward: boolean; backward: boolean; left: boolean; right: boolean; wheelDelta: number }
-  ) => void;
+  stepFrame: (delta: number) => void;
 }
 
 const HighwayStateContext = createContext<HighwayStateContextType | null>(null);
 
 export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [progress, setProgress] = useState(0.0);
-  const [currentKM, setCurrentKM] = useState(0.0);
-  const [speed, setSpeed] = useState(0.0); // km/h
-  const [mode, setModeState] = useState<TravelMode>('manual');
-  const [cameraView, setCameraViewState] = useState<CameraViewMode>('chase');
-  const [steerOffset, setSteerOffset] = useState(0.0);
-  const [targetKM, setTargetKMState] = useState<number | null>(null);
-  const [activeMilestone, setActiveMilestone] = useState<HighwayMilestone>(HIGHWAY_MILESTONES[0]);
+  // Initialize at Section 01: About Me (KM 1.0)
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [progress, setProgress] = useState(PORTFOLIO_SECTIONS[0].progress);
+  const [currentKM, setCurrentKM] = useState(PORTFOLIO_SECTIONS[0].km);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Refs to allow atomic, non-stuttering physics update at 60 FPS
-  const progressRef = useRef(0.0);
-  const speedRef = useRef(0.0);
-  const steerRef = useRef(0.0);
-  const targetKMRef = useRef<number | null>(null);
-  const modeRef = useRef<TravelMode>('manual');
-  const cameraViewRef = useRef<CameraViewMode>('chase');
+  // High-performance animation refs (bypasses React render loop lag)
+  const currentProgressRef = useRef(PORTFOLIO_SECTIONS[0].progress);
+  const targetProgressRef = useRef(PORTFOLIO_SECTIONS[0].progress);
+  const isTransitioningRef = useRef(false);
+  const sectionIndexRef = useRef(0);
 
-  const setMode = useCallback((newMode: TravelMode) => {
-    modeRef.current = newMode;
-    setModeState(newMode);
-    SoundFX.playModeSwitch();
-  }, []);
+  const totalSections = PORTFOLIO_SECTIONS.length;
+  const currentSection = getSectionByIndex(currentSectionIndex);
 
-  const toggleMode = useCallback(() => {
-    const next = modeRef.current === 'manual' ? 'autopilot' : 'manual';
-    setMode(next);
-  }, [setMode]);
+  const goToSection = useCallback((index: number) => {
+    if (isTransitioningRef.current) return; // Prevent duplicate clicks and overlapping animations
 
-  const toggleCameraView = useCallback(() => {
-    const next = cameraViewRef.current === 'chase' ? 'cockpit' : 'chase';
-    cameraViewRef.current = next;
-    setCameraViewState(next);
-    SoundFX.playClick();
-  }, []);
+    const clamped = Math.max(0, Math.min(index, totalSections - 1));
+    if (clamped === sectionIndexRef.current) return;
 
-  const setTargetKM = useCallback((km: number) => {
-    const clamped = THREE.MathUtils.clamp(km, 0, 7.0);
-    targetKMRef.current = clamped;
-    setTargetKMState(clamped);
-    modeRef.current = 'autopilot';
-    setModeState('autopilot');
+    sectionIndexRef.current = clamped;
+    setCurrentSectionIndex(clamped);
+
+    const target = PORTFOLIO_SECTIONS[clamped].progress;
+    targetProgressRef.current = target;
+    isTransitioningRef.current = true;
+    setIsTransitioning(true);
+
     SoundFX.playWarp();
-  }, []);
+  }, [totalSections]);
+
+  const goToNextSection = useCallback(() => {
+    if (isTransitioningRef.current) return;
+    if (sectionIndexRef.current < totalSections - 1) {
+      goToSection(sectionIndexRef.current + 1);
+    }
+  }, [goToSection, totalSections]);
+
+  const goToPrevSection = useCallback(() => {
+    if (isTransitioningRef.current) return;
+    if (sectionIndexRef.current > 0) {
+      goToSection(sectionIndexRef.current - 1);
+    }
+  }, [goToSection]);
 
   const toggleMute = useCallback(() => {
     setIsMuted((prev) => {
@@ -86,116 +76,45 @@ export const HighwayStateProvider: React.FC<{ children: React.ReactNode }> = ({ 
     });
   }, []);
 
-  const accelerate = useCallback((amount = 4.0) => {
-    speedRef.current = Math.min(140.0, speedRef.current + amount);
-  }, []);
+  // Frame stepping loop driven by R3F useFrame at 60 FPS
+  const stepFrame = useCallback((delta: number) => {
+    const dt = Math.min(delta, 0.1);
+    const current = currentProgressRef.current;
+    const target = targetProgressRef.current;
+    const diff = target - current;
 
-  const brake = useCallback((amount = 8.0) => {
-    speedRef.current = Math.max(-20.0, speedRef.current - amount);
-  }, []);
-
-  const steer = useCallback((direction: number) => {
-    steerRef.current = THREE.MathUtils.clamp(steerRef.current + direction * 0.15, -4.5, 4.5);
-    setSteerOffset(steerRef.current);
-  }, []);
-
-  // Central frame stepping method called once per frame from R3F useFrame
-  const stepFrame = useCallback(
-    (
-      delta: number,
-      input: { forward: boolean; backward: boolean; left: boolean; right: boolean; wheelDelta: number }
-    ) => {
-      const dt = Math.min(delta, 0.1); // prevent giant deltas on tab switch
-
-      // 1. Process Input into Speed
-      if (modeRef.current === 'autopilot') {
-        const targetProgress = targetKMRef.current !== null ? targetKMRef.current / 7.0 : 1.0;
-        const diff = targetProgress - progressRef.current;
-
-        if (Math.abs(diff) < 0.002) {
-          // Reached destination milestone
-          speedRef.current = THREE.MathUtils.damp(speedRef.current, 0, 4, dt);
-          if (targetKMRef.current !== null) {
-            targetKMRef.current = null;
-            setTargetKMState(null);
-          }
-        } else {
-          // Cruise at optimal speed: 85 km/h
-          const desiredSpeed = Math.sign(diff) * Math.min(85.0, Math.abs(diff) * 600);
-          speedRef.current = THREE.MathUtils.damp(speedRef.current, desiredSpeed, 3, dt);
-        }
-
-        // Center lane during autopilot
-        steerRef.current = THREE.MathUtils.damp(steerRef.current, 0, 4, dt);
-      } else {
-        // Manual driving mode
-        if (input.forward) {
-          speedRef.current = Math.min(130.0, speedRef.current + 45.0 * dt);
-        } else if (input.backward) {
-          speedRef.current = Math.max(-25.0, speedRef.current - 60.0 * dt);
-        } else if (Math.abs(input.wheelDelta) > 0.01) {
-          speedRef.current = THREE.MathUtils.clamp(speedRef.current + input.wheelDelta * 1.5, -20.0, 130.0);
-        } else {
-          // Natural rolling friction resistance
-          speedRef.current = THREE.MathUtils.damp(speedRef.current, 0, 2.5, dt);
-        }
-
-        // Steering input
-        if (input.left) {
-          steerRef.current = Math.max(-4.2, steerRef.current - 9.0 * dt);
-        } else if (input.right) {
-          steerRef.current = Math.min(4.2, steerRef.current + 9.0 * dt);
-        } else {
-          // Gentle steering auto-center
-          steerRef.current = THREE.MathUtils.damp(steerRef.current, 0, 3.0, dt);
-        }
+    if (Math.abs(diff) > 0.0005) {
+      // Smooth exponential damping along the highway curve (damp factor ~4.2 for elegant cinematic travel)
+      const nextProgress = THREE.MathUtils.damp(current, target, 4.2, dt);
+      currentProgressRef.current = nextProgress;
+      setProgress(nextProgress);
+      setCurrentKM(nextProgress * 7.0);
+    } else {
+      // Settled at exact destination
+      if (isTransitioningRef.current) {
+        currentProgressRef.current = target;
+        setProgress(target);
+        setCurrentKM(target * 7.0);
+        isTransitioningRef.current = false;
+        setIsTransitioning(false);
       }
-
-      // 2. Advance road progress
-      // Total road length = 2200 units = 7.0 KM
-      const kmPerSec = speedRef.current / 3600.0;
-      const progressDelta = (kmPerSec * dt) / 7.0 * 20.0;
-
-      progressRef.current = THREE.MathUtils.clamp(progressRef.current + progressDelta, 0.0, 1.0);
-
-      // Stop velocity at road boundaries
-      if (progressRef.current <= 0.0 || progressRef.current >= 1.0) {
-        speedRef.current = THREE.MathUtils.damp(speedRef.current, 0, 8, dt);
-      }
-
-      // 3. Sync state to React
-      const currentKMCalc = progressRef.current * 7.0;
-      setProgress(progressRef.current);
-      setCurrentKM(currentKMCalc);
-      setSpeed(Math.round(Math.abs(speedRef.current)));
-      setSteerOffset(steerRef.current);
-
-      const nearest = getNearestMilestone(progressRef.current);
-      setActiveMilestone(nearest);
-    },
-    []
-  );
+    }
+  }, []);
 
   return (
     <HighwayStateContext.Provider
       value={{
+        currentSectionIndex,
+        currentSection,
+        totalSections,
+        isTransitioning,
         progress,
         currentKM,
-        speed,
-        mode,
-        cameraView,
-        steerOffset,
-        targetKM,
-        activeMilestone,
         isMuted,
-        setMode,
-        toggleMode,
-        toggleCameraView,
-        setTargetKM,
+        goToNextSection,
+        goToPrevSection,
+        goToSection,
         toggleMute,
-        accelerate,
-        brake,
-        steer,
         stepFrame
       }}
     >
