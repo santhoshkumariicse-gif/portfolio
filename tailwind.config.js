@@ -7,24 +7,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#030806',
-        'bg-secondary': '#07120D',
-        surface: '#0A1710',
-        'surface-subtle': '#0F2117',
-        raised: '#142B1F',
-        'primary-text': '#E7F5EC',
-        'secondary-text': '#91A99A',
-        muted: '#536B5E',
-        'primary-green': '#00E676',
-        'holographic-green': '#39FF88',
-        'secondary-green': '#00BFA5',
-        'muted-green': '#75B798',
-        accent: '#00E676',
-        'accent-dim': 'rgba(0, 230, 118, 0.12)',
-        'accent-glow': 'rgba(57, 255, 136, 0.35)',
-        border: 'rgba(0, 230, 118, 0.16)',
-        'border-strong': 'rgba(57, 255, 136, 0.32)',
-        'active-border': 'rgba(0, 230, 118, 0.75)',
+        // 60% Primary Surfaces - Obsidian & Carbon Black
+        bg: '#090B0E',
+        'bg-secondary': '#171B20',
+        surface: '#171B20',
+        'surface-subtle': '#20252C',
+        raised: '#20252C',
+
+        // 30% Typography & Secondary Neutrals - Ice Grey & Steel Grey
+        'primary-text': '#F2F4F7',
+        'secondary-text': '#C9D0D8',
+        muted: '#87919D',
+        'muted-dark': '#626C78',
+
+        // 10% Controlled Motorsport Accent - Racing Red
+        accent: '#E10620',
+        'accent-signal': '#FF3548',
+        'accent-deep': '#A9081A',
+        'accent-dim': 'rgba(225, 6, 32, 0.12)',
+        'accent-glow': 'rgba(225, 6, 32, 0.35)',
+
+        // High-Precision Architectural Borders
+        border: 'rgba(201, 208, 216, 0.12)',
+        'border-strong': 'rgba(201, 208, 216, 0.24)',
+        'active-border': 'rgba(225, 6, 32, 0.75)',
+
+        // Motorsport Telemetry Specific Tokens
+        'telemetry-red': '#E10620',
+        'telemetry-signal': '#FF3548',
+        'telemetry-ice': '#C9D0D8',
+        'telemetry-steel': '#87919D',
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
@@ -35,4 +47,3 @@ export default {
   },
   plugins: [],
 }
-

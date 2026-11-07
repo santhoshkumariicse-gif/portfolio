@@ -3,35 +3,34 @@
 @tailwind utilities;
 
 :root {
-  /* Green + Black JARVIS Core Design System (60-30-10 distribution) */
-  --bg: #030806;              /* 60% Primary Deep Space Black */
-  --bg-secondary: #07120D;    /* 30% Secondary Emerald Background */
-  --surface: #0A1710;         /* 30% Dark Emerald Surface */
-  --surface-subtle: #0F2117;  /* Elevated Emerald Surface */
-  --raised: #142B1F;          /* Highlight Surface */
+  /* Obsidian Black × Ice Grey × Racing Red Design System (60-30-10 distribution) */
+  --bg: #090B0E;              /* 60% Primary Obsidian Black */
+  --bg-secondary: #171B20;    /* Carbon Black */
+  --surface: #171B20;         /* Carbon Black */
+  --surface-subtle: #20252C;  /* Elevated Surface */
+  --raised: #20252C;          /* Highlight Surface */
   
-  --primary-text: #E7F5EC;    /* High Contrast Emerald Tint White */
-  --secondary-text: #91A99A;  /* Balanced Secondary Muted Sage */
-  --muted: #536B5E;          /* Muted Telemetry Text */
+  --primary-text: #F2F4F7;    /* Pure Light Primary Text */
+  --secondary-text: #C9D0D8;  /* Ice Grey Readable Text */
+  --muted: #87919D;          /* Steel Grey Telemetry */
+  --muted-dark: #626C78;     /* Muted Grey Minor Labels */
   
-  --primary-green: #00E676;   /* 10% Vibrant Electric Emerald Accent */
-  --holographic-green: #39FF88; /* Holographic Laser Green */
-  --secondary-green: #00BFA5; /* Cyan-Green Secondary Accent */
-  --muted-green: #75B798;     /* Soft Emerald Accent */
+  --accent: #E10620;          /* 10% Controlled Racing Red Accent */
+  --accent-signal: #FF3548;   /* Signal Red Active State */
+  --accent-deep: #A9081A;     /* Deep Red Shadow Accent */
   
-  --accent: #00E676;
-  --accent-dim: rgba(0, 230, 118, 0.12);
-  --accent-glow: rgba(57, 255, 136, 0.35);
+  --accent-dim: rgba(225, 6, 32, 0.12);
+  --accent-glow: rgba(225, 6, 32, 0.35);
   
-  --border: rgba(0, 230, 118, 0.16);
-  --border-strong: rgba(57, 255, 136, 0.32);
-  --active-border: rgba(0, 230, 118, 0.75);
+  --border: rgba(201, 208, 216, 0.12);
+  --border-strong: rgba(201, 208, 216, 0.24);
+  --active-border: rgba(225, 6, 32, 0.75);
 
-  /* JARVIS Hologram Accents */
-  --jarvis-emerald: #00E676;
-  --jarvis-hologram: #39FF88;
-  --jarvis-teal: #00BFA5;
-  --jarvis-amber: #FFB347;
+  /* Motorsport Telemetry & Instrument Cluster Tokens */
+  --telemetry-red: #E10620;
+  --telemetry-signal: #FF3548;
+  --telemetry-ice: #C9D0D8;
+  --telemetry-steel: #87919D;
 
   /* Fonts */
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
@@ -60,18 +59,18 @@ body {
   overflow-x: hidden;
 }
 
-/* Technical Subtle Dot Grid Texture */
+/* Subtle Technical Carbon Grid Texture */
 body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.028;
+  opacity: 0.025;
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(rgba(240, 240, 233, 0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(240, 240, 233, 0.4) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(rgba(201, 208, 216, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 208, 216, 0.3) 1px, transparent 1px);
+  background-size: 48px 48px;
   mask-image: radial-gradient(circle at 50% 20%, black 30%, transparent 85%);
 }
 
@@ -82,34 +81,28 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-signal);
   outline-offset: 3px;
 }
 
-/* JARVIS HUD & Cyber Utilities */
-.jarvis-panel {
-  background-color: rgba(10, 23, 16, 0.88);
-  border: 1px solid rgba(0, 230, 118, 0.25);
+/* Motorsport HUD & Telemetry Utilities */
+.telemetry-panel {
+  background-color: rgba(23, 27, 32, 0.94);
+  border: 1px solid var(--border);
   backdrop-filter: blur(16px);
   position: relative;
 }
 
-.jarvis-glow {
-  box-shadow: 0 0 24px rgba(0, 230, 118, 0.25);
+.telemetry-glow {
+  box-shadow: 0 0 24px rgba(225, 6, 32, 0.25);
 }
 
-.jarvis-glow-strong {
-  box-shadow: 0 0 35px rgba(57, 255, 136, 0.45);
+.telemetry-glow-strong {
+  box-shadow: 0 0 35px rgba(255, 53, 72, 0.4);
 }
 
-.anime-hud-panel {
-  background-color: rgba(10, 23, 16, 0.88);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(14px);
-  position: relative;
-}
-
-.anime-reticle-top-left {
+/* Carbon-Fiber Corner Tick Reticles */
+.telemetry-reticle-top-left {
   position: absolute;
   top: 0;
   left: 0;
@@ -120,7 +113,7 @@ select:focus-visible,
   pointer-events: none;
 }
 
-.anime-reticle-top-right {
+.telemetry-reticle-top-right {
   position: absolute;
   top: 0;
   right: 0;
@@ -131,7 +124,7 @@ select:focus-visible,
   pointer-events: none;
 }
 
-.anime-reticle-bottom-left {
+.telemetry-reticle-bottom-left {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -142,7 +135,7 @@ select:focus-visible,
   pointer-events: none;
 }
 
-.anime-reticle-bottom-right {
+.telemetry-reticle-bottom-right {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -151,6 +144,21 @@ select:focus-visible,
   border-bottom: 2px solid var(--accent);
   border-right: 2px solid var(--accent);
   pointer-events: none;
+}
+
+/* Precision Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(9, 11, 14, 0.6);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(135, 145, 157, 0.4);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
 
 /* Reduced Motion Fallback */
@@ -167,7 +175,7 @@ select:focus-visible,
   }
 }
 
-/* Print Specific Styles & A4 Optimization (Prompt 46) */
+/* Print Specific Styles & A4 Optimization */
 @page {
   size: A4 portrait;
   margin: 12mm 14mm;
@@ -182,33 +190,8 @@ select:focus-visible,
   body::before,
   nav,
   footer,
-  #command-center,
-  #projects,
-  #demo-center,
-  #systems-lab,
-  #security-playground,
-  #api-lab,
-  #terminal,
-  #knowledge-graph,
-  #journey-timeline,
-  #blog,
-  #engineering,
-  #contact,
   .print-hide {
     display: none !important;
-  }
-
-  #resume-center {
-    display: block !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-  }
-
-  .break-inside-avoid {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
   }
 
   a {
@@ -216,4 +199,3 @@ select:focus-visible,
     color: #000000 !important;
   }
 }
-

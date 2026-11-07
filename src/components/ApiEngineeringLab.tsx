@@ -252,7 +252,7 @@ export const ApiEngineeringLab: React.FC = () => {
                       RESPONSE OUTPUT:
                     </span>
                     <div className="flex items-center gap-3">
-                      <span className="px-2 py-0.5 bg-emerald-950/60 border border-emerald-800 text-emerald-400 font-bold text-[0.7rem]">
+                      <span className="px-2 py-0.5 bg-red-950/40 border border-[#E10620]/40 text-[#FF3548] font-bold text-[0.7rem]">
                         STATUS: {responseOutput.status} OK
                       </span>
                       <span className="text-[0.7rem] text-[var(--muted)] flex items-center gap-1">

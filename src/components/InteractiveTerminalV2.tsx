@@ -247,7 +247,7 @@ export const InteractiveTerminalV2: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+              <span className="w-3 h-3 rounded-full bg-slate-500/80 inline-block" />
               <span className="ml-2 font-bold text-[var(--primary-text)] text-[0.7rem]">
                 santhosh@portfolio: ~
               </span>

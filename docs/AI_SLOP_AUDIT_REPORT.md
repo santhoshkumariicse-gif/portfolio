@@ -67,3 +67,4 @@ All fixes were validated through:
 2. `npm run build` — Clean production build with code splitting.
 3. Local Dev Server — HTTP 200 verification on `http://localhost:5173/`.
 4. Visual QA — Confirmed zero white-page errors, zero layout overlaps, and instant response across desktop and mobile viewport sizes.
+

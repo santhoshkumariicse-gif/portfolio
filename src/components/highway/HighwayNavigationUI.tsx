@@ -50,7 +50,7 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
       aria-label="Sequential Presentation Navigation"
       className="pointer-events-auto flex items-center justify-center w-full select-none"
     >
-      <div className="flex items-center gap-2 sm:gap-4 px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-[#07120D]/95 border border-[#00E676]/25 backdrop-blur-xl shadow-[0_16px_40px_rgba(0,0,0,0.85)] font-mono">
+      <div className="flex items-center gap-2 sm:gap-4 px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-[#171B20]/95 border border-[rgba(201,208,216,0.12)] backdrop-blur-xl shadow-[0_16px_40px_rgba(0,0,0,0.9)] font-mono">
         {/* 1. PREVIOUS SECTION BUTTON */}
         {!isFirstSection ? (
           <button
@@ -60,12 +60,12 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
             className={`px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border text-xs font-bold uppercase transition-all flex items-center gap-1.5 ${
               isTransitioning
                 ? 'opacity-40 cursor-not-allowed bg-black/30 border-white/10 text-slate-400'
-                : 'bg-black/40 border-white/15 text-white hover:border-[#00E676] hover:bg-[#00E676]/10 hover:text-[#39FF88] active:scale-95'
+                : 'bg-[#090B0E]/80 border-[rgba(201,208,216,0.12)] text-[#C9D0D8] hover:border-[#E10620] hover:bg-[#E10620]/10 hover:text-[#FF3548] active:scale-95'
             }`}
             title="Navigate to Previous Section (Hotkey: Left Arrow)"
             aria-label="Previous Section"
           >
-            <ArrowLeft className="w-4 h-4 text-[#00E676]" />
+            <ArrowLeft className="w-4 h-4 text-[#FF3548]" />
             <span className="hidden sm:inline">PREVIOUS</span>
             <span className="sm:hidden">PREV</span>
           </button>
@@ -75,12 +75,12 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
 
         {/* 2. SECTION INDICATOR & 7 INTERACTIVE PIPS */}
         <div className="flex flex-col items-center px-2 sm:px-4">
-          <div className="flex items-baseline gap-1 text-[10px] text-[#91A99A] uppercase tracking-wider font-bold">
+          <div className="flex items-baseline gap-1 text-[10px] text-[#87919D] uppercase tracking-wider font-bold">
             <span>SECTION</span>
-            <span className="text-sm sm:text-base font-black text-[#00E676] tracking-wider">
+            <span className="text-sm sm:text-base font-black text-[#FF3548] tracking-wider">
               {formattedCurrent}
             </span>
-            <span className="text-xs text-white/40">/ {formattedTotal}</span>
+            <span className="text-xs text-[#87919D]/60">/ {formattedTotal}</span>
           </div>
 
           {/* 7 Section Quick Jump Pips */}
@@ -97,9 +97,9 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
                   disabled={isTransitioning}
                   className={`h-1.5 rounded-full transition-all ${
                     isActive
-                      ? 'w-5 sm:w-6 bg-[#00E676] shadow-[0_0_8px_#00E676]'
+                      ? 'w-5 sm:w-6 bg-[#E10620] shadow-[0_0_8px_#E10620]'
                       : isPassed
-                      ? 'w-2 bg-[#00E676]/50 hover:bg-[#00E676]'
+                      ? 'w-2 bg-[#E10620]/50 hover:bg-[#E10620]'
                       : 'w-2 bg-white/20 hover:bg-white/40'
                   }`}
                   title={`Jump to Section 0${idx + 1}`}
@@ -116,28 +116,28 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
             type="button"
             onClick={goToNextSection}
             disabled={isTransitioning}
-            className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold uppercase transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(0,230,118,0.35)] ${
+            className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold uppercase transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(225,6,32,0.35)] border border-[#FF3548] ${
               isTransitioning
-                ? 'opacity-50 cursor-not-allowed bg-[#00E676]/30 text-[#030806]'
-                : 'bg-[#00E676] hover:bg-[#39FF88] text-[#030806] active:scale-95'
+                ? 'opacity-50 cursor-not-allowed bg-[#E10620]/30 text-white'
+                : 'bg-[#E10620] hover:bg-[#FF3548] text-[#F2F4F7] active:scale-95'
             }`}
             title="Navigate to Next Section (Hotkey: Right Arrow)"
             aria-label="Next Section"
           >
             <span>NEXT SECTION</span>
-            <ArrowRight className="w-4 h-4 text-[#030806]" />
+            <ArrowRight className="w-4 h-4 text-[#F2F4F7]" />
           </button>
         ) : (
           <button
             type="button"
             onClick={onReturnToUniverse}
-            className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold uppercase transition-all flex items-center gap-2 bg-[#00E676] hover:bg-[#39FF88] text-[#030806] shadow-[0_0_24px_rgba(0,230,118,0.45)] active:scale-95"
+            className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold uppercase transition-all flex items-center gap-2 bg-[#E10620] hover:bg-[#FF3548] text-[#F2F4F7] shadow-[0_0_24px_rgba(225,6,32,0.45)] active:scale-95 border border-[#FF3548]"
             title="Finish Journey & Return to Universe Homepage"
             aria-label="Finish and Return to Home"
           >
-            <Check className="w-4 h-4 text-[#030806]" />
+            <Check className="w-4 h-4 text-[#F2F4F7]" />
             <span>FINISH / HOME</span>
-            <Home className="w-3.5 h-3.5 text-[#030806]" />
+            <Home className="w-3.5 h-3.5 text-[#F2F4F7]" />
           </button>
         )}
       </div>

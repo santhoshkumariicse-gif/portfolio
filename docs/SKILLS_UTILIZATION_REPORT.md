@@ -68,3 +68,4 @@ In strict accordance with the **Mandatory Skill Usage Protocol**, the project ev
 ## 3. Skills Deemed Inapplicable
 - `aegis-*` (backend penetration testing tools): Inapplicable as the project is a client-side Vite/React 3D frontend.
 - `airflow-*`, `dataproc-*`, `k2`: Inapplicable to web portfolio architecture.
+

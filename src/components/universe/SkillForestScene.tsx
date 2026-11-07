@@ -184,7 +184,7 @@ export const SkillForestScene: React.FC<SkillForestSceneProps> = ({ onSelectCate
       '#FFB347', // 01 Languages (Amber)
       '#00E5FF', // 02 Frontend (Cyan)
       '#C7FF45', // 03 Backend (Lime)
-      '#2ECC71', // 04 Mobile (Emerald)
+      '#E10620', // 04 Mobile (Racing Red)
       '#3498DB', // 05 Databases (Cobalt)
       '#9B59B6', // 06 Tools & DevOps (Amethyst)
       '#FF3358'  // 07 AI & Security (Crimson)

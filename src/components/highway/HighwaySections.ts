@@ -41,7 +41,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'About Santhosh',
     subtitle: 'Computer Science Student & Security Enthusiast',
     codeName: 'OVERVIEW // PROFILE',
-    accentColor: '#39FF88',
+    accentColor: '#FF3548',
     tagline: 'Computer Science Engineering undergraduate with hands-on exposure to vulnerability assessment, web application security testing, and Python tooling.',
     statBadge: { label: 'ACADEMIC STANDING', value: 'GPA: 7.2' },
     bulletPoints: [
@@ -62,7 +62,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'Academic Foundations',
     subtitle: 'B.E. in Computer Science & Engineering',
     codeName: 'ACADEMIC // CREDENTIALS',
-    accentColor: '#00BFA5',
+    accentColor: '#E10620',
     tagline: 'Rigorous coursework in ethical hacking, networking protocols, and systems programming at Gnanamani College of Technology.',
     statBadge: { label: 'EXPECTED DEGREE', value: 'B.E. CSE (2027)' },
     bulletPoints: [
@@ -84,7 +84,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'Technical Competencies',
     subtitle: 'Demonstrated Engineering & Security Skills',
     codeName: 'COMPETENCY // MATRIX',
-    accentColor: '#00E676',
+    accentColor: '#FF3548',
     tagline: 'Verified technical proficiencies across programming languages, security assessment concepts, and systems.',
     statBadge: { label: 'SPECIALIZATION', value: 'SECURITY & DEV' },
     bulletPoints: [
@@ -106,7 +106,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'Featured Projects',
     subtitle: 'Production & Prototype Architectures',
     codeName: 'ENGINEERING // CASE STUDIES',
-    accentColor: '#39FF88',
+    accentColor: '#E10620',
     tagline: 'Practical software solutions engineered with React, TypeScript, Python FastAPI, and PostgreSQL.',
     statBadge: { label: 'VERIFIED BUILDS', value: '3 PLATFORMS' },
     bulletPoints: [
@@ -127,7 +127,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'Work Experience',
     subtitle: 'Software Development Internships',
     codeName: 'INDUSTRY // TENURE',
-    accentColor: '#00BFA5',
+    accentColor: '#FF3548',
     tagline: 'Verified software engineering and scripting internships at Cybernaut (Karur) and ELITA (Bangalore).',
     statBadge: { label: 'VERIFIED ROLES', value: '2 INTERNSHIPS' },
     bulletPoints: [
@@ -147,7 +147,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'Security Labs & Interests',
     subtitle: 'Hands-on CTFs & Collegiate Involvement',
     codeName: 'SECURITY // LABS & CTF',
-    accentColor: '#00E676',
+    accentColor: '#E10620',
     tagline: 'Hands-on security testing in lab environments, Capture The Flag competitions, and cybersecurity research.',
     statBadge: { label: 'CAMPUS ROLE', value: 'CYBER CLUB' },
     bulletPoints: [
@@ -169,7 +169,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     title: 'Connect & Inquire',
     subtitle: 'Direct Communication Channels',
     codeName: 'DISPATCH // GET IN TOUCH',
-    accentColor: '#39FF88',
+    accentColor: '#FF3548',
     tagline: 'Currently open to entry-level cybersecurity roles, software development opportunities, and security internships.',
     statBadge: { label: 'WORK STATUS', value: 'AVAILABLE' },
     bulletPoints: [

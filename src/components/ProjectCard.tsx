@@ -19,9 +19,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
     switch (status) {
       case 'Completed':
         return {
-          bg: 'bg-emerald-950/60',
-          text: 'text-emerald-400',
-          border: 'border-emerald-800/60'
+          bg: 'bg-red-950/40',
+          text: 'text-[#FF3548]',
+          border: 'border-[#E10620]/40'
         };
       case 'In development':
         return {

@@ -14,12 +14,12 @@ export const Badge: React.FC<BadgeProps> = ({
   className = ''
 }) => {
   const variantMap: Record<BadgeVariant, string> = {
-    accent: 'bg-[rgba(199,255,69,0.08)] border-[var(--accent)]/40 text-[var(--accent)]',
-    muted: 'bg-[rgba(240,240,233,0.03)] border-[var(--border)] text-[var(--secondary-text)]',
+    accent: 'bg-[#E10620]/15 border-[#E10620]/40 text-[#FF3548]',
+    muted: 'bg-white/5 border-[var(--border)] text-[var(--secondary-text)]',
     raised: 'bg-[var(--raised)] border-[var(--border)] text-[var(--secondary-text)]',
     outline: 'bg-transparent border-[var(--border-strong)] text-[var(--primary-text)]',
     warning: 'bg-amber-950/60 border-amber-800/60 text-amber-400',
-    success: 'bg-emerald-950/60 border-emerald-800/60 text-emerald-400'
+    success: 'bg-red-950/40 border-[#E10620]/40 text-[#FF3548]'
   };
 
   return (

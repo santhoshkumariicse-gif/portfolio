@@ -12,12 +12,12 @@ export const AICore: React.FC<AICoreProps> = ({ size = 96, className = '' }) => 
   const shouldReduceMotion = useReducedMotion();
 
   const themeColors = {
-    idle: { primary: '#00E676', glow: 'rgba(0, 230, 118, 0.45)', status: 'ONLINE // JARVIS_CORE' },
-    listening: { primary: '#39FF88', glow: 'rgba(57, 255, 136, 0.65)', status: 'LISTENING // AUDIO_IN' },
-    processing: { primary: '#00BFA5', glow: 'rgba(0, 191, 165, 0.65)', status: 'ANALYZING // KB_QUERY' },
-    speaking: { primary: '#39FF88', glow: 'rgba(57, 255, 136, 0.85)', status: 'TRANSMITTING // SPEECH_OUT' },
-    navigation: { primary: '#00E676', glow: 'rgba(0, 230, 118, 0.75)', status: 'ROUTING // COORDINATE_LOCK' },
-    error: { primary: '#FF3358', glow: 'rgba(255, 51, 88, 0.8)', status: 'ALERT // ANOMALY' }
+    idle: { primary: '#E10620', glow: 'rgba(225, 6, 32, 0.45)', status: 'ONLINE // TELEMETRY_CORE' },
+    listening: { primary: '#FF3548', glow: 'rgba(255, 53, 72, 0.65)', status: 'LISTENING // AUDIO_IN' },
+    processing: { primary: '#C9D0D8', glow: 'rgba(201, 208, 216, 0.5)', status: 'PROCESSING // TELEMETRY' },
+    speaking: { primary: '#FF3548', glow: 'rgba(255, 53, 72, 0.75)', status: 'TRANSMITTING // SPEECH_OUT' },
+    navigation: { primary: '#E10620', glow: 'rgba(225, 6, 32, 0.65)', status: 'ROUTING // SECTOR_LOCK' },
+    error: { primary: '#A9081A', glow: 'rgba(169, 8, 26, 0.8)', status: 'ALERT // ANOMALY' }
   }[state];
 
   const waveformBars = [12, 24, 18, 30, 22, 14, 28, 16];
@@ -132,18 +132,17 @@ export const AICore: React.FC<AICoreProps> = ({ size = 96, className = '' }) => 
           backgroundColor: themeColors.primary,
           boxShadow: `0 0 20px ${themeColors.primary}`
         }}
-        className="rounded-full flex flex-col items-center justify-center text-[#0A0B09] font-mono font-extrabold text-[10px] tracking-wider z-20"
+        className="rounded-full flex flex-col items-center justify-center text-[#F2F4F7] font-mono font-extrabold text-[10px] tracking-wider z-20"
       >
         <span>SAN</span>
       </motion.div>
 
       {/* Status Pill Tag Underneath when not expanded */}
       {!isExpanded && (
-        <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-sm bg-black/80 border border-white/10 font-mono text-[8px] text-[var(--secondary-text)]">
+        <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-sm bg-[#090B0E]/90 border border-[rgba(201,208,216,0.12)] font-mono text-[8px] text-[#87919D]">
           {themeColors.status}
         </div>
       )}
     </div>
   );
 };
-

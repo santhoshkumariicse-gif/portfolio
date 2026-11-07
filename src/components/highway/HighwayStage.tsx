@@ -13,15 +13,15 @@ export interface HighwayStageProps {
 const HighwayCanvasInner: React.FC = () => {
   return (
     <>
-      <color attach="background" args={['#030806']} />
-      <fog attach="fog" args={['#030806', 40, 480]} />
+      <color attach="background" args={['#090B0E']} />
+      <fog attach="fog" args={['#090B0E', 40, 480]} />
 
-      {/* Atmospheric Lighting: Deep Emerald Night with Overhead Lanterns */}
-      <ambientLight intensity={0.45} color="#07120D" />
+      {/* Atmospheric Lighting: Carbon Black Night with High-Performance Headlights */}
+      <ambientLight intensity={0.45} color="#171B20" />
       <directionalLight
         position={[35, 60, 20]}
         intensity={0.85}
-        color="#D4F6E5"
+        color="#F2F4F7"
       />
 
       {/* 3D Road Geometry along CatmullRomCurve3 */}
@@ -38,7 +38,7 @@ const HighwayCanvasInner: React.FC = () => {
 
 const HighwayStageContent: React.FC<HighwayStageProps> = ({ onReturnToUniverse }) => {
   return (
-    <div className="relative w-full h-screen bg-[#030806] overflow-hidden select-none">
+    <div className="relative w-full h-screen bg-[#090B0E] overflow-hidden select-none">
       {/* 1. Main 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0">
         <Canvas
@@ -50,7 +50,7 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onReturnToUniverse }
             fallback={
               <mesh position={[0, 2, 0]}>
                 <boxGeometry args={[1, 1, 1]} />
-                <meshBasicMaterial color="#00E676" wireframe />
+                <meshBasicMaterial color="#E10620" wireframe />
               </mesh>
             }
           >
@@ -60,7 +60,7 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onReturnToUniverse }
       </div>
 
       {/* 2. Cinematic Vignette Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(3,8,6,0.85)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(9,11,14,0.88)_100%)]" />
 
       {/* 3. Sequential Presentation HUD */}
       <HighwayHUD onReturnToUniverse={onReturnToUniverse} />

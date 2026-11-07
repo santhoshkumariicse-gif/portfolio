@@ -26,24 +26,24 @@ export const HighwayRoadMesh: React.FC = () => {
     const roadUVs: number[] = [];
     const roadIndices: number[] = [];
 
-    // Left Edge Solid White Line
+    // Left Edge Solid Ice Grey Line
     const leftLineVerts: number[] = [];
     const leftLineIndices: number[] = [];
 
-    // Right Edge Solid White Line
+    // Right Edge Solid Ice Grey Line
     const rightLineVerts: number[] = [];
     const rightLineIndices: number[] = [];
 
-    // Center Dashed Amber Line
+    // Center Dashed Steel Grey Line
     const centerLineVerts: number[] = [];
     const centerLineIndices: number[] = [];
 
-    // Laser Edge Glow Rails (Crimson Hologram)
+    // Laser Edge Glow Rails (Controlled Racing Red)
     const laserLVerts: number[] = [];
     const laserRVerts: number[] = [];
     const laserIndices: number[] = [];
 
-    // Guardrail Left & Right
+    // Guardrail Left & Right (Carbon Black)
     const glVerts: number[] = [];
     const grVerts: number[] = [];
     const guardrailIndices: number[] = [];
@@ -67,17 +67,17 @@ export const HighwayRoadMesh: React.FC = () => {
       roadVerts.push(pRight.x, pRight.y, pRight.z);
       roadUVs.push(0, t * 80, 1, t * 80);
 
-      // Left Solid White Edge Line (offset 0.02 above road)
+      // Left Solid Ice Grey Edge Line (offset 0.02 above road)
       const l1 = pt.clone().addScaledVector(right, -HALF_WIDTH + 0.4).add(new THREE.Vector3(0, 0.02, 0));
       const l2 = pt.clone().addScaledVector(right, -HALF_WIDTH + 0.7).add(new THREE.Vector3(0, 0.02, 0));
       leftLineVerts.push(l1.x, l1.y, l1.z, l2.x, l2.y, l2.z);
 
-      // Right Solid White Edge Line
+      // Right Solid Ice Grey Edge Line
       const r1 = pt.clone().addScaledVector(right, HALF_WIDTH - 0.7).add(new THREE.Vector3(0, 0.02, 0));
       const r2 = pt.clone().addScaledVector(right, HALF_WIDTH - 0.4).add(new THREE.Vector3(0, 0.02, 0));
       rightLineVerts.push(r1.x, r1.y, r1.z, r2.x, r2.y, r2.z);
 
-      // Center Amber Dashed Line (dashed every alternate 2 segments)
+      // Center Steel Grey Dashed Line (dashed every alternate 2 segments)
       const isDash = (i % 4) < 2;
       const c1 = pt.clone().addScaledVector(right, -0.18).add(new THREE.Vector3(0, 0.025, 0));
       const c2 = pt.clone().addScaledVector(right, 0.18).add(new THREE.Vector3(0, 0.025, 0));
@@ -87,7 +87,7 @@ export const HighwayRoadMesh: React.FC = () => {
         centerLineVerts.push(c1.x, c1.y, c1.z, c1.x, c1.y, c1.z);
       }
 
-      // Crimson Laser Rails along the extreme edge of the highway
+      // Racing Red Directional Indicator Rails along the extreme edge
       const railL = pt.clone().addScaledVector(right, -HALF_WIDTH - 0.1).add(new THREE.Vector3(0, 0.35, 0));
       const railR = pt.clone().addScaledVector(right, HALF_WIDTH + 0.1).add(new THREE.Vector3(0, 0.35, 0));
       laserLVerts.push(railL.x, railL.y, railL.z, railL.x, railL.y + 0.1, railL.z);
@@ -198,89 +198,89 @@ export const HighwayRoadMesh: React.FC = () => {
 
   return (
     <group name="HighwayEnvironment">
-      {/* 1. Main Asphalt Highway Surface */}
+      {/* 1. Main Obsidian Black Asphalt Highway Surface */}
       <mesh geometry={roadGeometry} receiveShadow>
         <meshStandardMaterial
-          color="#030806"
-          roughness={0.88}
+          color="#090B0E"
+          roughness={0.9}
           metalness={0.15}
           side={THREE.DoubleSide}
         />
       </mesh>
 
-      {/* 2. White Shoulder Solid Lines */}
+      {/* 2. Ice Grey Shoulder Solid Lines */}
       <mesh geometry={leftLineGeometry}>
-        <meshBasicMaterial color="#E2E8F0" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#C9D0D8" side={THREE.DoubleSide} />
       </mesh>
       <mesh geometry={rightLineGeometry}>
-        <meshBasicMaterial color="#E2E8F0" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#C9D0D8" side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 3. Holographic Green Center Dashed Divider Line */}
+      {/* 3. Subtle Steel Grey Center Dashed Divider Line */}
       <mesh geometry={centerLineGeometry}>
-        <meshBasicMaterial color="#39FF88" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#87919D" side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 4. Emerald Holographic Laser Edge Rails */}
+      {/* 4. Controlled Racing Red Directional Edge Indicator Rails */}
       <mesh geometry={laserRailLeftGeom}>
-        <meshBasicMaterial color="#00E676" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#E10620" side={THREE.DoubleSide} />
       </mesh>
       <mesh geometry={laserRailRightGeom}>
-        <meshBasicMaterial color="#00E676" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#E10620" side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 5. Left and Right Guardrails */}
+      {/* 5. Left and Right Guardrails - Carbon Black */}
       <mesh geometry={guardrailLeftGeom}>
-        <meshStandardMaterial color="#0A1710" metalness={0.85} roughness={0.3} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#171B20" metalness={0.88} roughness={0.25} side={THREE.DoubleSide} />
       </mesh>
       <mesh geometry={guardrailRightGeom}>
-        <meshStandardMaterial color="#0A1710" metalness={0.85} roughness={0.3} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#171B20" metalness={0.88} roughness={0.25} side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 6. Roadside Highway Light Posts with Emerald Luminescence */}
+      {/* 6. Roadside Highway Light Posts with High-CRI Pure Light & Red Base Accents */}
       {lightPostsData.map((post, idx) => (
         <group key={`light-post-${idx}`} position={post.position} rotation={[0, post.rotationY, 0]}>
           <mesh position={[0, 4.5, 0]}>
             <cylinderGeometry args={[0.12, 0.16, 9.0, 8]} />
-            <meshStandardMaterial color="#0F2117" metalness={0.85} roughness={0.35} />
+            <meshStandardMaterial color="#171B20" metalness={0.9} roughness={0.25} />
           </mesh>
           <mesh position={[1.4, 8.8, 0]} rotation={[0, 0, -Math.PI / 4]}>
             <cylinderGeometry args={[0.08, 0.1, 3.2, 8]} />
-            <meshStandardMaterial color="#0F2117" metalness={0.85} roughness={0.35} />
+            <meshStandardMaterial color="#171B20" metalness={0.9} roughness={0.25} />
           </mesh>
           <mesh position={[2.5, 9.7, 0]}>
             <boxGeometry args={[0.7, 0.2, 0.4]} />
             <meshStandardMaterial
-              color="#00E676"
-              emissive="#00E676"
-              emissiveIntensity={2.5}
+              color="#F2F4F7"
+              emissive="#F2F4F7"
+              emissiveIntensity={1.8}
             />
           </mesh>
         </group>
       ))}
 
-      {/* 7. Overhead Trusses spanning the highway */}
+      {/* 7. Overhead Trusses spanning the highway - Carbon Black with Racing Red Telemetry Bar */}
       {overheadGantriesData.map((gantry, idx) => (
         <group key={`overhead-gantry-${idx}`} position={gantry.position} rotation={[0, gantry.rotationY, 0]}>
           {/* Left Column */}
           <mesh position={[-9.5, 5.5, 0]}>
             <cylinderGeometry args={[0.3, 0.35, 11.0, 8]} />
-            <meshStandardMaterial color="#07120D" metalness={0.9} roughness={0.25} />
+            <meshStandardMaterial color="#171B20" metalness={0.92} roughness={0.2} />
           </mesh>
           {/* Right Column */}
           <mesh position={[9.5, 5.5, 0]}>
             <cylinderGeometry args={[0.3, 0.35, 11.0, 8]} />
-            <meshStandardMaterial color="#07120D" metalness={0.9} roughness={0.25} />
+            <meshStandardMaterial color="#171B20" metalness={0.92} roughness={0.2} />
           </mesh>
-          {/* Crossbeam */}
+          {/* Crossbeam - Elevated Surface */}
           <mesh position={[0, 11.0, 0]} rotation={[0, 0, Math.PI / 2]}>
             <boxGeometry args={[1.2, 19.5, 0.6]} />
-            <meshStandardMaterial color="#0A1710" metalness={0.9} roughness={0.25} />
+            <meshStandardMaterial color="#20252C" metalness={0.9} roughness={0.2} />
           </mesh>
-          {/* Glowing Emerald Telemetry Bar across beam */}
+          {/* Racing Red Telemetry Line across beam */}
           <mesh position={[0, 11.0, 0.35]}>
-            <planeGeometry args={[18.0, 0.15]} />
-            <meshBasicMaterial color="#00E676" />
+            <planeGeometry args={[18.0, 0.12]} />
+            <meshBasicMaterial color="#E10620" />
           </mesh>
         </group>
       ))}
@@ -296,7 +296,7 @@ export const HighwayRoadMesh: React.FC = () => {
           <group key={ms.id} position={[postPos.x, postPos.y, postPos.z]}>
             <mesh position={[0, 1.2, 0]}>
               <boxGeometry args={[1.2, 2.4, 0.6]} />
-              <meshStandardMaterial color="#0A1710" roughness={0.6} metalness={0.3} />
+              <meshStandardMaterial color="#171B20" roughness={0.5} metalness={0.4} />
             </mesh>
             <mesh position={[0, 1.6, 0.32]}>
               <planeGeometry args={[1.0, 0.9]} />
@@ -310,12 +310,12 @@ export const HighwayRoadMesh: React.FC = () => {
         );
       })}
 
-      {/* 9. Ambient Cyber Terrain Grid Ground */}
+      {/* 9. Ambient Obsidian Black Terrain Floor */}
       <mesh position={[0, -0.4, -1100]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[500, 2600, 32, 32]} />
         <meshStandardMaterial
-          color="#030806"
-          roughness={0.96}
+          color="#090B0E"
+          roughness={0.95}
           metalness={0.1}
           wireframe={false}
         />

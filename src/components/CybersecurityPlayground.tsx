@@ -219,7 +219,7 @@ export const CybersecurityPlayground: React.FC = () => {
                 </div>
 
                 {/* Defensive Result Card */}
-                <div className="p-5 bg-[#171A16] border border-emerald-800/50">
+                <div className="p-5 bg-[var(--surface)] border border-[rgba(201,208,216,0.12)]">
                   <div className="flex items-center gap-2 text-[var(--accent)] font-bold mb-3">
                     <ShieldCheck className="w-4 h-4" />
                     <span className="uppercase tracking-wider">Defended Implementation</span>

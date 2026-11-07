@@ -1,46 +1,51 @@
-# Design System: Green + Black JARVIS Core
+# Design System: Obsidian Black × Ice Grey × Racing Red
 **Project:** Santhosh Kumar M — Professional Portfolio  
 **Architecture:** 3D Universe Homepage × 3D Highway Portfolio  
+**Visual Identity:** Precision Motorsport Telemetry & High-Performance Engineering Interface  
 **Design Standard:** Anti-Slop Discipline // Recruiter-First Information Architecture  
 
 ---
 
-## 1. Color Palette & 60-30-10 Distribution
+## 1. Non-Negotiable Color Palette & 60-30-10 Distribution
 
-The portfolio enforces a strict **60-30-10 color hierarchy** to prevent visual fatigue, eliminate generic AI neon glow soup, and guarantee WCAG 2.2 AA accessibility contrast across all screens.
+The portfolio enforces a strict **60-30-10 color hierarchy** inspired by high-performance automotive cockpits, carbon-fiber surfaces, and precision engineering telemetry. This eliminates generic neon glow soup and ensures maximum readability and contrast (WCAG 2.2 AA).
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│  60% DEEP SPACE BLACK (#030806, #07120D)               │
-│  Base background, 3D world fog, asphalt, canvas body   │
+│  60% OBSIDIAN & CARBON BLACK                           │
+│  #090B0E (Obsidian Black) · #171B20 (Carbon Black)     │
+│  Base background, 3D world fog, road asphalt, body     │
 ├────────────────────────────────────────┬───────────────┤
-│  30% DARK EMERALD SURFACES             │ 10% EMERALD   │
-│  (#0A1710, #0F2117)                    │ HIGHLIGHTS    │
-│  Cards, panels, headers, borders       │ Active state, │
-│                                        │ badges, CTAs  │
+│  30% ICE GREY & STEEL GREY             │ 10% RACING    │
+│  #C9D0D8 (Ice Grey) · #87919D (Steel)  │ RED ACCENT    │
+│  #20252C (Elevated Surface)            │ #E10620 (Red) │
+│  Typography, cards, borders, markings  │ Active state  │
 └────────────────────────────────────────┴───────────────┘
 ```
 
-### Palette Tokens
+### Exact Design Tokens
 
-| Token | Hex Value | Role | Usage |
+| Role | Token Name | Value | Purpose & Application |
 | :--- | :--- | :--- | :--- |
-| `color-bg-primary` | `#030806` | Primary Canvas | 3D space background, highway asphalt, body root. |
-| `color-bg-secondary` | `#07120D` | Secondary Surface | Card outer backgrounds, HUD headers, modal backings. |
-| `color-surface` | `#0A1710` | Interactive Surface | Sub-cards, technology tags, active selection panels. |
-| `color-primary-green` | `#00E676` | Primary Accent | Main CTA buttons, active milestone nodes, key highlights. |
-| `color-holographic-green` | `#39FF88` | Secondary Accent | Subtitles, status indicators, animated progress bars. |
-| `color-secondary-teal` | `#00BFA5` | Tertiary Accent | Orbital planetary rings, technical badge borders. |
-| `color-text-primary` | `#E7F5EC` | Primary Text | Headings, card titles, verified credentials (4.5:1+ contrast). |
-| `color-text-secondary` | `#91A99A` | Secondary Text | Descriptions, dates, metadata labels. |
-| `color-border-subtle` | `rgba(255, 255, 255, 0.10)` | Surface Structure | Clean structural borders without fluorescent distraction. |
-| `color-border-active` | `rgba(0, 230, 118, 0.35)` | Active Border | Active section indicators, focused cards. |
+| **Primary Base** | Obsidian Black | `#090B0E` | Deep background, 3D universe fog, highway asphalt, page root. |
+| **Secondary Surface** | Carbon Black | `#171B20` | Cards, modal backing, truss frameworks, road guardrails. |
+| **Elevated Surface** | Elevated Surface | `#20252C` | Card headers, chip surfaces, overhead gantry crossbeams. |
+| **Primary Text** | Pure Light | `#F2F4F7` | Hero name, card headings, modal titles, high-contrast readability. |
+| **Readable Body** | Ice Grey | `#C9D0D8` | Section subtitles, body prose, descriptions, solid shoulder road lines. |
+| **Telemetry Text** | Steel Grey | `#87919D` | Milestone labels, dates, secondary tags, subtle dashed road markings. |
+| **Muted Minor** | Muted Grey | `#626C78` | Minor telemetry footprints, footer copyright, placeholder text. |
+| **Primary Accent** | Racing Red | `#E10620` | Main CTA buttons, active milestone indicators, laser edge rails. |
+| **Signal Accent** | Signal Red | `#FF3548` | Interactive hover states, pulse dots, active section numbers, pips. |
+| **Deep Accent** | Deep Red | `#A9081A` | Atmospheric glow rim, shadow accents, progress gradient stops. |
+| **Subtle Border** | Subtle Border | `rgba(201, 208, 216, 0.12)` | Structural card borders, grid dividers, subtle separators. |
+| **Strong Border** | Strong Border | `rgba(201, 208, 216, 0.24)` | Active focus outlines, header borders. |
+| **Active Border** | Active Border | `rgba(225, 6, 32, 0.75)` | Interactive focused cards, active input boundaries. |
 
 ---
 
 ## 2. Typography Hierarchy
 
-To eliminate the common AI antipattern of rendering every string in uppercase monospace, the typography strictly separates human communication from machine telemetry:
+To maintain technical credibility without excessive monospace, typography strictly separates human communication from machine telemetry:
 
 | Layer | Font Family | Size / Leading | Weight | Role & Application |
 | :--- | :--- | :--- | :--- | :--- |
@@ -48,44 +53,27 @@ To eliminate the common AI antipattern of rendering every string in uppercase mo
 | **Section Title** | `Inter`, sans-serif | `16px–24px` / `1.2` | `Bold (700)` | Section titles (e.g. "About Santhosh", "Featured Projects"). |
 | **Body Prose** | `Inter`, sans-serif | `12px–14px` / `1.6` | `Regular (400)` | Descriptions, bullet points, bios, project details. |
 | **Telemetry / Code** | `JetBrains Mono`, mono | `10px–12px` / `1.4` | `Bold (700)` | Section indices (`01 / 07`), KM odometer, dates, tech chips. |
-| **Micro Badges** | `JetBrains Mono`, mono | `9px–10px` / `1.2` | `Bold (700)` | Status pills, GPA metrics, degrees, coordinates. |
+| **Stat Badges** | `JetBrains Mono`, mono | `9px–11px` / `1.0` | `Black (900)` | Numerical metrics, verified tags (`GPA: 7.2`). |
 
 ---
 
-## 3. Spatial Layout & Layout Rules
+## 3. Spatial Rules & Highway Composition
 
-1. **Unobstructed Viewports**:
-   - The active section presentation card is docked at `ml-0 sm:ml-4 lg:ml-8` with a restrained width (`max-w-md lg:max-w-lg`).
-   - This guarantees that 3D billboards (including Santhosh's authentic photograph at KM 1) remain clearly visible and unoccluded.
-2. **Responsive Max Heights**:
-   - Desktop: `max-h-[64vh]` with custom smooth scrollbars.
-   - Mobile: `max-h-[52vh]` to prevent overlap with top headers or bottom navigation docks.
-3. **Z-Index Layering**:
-   - Layer 0: Three.js 3D WebGL Canvas (`z-0`).
-   - Layer 10: Vignette and subtle atmospheric overlays (`z-10`).
-   - Layer 20: 3D Billboards & Spatial anchors.
-   - Layer 30: HUD Navigation Dock, Header, and Section Presentation Card (`z-30`).
+1. **Billboard Visibility Protection**:
+   - The active information card is constrained to `max-w-md lg:max-w-lg` with responsive margins (`ml-0 sm:ml-4 lg:ml-8`).
+   - The 3D milestone billboard at lateral offset `-13.0` (KM 1) is never occluded by the 2D UI card.
+2. **Vertical Chromatic Containment**:
+   - Card max-height is strictly clamped to `52vh` on mobile and `64vh` on desktop.
+   - The Top HUD and bottom navigation controls maintain dedicated clear zones across all viewport sizes.
+3. **High-CRI Authentic Portrait Lighting**:
+   - The KM 1 portrait billboard features a dedicated high-CRI natural white key spotlight (`#F4FBF7`, intensity `2.8`) to preserve authentic skin tones and photograph integrity without distortion or green wash.
+   - A subtle Signal Red rim light (`#FF3548`, intensity `0.6`) provides atmospheric cohesion without contaminating the face.
 
 ---
 
-## 4. Component Design & Anti-Slop Rules
+## 4. Motion Design Rules
 
-1. **Restraint Over Excess**:
-   - **No Glow Everywhere**: Glow is capped at 1–2 focal elements per screen (e.g., active section pip, primary CTA button). All sub-cards and pills stay matte.
-   - **No Perpetual Line Clutter**: Decorative SVG lines across full viewports are avoided; only subtle concentric planetary rings (opacity `< 18%`) are allowed.
-   - **No Meaningless Jargon**: Tech names are direct, descriptive, and human-friendly (e.g., "About Santhosh" instead of "SEC-01 // PERSONAL_DOSSIER").
-2. **Tactile Interaction**:
-   - Hover states provide immediate, subtle feedback (`scale(1.02)` and border transition) without jitter or layout shifts.
-   - Active controls indicate current status through fill color and clear text labels.
-
----
-
-## 5. Motion & Animation Principles
-
-1. **Purpose-Driven Movement**:
-   - Camera movement along the Catmull-Rom spline occurs only during navigation between sections.
-   - Camera damping factor of `4.2` ensures smooth, cinematic glide without nausea or disorientation.
-2. **Transition Locks**:
-   - `isTransitioning` state locks out rapid duplicate clicks during flight, ensuring the camera completes its arrival before the next section can be triggered.
-3. **Accessibility**:
-   - Fully respects `prefers-reduced-motion`: animation damping times collapse to instant transitions for visitors with vestibular sensitivities.
+- **Camera Paths**: Smooth Catmull-Rom spline progression (`centripetal`, tension `0.25`).
+- **Accent Motion**: Controlled Racing Red glow pulses on active milestones; no perpetual spinning screen-wide reticles.
+- **Button Transitions**: Mechanical scale feedback (`hover:scale-105 active:scale-95`) with smooth shadow expansions.
+- **Reduced Motion**: Full support for `prefers-reduced-motion: reduce`, dropping transition durations to `0.01ms`.
