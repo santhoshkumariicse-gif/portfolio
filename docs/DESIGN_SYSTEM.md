@@ -77,3 +77,40 @@ To maintain technical credibility without excessive monospace, typography strict
 - **Accent Motion**: Controlled Racing Red glow pulses on active milestones; no perpetual spinning screen-wide reticles.
 - **Button Transitions**: Mechanical scale feedback (`hover:scale-105 active:scale-95`) with smooth shadow expansions.
 - **Reduced Motion**: Full support for `prefers-reduced-motion: reduce`, dropping transition durations to `0.01ms`.
+
+---
+
+## 5. Visual Asset Architecture & Guidelines
+
+All visual media in the portfolio adhere to the **Obsidian Black × Ice Grey × Racing Red** design system.
+
+### Asset Directory Hierarchy
+
+```
+public/assets/
+├── profile/
+│   └── santhosh-profile-formal.jpg          # Authentic candidate portrait (Strictly preserved)
+├── portfolio/
+│   ├── billboards/                          # 16:9 Motorsport telemetry billboard assets
+│   │   ├── km0-welcome-telemetry.jpg
+│   │   ├── km2-education-telemetry.jpg
+│   │   ├── km3-skills-telemetry.jpg
+│   │   ├── km4a-lorrybook-telemetry.jpg
+│   │   ├── km4b-nexusats-telemetry.jpg
+│   │   ├── km4c-recallai-telemetry.jpg
+│   │   ├── km5-experience-telemetry.jpg
+│   │   ├── km6-cybersecurity-telemetry.jpg
+│   │   └── km7-contact-telemetry.jpg
+│   ├── textures/                            # Surface textures (carbon fiber, asphalt)
+│   ├── hero/                                # Universe hero backdrops
+│   ├── hud/                                 # Telemetry vector badges
+│   └── icons/                               # Specialized SVG engineering icons
+└── assets_backup/                           # Complete safety archive of all legacy assets
+```
+
+### Visual Production Rules
+
+1. **60-30-10 Color Balance**: All billboard graphics utilize deep obsidian blacks (`#090B0E`) and carbon weaves (`#171B20`) for 60% of the surface area, ice grey (`#C9D0D8`) and steel grey (`#87919D`) for technical content and typography, and precision laser racing red (`#E10620`) for active gauges, status markers, and focus pathways.
+2. **Strict Zero-Green Policy**: Under no circumstances may green, emerald, turquoise, or cyan be used in decorative assets, shaders, or billboards.
+3. **Authentic Profile Integrity**: Never replace or recolor candidate photographs with AI-generated avatars. Real candidate imagery must always use high-CRI natural studio key illumination (`#F4FBF7`).
+4. **Context-Accurate Telemetry**: Every project and experience billboard must depict genuine engineering diagrams, actual project architecture, and authentic metrics rather than generic abstract art.

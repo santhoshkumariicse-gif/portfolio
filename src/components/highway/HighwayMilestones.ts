@@ -56,8 +56,8 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-PORTAL-00',
     accentColor: '#E10620',
     category: 'origin',
-    imageAsset: getAsset('assets/illustrations/anime-coder-4k-workstation.jpg'),
-    secondaryImage: getAsset('assets/ai-interface/san-ai-keynote-telemetry.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km0-welcome-telemetry.jpg'),
+    secondaryImage: getAsset('assets/portfolio/billboards/km0-welcome-telemetry.jpg'),
     tagline: 'Santhosh Kumar M — Cybersecurity Enthusiast & Computer Science Engineering Student.',
     statBadge: { label: 'SPEEDWAY', value: '7.0 KM' },
     bulletPoints: [
@@ -107,7 +107,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-EDU-02',
     accentColor: '#E10620',
     category: 'education',
-    imageAsset: getAsset('assets/illustrations/anime-coder-neon-looking-back.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km2-education-telemetry.jpg'),
     tagline: 'Gnanamani College of Technology, Namakkal — Expected Graduation: May 2027 (GPA: 7.2)',
     statBadge: { label: 'DEGREE', value: 'B.E. CSE' },
     bulletPoints: [
@@ -135,7 +135,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-SKILLS-03',
     accentColor: '#FF3548',
     category: 'skills',
-    imageAsset: getAsset('assets/backgrounds/curved-workstation-reference.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km3-skills-telemetry.jpg'),
     tagline: 'Categorized technical signboards without fabricated percentages or subjective ratings.',
     statBadge: { label: 'DOMAINS', value: '4 AREAS' },
     bulletPoints: [
@@ -185,7 +185,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-PROJ-RDA',
     accentColor: '#E10620',
     category: 'project',
-    imageAsset: getAsset('assets/projects/systems-lab-optical-bus.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km4a-lorrybook-telemetry.jpg'),
     tagline: 'Transport route logistics and driver queue platform with automated dispatch and trip logging.',
     statBadge: { label: 'STATUS', value: 'VERIFIED' },
     bulletPoints: [
@@ -204,7 +204,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
       tags: ['React', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'REST API'],
       githubUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
       demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio/',
-      image: getAsset('assets/projects/systems-lab-optical-bus.jpg'),
+      image: getAsset('assets/portfolio/billboards/km4a-lorrybook-telemetry.jpg'),
       features: [
         'Real-time driver queue management',
         'Geofenced gate check-in triggers',
@@ -226,7 +226,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-PROJ-ATS',
     accentColor: '#FF3548',
     category: 'project',
-    imageAsset: getAsset('assets/ai-interface/avatar-wireframe-diagnostics.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km4b-nexusats-telemetry.jpg'),
     tagline: 'Modern Applicant Tracking System for structured candidate evaluation and blind screening.',
     statBadge: { label: 'STATUS', value: 'VERIFIED' },
     bulletPoints: [
@@ -245,7 +245,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
       tags: ['TypeScript', 'React', 'FastAPI', 'PostgreSQL', 'Tailwind CSS'],
       githubUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
       demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio/',
-      image: getAsset('assets/ai-interface/avatar-wireframe-diagnostics.jpg'),
+      image: getAsset('assets/portfolio/billboards/km4b-nexusats-telemetry.jpg'),
       features: [
         'Automated PDF resume parser',
         'Blind demographic masking filter',
@@ -267,7 +267,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-PROJ-RAG',
     accentColor: '#E10620',
     category: 'project',
-    imageAsset: getAsset('assets/projects/ai-brain-neural-architecture.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km4c-recallai-telemetry.jpg'),
     tagline: 'Intelligent multi-agent document analysis and vector memory retrieval prototype.',
     statBadge: { label: 'STATUS', value: 'VERIFIED' },
     bulletPoints: [
@@ -286,7 +286,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
       tags: ['Python', 'FastAPI', 'LangChain', 'OpenAI', 'Pinecone', 'React'],
       githubUrl: 'https://github.com/santhoshkumariicse-gif/portfolio',
       demoUrl: 'https://santhoshkumariicse-gif.github.io/portfolio/',
-      image: getAsset('assets/projects/ai-brain-neural-architecture.jpg'),
+      image: getAsset('assets/portfolio/billboards/km4c-recallai-telemetry.jpg'),
       features: [
         'Hierarchical document vector chunking',
         'Citation verification mechanism',
@@ -308,7 +308,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-EXP-05',
     accentColor: '#FF3548',
     category: 'experience',
-    imageAsset: getAsset('assets/cybersecurity/cyber-soc-threat-command.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km5-experience-telemetry.jpg'),
     tagline: 'Verified software engineering internships at Cybernaut (Karur) and ELITA (Bangalore).',
     statBadge: { label: 'INDUSTRY', value: '2 FIRMS' },
     bulletPoints: [
@@ -362,8 +362,8 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-SEC-06',
     accentColor: '#E10620',
     category: 'cybersecurity',
-    imageAsset: getAsset('assets/cybersecurity/cyber-soc-threat-command.jpg'),
-    secondaryImage: getAsset('assets/illustrations/anime-coder-sunset-cat.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km6-cybersecurity-telemetry.jpg'),
+    secondaryImage: getAsset('assets/portfolio/billboards/km6-cybersecurity-telemetry.jpg'),
     tagline: 'Practical exposure and lab-based learning in web security, CTFs, and secure coding practices.',
     statBadge: { label: 'SECURITY', value: 'CTF & LABS' },
     bulletPoints: [
@@ -393,7 +393,7 @@ export const DETAILED_HIGHWAY_MILESTONES: HighwayMilestoneData[] = [
     codeName: 'SAN-HIRE-07',
     accentColor: '#FF3548',
     category: 'destination',
-    imageAsset: getAsset('assets/backgrounds/jarvis-holographic-lab.jpg'),
+    imageAsset: getAsset('assets/portfolio/billboards/km7-contact-telemetry.jpg'),
     secondaryImage: getAsset('assets/profile/santhosh-profile-formal.jpg'),
     tagline: 'Seeking entry-level cybersecurity, internship, or SOC analyst roles.',
     statBadge: { label: 'CONTACT', value: 'DISPATCH' },
