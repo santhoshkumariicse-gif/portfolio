@@ -310,13 +310,13 @@ export const HighwayRoadMesh: React.FC = () => {
         );
       })}
 
-      {/* 9. Ambient Obsidian Black Terrain Floor */}
+      {/* 9. Ambient Neutral Ice Grey Proving Ground Terrain Floor */}
       <mesh position={[0, -0.4, -1100]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[500, 2600, 32, 32]} />
         <meshStandardMaterial
-          color="#090B0E"
-          roughness={0.95}
-          metalness={0.1}
+          color="#C9D0D8"
+          roughness={0.9}
+          metalness={0.15}
           wireframe={false}
         />
       </mesh>

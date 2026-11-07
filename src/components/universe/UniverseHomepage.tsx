@@ -47,74 +47,75 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
   return (
     <group position={[0, 0, 0]}>
-      {/* 1. Deep Space Starfield with Neutral Pure Light Particles */}
+      {/* 1. Ambient High-Key Technical Space Dust Particles */}
       <Stars
         radius={220}
         depth={60}
-        count={2800}
-        factor={4.5}
+        count={1200}
+        factor={3.0}
         saturation={0}
         fade
-        speed={isWarping ? 7 : 1.0}
+        speed={isWarping ? 7 : 0.8}
       />
 
-      {/* 2. Central Cinematic Planet - Obsidian Black & Racing Red Core */}
+      {/* 2. Central Cinematic Automotive Sculpture - Carbon Black & Racing Red Precision Core */}
       <group ref={planetGroupRef}>
-        {/* Planet Core Sphere - Obsidian Black */}
+        {/* Core Sphere - Satin Carbon Black */}
         <mesh>
           <sphereGeometry args={[14, 32, 32]} />
           <meshStandardMaterial
-            color="#090B0E"
-            roughness={0.7}
-            metalness={0.85}
+            color="#171B20"
+            roughness={0.4}
+            metalness={0.8}
           />
         </mesh>
 
-        {/* Digital Continental Wireframe with Controlled Racing Red Glow */}
+        {/* Precision Obsidian Black Continental Geometry Wireframe */}
         <mesh>
           <sphereGeometry args={[14.25, 24, 24]} />
           <meshStandardMaterial
-            color="#E10620"
-            emissive="#E10620"
-            emissiveIntensity={0.65}
+            color="#090B0E"
+            emissive="#090B0E"
+            emissiveIntensity={0.2}
             wireframe
             transparent
-            opacity={0.35}
+            opacity={0.3}
           />
         </mesh>
 
-        {/* Deep Crimson Atmospheric Rim */}
+        {/* Ice Grey Rim Atmosphere with Subtle Crimson Depth */}
         <mesh ref={atmosphereRef}>
           <sphereGeometry args={[15.2, 32, 32]} />
           <meshStandardMaterial
-            color="#E10620"
+            color="#C9D0D8"
             emissive="#A9081A"
-            emissiveIntensity={0.9}
+            emissiveIntensity={0.4}
             transparent
-            opacity={0.15}
+            opacity={0.25}
             side={THREE.BackSide}
           />
         </mesh>
 
-        {/* Precision Telemetry Orbital Ring - Ice Grey */}
+        {/* Precision Telemetry Orbital Ring - Obsidian & Racing Red */}
         <mesh ref={ringRef} rotation={[Math.PI / 3.2, 0, 0]}>
           <ringGeometry args={[18, 22, 64]} />
           <meshStandardMaterial
-            color="#C9D0D8"
-            emissive="#FF3548"
-            emissiveIntensity={0.35}
+            color="#090B0E"
+            emissive="#E10620"
+            emissiveIntensity={0.7}
             side={THREE.DoubleSide}
             transparent
-            opacity={0.22}
+            opacity={0.35}
             wireframe
           />
         </mesh>
       </group>
 
-      {/* Motorsport Telemetry Cinematic Lighting: Signal Red & Steel Grey */}
-      <pointLight position={[35, 25, 45]} color="#FF3548" intensity={3.0} distance={130} />
-      <pointLight position={[-35, -20, -45]} color="#87919D" intensity={2.0} distance={130} />
-      <ambientLight intensity={0.4} color="#171B20" />
+      {/* High-Key Automotive Studio Telemetry Lighting */}
+      <directionalLight position={[0, 40, 20]} intensity={1.4} color="#FFFFFF" />
+      <pointLight position={[35, 30, 45]} color="#FFFFFF" intensity={2.2} distance={140} />
+      <pointLight position={[-35, -20, -45]} color="#E10620" intensity={1.6} distance={140} />
+      <ambientLight intensity={1.2} color="#DCE2E8" />
     </group>
   );
 };
@@ -160,7 +161,7 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
   };
 
   return (
-    <div className="relative w-full h-screen bg-[#090B0E] overflow-hidden select-none font-mono">
+    <div className="relative w-full h-screen bg-[#DCE2E8] overflow-hidden select-none font-mono">
       {/* 1. Main 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0">
         <Canvas
@@ -168,33 +169,33 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
           dpr={[1, 1.5]}
           gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
         >
-          <color attach="background" args={['#090B0E']} />
-          <fog attach="fog" args={['#090B0E', 40, 260]} />
+          <color attach="background" args={['#DCE2E8']} />
+          <fog attach="fog" args={['#DCE2E8', 40, 260]} />
           <CinematicPlanet isWarping={isWarping} />
         </Canvas>
       </div>
 
       {/* 2. Vignette and Ambient Radial Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(9,11,14,0.9)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(201,208,216,0.65)_100%)]" />
 
       {/* 2b. Subtle Ambient Telemetry Orbital Ring */}
-      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-15">
+      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-25">
         <svg
           viewBox="0 0 800 800"
           className="w-[85vw] max-w-[700px] h-auto animate-[spin_120s_linear_infinite]"
         >
-          <circle cx="400" cy="400" r="380" fill="none" stroke="#87919D" strokeWidth="0.8" strokeDasharray="6 12" opacity="0.3" />
-          <circle cx="400" cy="400" r="300" fill="none" stroke="#C9D0D8" strokeWidth="1" strokeDasharray="24 16" opacity="0.25" />
-          <circle cx="400" cy="400" r="220" fill="none" stroke="#E10620" strokeWidth="0.75" opacity="0.2" />
+          <circle cx="400" cy="400" r="380" fill="none" stroke="#87919D" strokeWidth="0.8" strokeDasharray="6 12" opacity="0.4" />
+          <circle cx="400" cy="400" r="300" fill="none" stroke="#090B0E" strokeWidth="1" strokeDasharray="24 16" opacity="0.3" />
+          <circle cx="400" cy="400" r="220" fill="none" stroke="#E10620" strokeWidth="1" opacity="0.35" />
         </svg>
       </div>
 
-      {/* 3. Top Clean Motorsport Header Bar */}
-      <header className="pointer-events-auto absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 py-3.5 sm:py-4 border-b border-[rgba(201,208,216,0.12)] bg-[#090B0E]/90 backdrop-blur-md">
+      {/* 3. Top Clean Light Automotive Header Bar */}
+      <header className="pointer-events-auto absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 py-3.5 sm:py-4 border-b border-[rgba(9,11,14,0.12)] bg-[#F2F4F7]/90 backdrop-blur-md shadow-sm">
         <div className="flex items-center gap-2.5">
           <span className="w-2 h-2 rounded-full bg-[#E10620] shadow-[0_0_8px_#E10620]" />
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#F2F4F7] uppercase">
-            SANTHOSH KUMAR M <span className="text-[#87919D] hidden sm:inline">· 2026 PORTFOLIO</span>
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#090B0E] uppercase">
+            SANTHOSH KUMAR M <span className="text-[#626C78] hidden sm:inline">· 2026 PORTFOLIO</span>
           </span>
         </div>
 
@@ -203,10 +204,10 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
           <button
             type="button"
             onClick={toggleMute}
-            className={`p-2 rounded-lg border text-xs transition-all backdrop-blur-md ${
+            className={`p-2 rounded-lg border text-xs transition-all backdrop-blur-md shadow-sm ${
               !isMuted
-                ? 'bg-[#E10620]/15 border-[#E10620] text-[#FF3548]'
-                : 'bg-[#171B20] border-[rgba(201,208,216,0.12)] text-[#87919D] hover:text-[#F2F4F7]'
+                ? 'bg-[#E10620]/15 border-[#E10620] text-[#E10620]'
+                : 'bg-[#F2F4F7] border-[rgba(9,11,14,0.12)] text-[#626C78] hover:text-[#090B0E] hover:border-[#E10620]'
             }`}
             title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
             aria-label={isMuted ? 'Unmute Sound' : 'Mute Sound'}
@@ -226,23 +227,23 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
             className="max-w-2xl w-full flex flex-col items-center space-y-4 sm:space-y-5"
           >
             {/* Technical Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E10620]/10 border border-[#E10620]/30 text-[#FF3548] text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] text-[#090B0E] text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
               <Sparkles className="w-3 h-3 text-[#E10620]" />
               <span>INTERACTIVE 3D PRESENTATION</span>
             </div>
 
             {/* Developer Identity Heading */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#F2F4F7] uppercase font-sans leading-none drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#090B0E] uppercase font-sans leading-none drop-shadow-sm">
               SANTHOSH KUMAR M
             </h1>
 
             {/* Subheading / Profession from Resume */}
-            <div className="text-xs sm:text-sm font-mono text-[#C9D0D8] font-bold tracking-widest uppercase">
+            <div className="text-xs sm:text-sm font-mono text-[#171B20] font-bold tracking-widest uppercase">
               CYBERSECURITY ENTHUSIAST · COMPUTER SCIENCE ENGINEERING STUDENT
             </div>
 
             {/* Clear, Non-Redundant Recruiter Narrative */}
-            <p className="text-xs sm:text-sm md:text-base text-[#C9D0D8] font-sans max-w-lg leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-[#626C78] font-sans max-w-lg leading-relaxed">
               B.E. Computer Science student at Gnanamani College of Technology (GPA: 7.2, Exp. 2027). Specializing in web application security, vulnerability assessment, and Python automation.
             </p>
 
@@ -251,10 +252,10 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
               <button
                 type="button"
                 onClick={handleViewJourney}
-                className="w-full px-8 py-3.5 bg-[#E10620] hover:bg-[#FF3548] text-[#F2F4F7] rounded-xl font-bold text-xs sm:text-sm uppercase tracking-widest shadow-[0_0_24px_rgba(225,6,32,0.45)] hover:shadow-[0_0_36px_rgba(255,53,72,0.65)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 border border-[#FF3548]"
+                className="w-full px-8 py-3.5 bg-[#E10620] hover:bg-[#FF3548] text-white rounded-xl font-bold text-xs sm:text-sm uppercase tracking-widest shadow-[0_4px_24px_rgba(225,6,32,0.35)] hover:shadow-[0_4px_32px_rgba(255,53,72,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 border border-[#FF3548]"
                 title="Launch the 3D Highway Experience"
               >
-                <Play className="w-4 h-4 fill-current text-[#F2F4F7]" />
+                <Play className="w-4 h-4 fill-current text-white" />
                 <span>VIEW JOURNEY</span>
               </button>
             </div>
@@ -269,12 +270,12 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="pointer-events-auto absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#090B0E]/90 backdrop-blur-xl p-6 text-center select-none"
+            className="pointer-events-auto absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#DCE2E8]/95 backdrop-blur-xl p-6 text-center select-none"
           >
             {/* Warp Telemetry & Title Display */}
             <div className="relative max-w-xl w-full flex flex-col items-center space-y-6">
               {/* Status Telemetry */}
-              <div className="flex items-center gap-2 text-[#FF3548] text-xs font-black tracking-widest uppercase animate-pulse">
+              <div className="flex items-center gap-2 text-[#E10620] text-xs font-black tracking-widest uppercase animate-pulse">
                 <span className="w-2 h-2 rounded-full bg-[#E10620] shadow-[0_0_8px_#E10620]" />
                 <span>SAN AI // ENGAGING HIGHWAY TELEMETRY</span>
               </div>
@@ -286,23 +287,23 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
                 transition={{ duration: 0.6 }}
                 className="space-y-2"
               >
-                <h2 className="text-3xl sm:text-5xl font-black text-[#F2F4F7] tracking-widest uppercase font-sans drop-shadow-[0_0_30px_rgba(225,6,32,0.6)]">
+                <h2 className="text-3xl sm:text-5xl font-black text-[#090B0E] tracking-widest uppercase font-sans drop-shadow-[0_0_30px_rgba(225,6,32,0.35)]">
                   THE ROAD OF SANTHOSH
                 </h2>
-                <div className="text-xs sm:text-sm text-[#C9D0D8] font-mono tracking-widest font-bold">
+                <div className="text-xs sm:text-sm text-[#171B20] font-mono tracking-widest font-bold">
                   POWERED BY SAN AI // INITIALIZING KM 0
                 </div>
               </motion.div>
 
               {/* Sequential Road Luminaire Activation Progress Bar */}
-              <div className="w-full max-w-md bg-white/10 h-2.5 rounded-full overflow-hidden border border-[rgba(201,208,216,0.12)]">
+              <div className="w-full max-w-md bg-black/10 h-2.5 rounded-full overflow-hidden border border-[rgba(9,11,14,0.12)]">
                 <div
                   className="h-full bg-gradient-to-r from-[#A9081A] via-[#E10620] to-[#FF3548] transition-all duration-75 shadow-[0_0_12px_#E10620]"
                   style={{ width: `${warpProgress}%` }}
                 />
               </div>
 
-              <div className="text-[10px] text-[#87919D] tracking-wider font-mono">
+              <div className="text-[10px] text-[#626C78] tracking-wider font-mono">
                 SEQUENTIAL LUMINAIRE IGNITION: {warpProgress}%
               </div>
 
@@ -310,7 +311,7 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
               <button
                 type="button"
                 onClick={handleSkipTransition}
-                className="mt-4 px-4 py-1.5 bg-[#171B20] hover:bg-[#20252C] text-[#C9D0D8] hover:text-[#F2F4F7] rounded-lg text-xs font-bold uppercase tracking-wider border border-[rgba(201,208,216,0.12)] transition-all flex items-center gap-1.5"
+                className="mt-4 px-4 py-1.5 bg-[#F2F4F7] hover:bg-[#C9D0D8] text-[#090B0E] rounded-lg text-xs font-bold uppercase tracking-wider border border-[rgba(9,11,14,0.12)] transition-all flex items-center gap-1.5 shadow-sm"
               >
                 <span>Skip Transition</span>
                 <FastForward className="w-3.5 h-3.5" />

@@ -27,12 +27,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[var(--accent)] text-[var(--bg)] font-bold text-xs uppercase tracking-wider outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[var(--accent)] text-white font-bold text-xs uppercase tracking-wider outline-none shadow-md"
       >
         Skip to main content
       </a>
 
-      <header className="sticky top-0 z-40 w-full border-b border-[var(--border)] bg-[#0A0B09]/90 backdrop-blur-md transition-colors">
+      <header className="sticky top-0 z-40 w-full border-b border-[var(--border)] bg-[var(--surface)]/90 backdrop-blur-md transition-colors">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-6 h-[72px] flex items-center justify-between gap-4">
           {/* Brand */}
           <a
@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-3 font-extrabold tracking-tight text-[var(--primary-text)] hover:opacity-90 transition-opacity"
             aria-label="Santhosh Kumar M — Home"
           >
-            <span className="w-8 h-8 grid place-items-center border border-[var(--accent)] text-[var(--accent)] font-[var(--mono)] text-xs font-bold bg-[rgba(199,255,69,0.05)] transition-transform hover:scale-105">
+            <span className="w-8 h-8 grid place-items-center border border-[var(--accent)] text-[var(--accent)] font-[var(--mono)] text-xs font-bold bg-[rgba(225,6,32,0.08)] transition-transform hover:scale-105">
               SK
             </span>
             <span className="text-sm font-bold tracking-tight">Santhosh Kumar M</span>
@@ -105,10 +105,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={onEnterHighway}
-                className="min-h-[38px] px-3 py-1.5 border border-[#FF3366]/60 bg-[#FF3366]/15 text-[#FF3366] hover:bg-[#FF3366] hover:text-white font-[var(--mono)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-sm transition-all shadow-[0_0_12px_rgba(255,51,102,0.3)] cursor-pointer"
+                className="min-h-[38px] px-3 py-1.5 border border-[#E10620]/40 bg-[#E10620]/10 text-[#E10620] hover:bg-[#E10620] hover:text-white font-[var(--mono)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-sm transition-all shadow-[0_0_12px_rgba(225,6,32,0.2)] cursor-pointer"
                 title="Enter 3D Highway: The Road of Santhosh"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF3366] animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E10620] animate-ping" />
                 <span>3D Highway</span>
               </button>
             )}
@@ -117,17 +117,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={onEnterUniverse}
-                className="min-h-[38px] px-3 py-1.5 border border-[#00E5FF]/60 bg-[#00E5FF]/10 text-[#00E5FF] hover:bg-[#00E5FF] hover:text-[#0A0B09] font-[var(--mono)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-sm transition-all shadow-[0_0_12px_rgba(0,229,255,0.25)]"
+                className="min-h-[38px] px-3 py-1.5 border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--primary-text)] hover:border-[#E10620] hover:text-[#E10620] font-[var(--mono)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-sm transition-all shadow-sm"
                 title="Enter 3D Open-World Island Universe"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E10620] animate-ping" />
                 <span>3D Universe</span>
               </button>
             )}
 
             <a
               href="mailto:santhoshkumar160706@gmail.com?subject=Resume%20request"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 border border-[var(--border-strong)] text-[var(--primary-text)] font-[var(--mono)] text-[0.74rem] uppercase tracking-wider font-bold hover:border-[var(--accent)] hover:bg-[rgba(199,255,69,0.08)] transition-all active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 border border-[var(--border-strong)] text-[var(--primary-text)] font-[var(--mono)] text-[0.74rem] uppercase tracking-wider font-bold hover:border-[var(--accent)] hover:bg-[rgba(225,6,32,0.08)] transition-all active:scale-[0.98]"
             >
               <span>Get in touch</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[var(--accent)]" />

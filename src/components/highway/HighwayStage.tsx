@@ -13,15 +13,21 @@ export interface HighwayStageProps {
 const HighwayCanvasInner: React.FC = () => {
   return (
     <>
-      <color attach="background" args={['#090B0E']} />
-      <fog attach="fog" args={['#090B0E', 40, 480]} />
+      {/* Subtle Neutral Ice Grey Proving Ground Environment */}
+      <color attach="background" args={['#C9D0D8']} />
+      <fog attach="fog" args={['#C9D0D8', 80, 520]} />
 
-      {/* Atmospheric Lighting: Carbon Black Night with High-Performance Headlights */}
-      <ambientLight intensity={0.45} color="#171B20" />
+      {/* Atmospheric High-Performance Automotive Proving Ground Lighting */}
+      <ambientLight intensity={1.2} color="#E8EDF2" />
       <directionalLight
-        position={[35, 60, 20]}
-        intensity={0.85}
-        color="#F2F4F7"
+        position={[35, 70, 20]}
+        intensity={1.5}
+        color="#FFFFFF"
+      />
+      <directionalLight
+        position={[-35, 40, -30]}
+        intensity={0.6}
+        color="#DCE2E8"
       />
 
       {/* 3D Road Geometry along CatmullRomCurve3 */}
@@ -38,7 +44,7 @@ const HighwayCanvasInner: React.FC = () => {
 
 const HighwayStageContent: React.FC<HighwayStageProps> = ({ onReturnToUniverse }) => {
   return (
-    <div className="relative w-full h-screen bg-[#090B0E] overflow-hidden select-none">
+    <div className="relative w-full h-screen bg-[#DCE2E8] overflow-hidden select-none">
       {/* 1. Main 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0">
         <Canvas
@@ -59,8 +65,8 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onReturnToUniverse }
         </Canvas>
       </div>
 
-      {/* 2. Cinematic Vignette Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(9,11,14,0.88)_100%)]" />
+      {/* 2. Light Proving Ground Vignette Overlay */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(201,208,216,0.6)_100%)]" />
 
       {/* 3. Sequential Presentation HUD */}
       <HighwayHUD onReturnToUniverse={onReturnToUniverse} />

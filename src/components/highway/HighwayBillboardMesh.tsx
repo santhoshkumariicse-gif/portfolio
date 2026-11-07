@@ -128,6 +128,11 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
   };
 
   const isKM1Personal = data.id === 'km-1';
+  // Alternating mix of light grey and dark carbon panels as per design specification
+  const isLightFrame = Math.round(data.km) % 2 === 0;
+  const frameColor = isLightFrame ? '#F2F4F7' : '#171B20';
+  const frameMetalness = isLightFrame ? 0.4 : 0.88;
+  const frameRoughness = isLightFrame ? 0.35 : 0.22;
 
   return (
     <group
@@ -138,13 +143,13 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
       onPointerOver={handlePointerOver}
       onPointerOut={handlePointerOut}
     >
-      {/* 1. Structural Truss Framework / Backing Frame - Carbon Black */}
+      {/* 1. Structural Truss Framework / Backing Frame - Mix of Light Grey & Carbon Black */}
       <mesh position={[0, 0, -0.4]}>
         <boxGeometry args={[width + 0.8, height + 0.8, 0.6]} />
         <meshStandardMaterial
-          color="#171B20"
-          metalness={0.9}
-          roughness={0.25}
+          color={frameColor}
+          metalness={frameMetalness}
+          roughness={frameRoughness}
         />
       </mesh>
 
@@ -169,7 +174,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
           />
         ) : (
           <meshStandardMaterial
-            color="#171B20"
+            color={frameColor}
             roughness={0.6}
             metalness={0.3}
             side={THREE.DoubleSide}
@@ -194,7 +199,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
         {/* Banner Bar */}
         <mesh>
           <boxGeometry args={[width, 0.8, 0.3]} />
-          <meshStandardMaterial color="#171B20" metalness={0.92} roughness={0.2} />
+          <meshStandardMaterial color={frameColor} metalness={frameMetalness} roughness={frameRoughness} />
         </mesh>
         {/* Neon Light Accent */}
         <mesh position={[0, 0, 0.18]}>
@@ -207,7 +212,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
       <group position={[0, -height / 2 - 0.6, 0.1]}>
         <mesh>
           <boxGeometry args={[width, 0.8, 0.3]} />
-          <meshStandardMaterial color="#171B20" metalness={0.92} roughness={0.2} />
+          <meshStandardMaterial color={frameColor} metalness={frameMetalness} roughness={frameRoughness} />
         </mesh>
         <mesh position={[0, 0, 0.18]}>
           <planeGeometry args={[width * 0.95, 0.12]} />

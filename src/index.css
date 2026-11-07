@@ -3,28 +3,28 @@
 @tailwind utilities;
 
 :root {
-  /* Obsidian Black × Ice Grey × Racing Red Design System (60-30-10 distribution) */
-  --bg: #090B0E;              /* 60% Primary Obsidian Black */
-  --bg-secondary: #171B20;    /* Carbon Black */
-  --surface: #171B20;         /* Carbon Black */
-  --surface-subtle: #20252C;  /* Elevated Surface */
-  --raised: #20252C;          /* Highlight Surface */
+  /* Ice Grey Background Edition — Global Visual System (60-30-10 distribution) */
+  --bg: #DCE2E8;              /* 60% Primary Background: Ice Grey Canvas */
+  --bg-secondary: #C9D0D8;    /* Secondary Background: Neutral Ice Grey */
+  --surface: #F2F4F7;         /* Elevated Light Surface for Cards & Panels */
+  --surface-subtle: #DCE2E8;  /* Subtle Light Accent Surface */
+  --raised: #F2F4F7;          /* Raised Light Surface */
   
-  --primary-text: #F2F4F7;    /* Pure Light Primary Text */
-  --secondary-text: #C9D0D8;  /* Ice Grey Readable Text */
-  --muted: #87919D;          /* Steel Grey Telemetry */
-  --muted-dark: #626C78;     /* Muted Grey Minor Labels */
+  --primary-text: #090B0E;    /* 30% Obsidian Black: High Contrast Headings */
+  --secondary-text: #171B20;  /* Carbon Black: Primary Body & Subheadings */
+  --muted: #626C78;          /* Muted Text: Secondary Supporting Copy */
+  --muted-dark: #87919D;     /* Steel Grey: Fine Telemetry & Structural Lines */
   
   --accent: #E10620;          /* 10% Controlled Racing Red Accent */
   --accent-signal: #FF3548;   /* Signal Red Active State */
-  --accent-deep: #A9081A;     /* Deep Red Shadow Accent */
+  --accent-deep: #A9081A;     /* Deep Red Gradient / Depth */
   
-  --accent-dim: rgba(225, 6, 32, 0.12);
-  --accent-glow: rgba(225, 6, 32, 0.35);
+  --accent-dim: rgba(225, 6, 32, 0.08);
+  --accent-glow: rgba(225, 6, 32, 0.25);
   
-  --border: rgba(201, 208, 216, 0.12);
-  --border-strong: rgba(201, 208, 216, 0.24);
-  --active-border: rgba(225, 6, 32, 0.75);
+  --border: rgba(9, 11, 14, 0.12);
+  --border-strong: rgba(9, 11, 14, 0.22);
+  --active-border: rgba(225, 6, 32, 0.85);
 
   /* Motorsport Telemetry & Instrument Cluster Tokens */
   --telemetry-red: #E10620;
@@ -59,19 +59,19 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle Technical Carbon Grid Texture */
+/* Subtle Technical Carbon Grid Texture for Light Automotive Proving Ground */
 body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.025;
+  opacity: 0.04;
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(rgba(201, 208, 216, 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 208, 216, 0.3) 1px, transparent 1px);
+    linear-gradient(rgba(9, 11, 14, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(9, 11, 14, 0.4) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: radial-gradient(circle at 50% 20%, black 30%, transparent 85%);
+  mask-image: radial-gradient(circle at 50% 20%, black 40%, transparent 90%);
 }
 
 /* Focus Ring Accessibility (WCAG 2.2 AA SC 2.4.7 & 2.4.11) */
@@ -81,24 +81,24 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--accent-signal);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* Motorsport HUD & Telemetry Utilities */
+/* Motorsport HUD & Telemetry Utilities - Light Automotive Surface */
 .telemetry-panel {
-  background-color: rgba(23, 27, 32, 0.94);
+  background-color: rgba(242, 244, 247, 0.95);
   border: 1px solid var(--border);
   backdrop-filter: blur(16px);
   position: relative;
 }
 
 .telemetry-glow {
-  box-shadow: 0 0 24px rgba(225, 6, 32, 0.25);
+  box-shadow: 0 4px 24px rgba(225, 6, 32, 0.2);
 }
 
 .telemetry-glow-strong {
-  box-shadow: 0 0 35px rgba(255, 53, 72, 0.4);
+  box-shadow: 0 4px 35px rgba(255, 53, 72, 0.35);
 }
 
 /* Carbon-Fiber Corner Tick Reticles */
@@ -146,15 +146,15 @@ select:focus-visible,
   pointer-events: none;
 }
 
-/* Precision Scrollbar */
+/* Precision Scrollbar - Ice Grey Light Edition */
 .custom-scrollbar::-webkit-scrollbar {
   width: 5px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(9, 11, 14, 0.6);
+  background: rgba(201, 208, 216, 0.4);
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(135, 145, 157, 0.4);
+  background: rgba(135, 145, 157, 0.6);
   border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {

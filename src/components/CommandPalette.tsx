@@ -229,7 +229,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           className="relative w-full max-w-2xl bg-[var(--surface)] border border-[var(--border-strong)] shadow-2xl overflow-hidden z-10 font-[var(--mono)]"
         >
           {/* Search Input Bar */}
-          <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[var(--border)] bg-[#171A16]">
+          <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[var(--border)] bg-[var(--raised)]">
             <Search className="w-4 h-4 text-[var(--accent)] shrink-0" />
             <input
               ref={inputRef}
@@ -284,7 +284,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       <div
                         className={`p-1.5 border ${
                           isSelected
-                            ? 'border-[var(--accent)] text-[var(--accent)] bg-[rgba(199,255,69,0.08)]'
+                            ? 'border-[var(--accent)] text-[var(--accent)] bg-[rgba(225,6,32,0.12)]'
                             : 'border-[var(--border)] text-[var(--muted)]'
                         }`}
                       >
@@ -320,7 +320,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           {/* Footer Navigation Hints */}
-          <div className="px-4 py-2 bg-[#171A16] border-t border-[var(--border)] flex items-center justify-between text-[0.65rem] text-[var(--muted)] select-none">
+          <div className="px-4 py-2 bg-[var(--raised)] border-t border-[var(--border)] flex items-center justify-between text-[0.65rem] text-[var(--muted)] select-none">
             <div className="flex items-center gap-3">
               <span>↑↓ Navigate</span>
               <span>↵ Select</span>

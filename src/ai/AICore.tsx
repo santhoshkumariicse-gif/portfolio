@@ -139,7 +139,7 @@ export const AICore: React.FC<AICoreProps> = ({ size = 96, className = '' }) => 
 
       {/* Status Pill Tag Underneath when not expanded */}
       {!isExpanded && (
-        <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-sm bg-[#090B0E]/90 border border-[rgba(201,208,216,0.12)] font-mono text-[8px] text-[#87919D]">
+        <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-sm bg-[#F2F4F7]/95 border border-[rgba(9,11,14,0.12)] font-mono text-[8px] text-[#090B0E] font-bold shadow-xs">
           {themeColors.status}
         </div>
       )}

@@ -116,7 +116,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             <div className="pt-6 border-t border-[var(--border)] flex flex-col gap-3">
               <a
                 href="mailto:santhoshkumar160706@gmail.com?subject=Resume%20request"
-                className="min-h-[44px] flex items-center justify-center gap-2 bg-[var(--accent)] text-[var(--bg)] font-bold text-xs uppercase tracking-wider transition-transform active:scale-[0.98]"
+                className="min-h-[44px] flex items-center justify-center gap-2 bg-[var(--accent)] text-white font-bold text-xs uppercase tracking-wider transition-transform active:scale-[0.98] shadow-md"
               >
                 <span>Get in touch</span>
                 <ArrowUpRight className="w-4 h-4" />
