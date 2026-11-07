@@ -19,7 +19,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'WELCOME',
     subtitle: 'System Ingress & Portal',
     codeName: 'ACT 00 // ORIGIN PORTAL',
-    color: '#FF1E40',
+    color: '#00E676',
     description: 'Welcome to the Road of Santhosh. Ingressing at KM 0. Prepare for acceleration.'
   },
   {
@@ -29,7 +29,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'ABOUT ME',
     subtitle: 'Cybersecurity-Focused CSE Student',
     codeName: 'ACT 01 // PERSONAL DOSSIER',
-    color: '#FF1E40',
+    color: '#39FF88',
     description: 'Santhosh Kumar M: B.E. CSE, Gnanamani College of Technology (Expected May 2027, GPA: 7.2).'
   },
   {
@@ -39,7 +39,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'EDUCATION',
     subtitle: 'Gnanamani College of Technology',
     codeName: 'ACT 02 // ACADEMIC OVERPASS',
-    color: '#00E5FF',
+    color: '#00BFA5',
     description: 'B.E. Computer Science & Engineering (GPA 7.2). Coursework: Ethical Hacking, Networks, Operating Systems.'
   },
   {
@@ -49,7 +49,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'SKILLS',
     subtitle: 'Technical Direction Signboards',
     codeName: 'ACT 03 // ARSENAL INTERCHANGE',
-    color: '#FFB347',
+    color: '#00E676',
     description: 'Programming: Python, Java, C. Cybersecurity: Web Security, CTFs, Vulnerability Assessment. Linux & Git.'
   },
   {
@@ -59,7 +59,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'PROJECTS',
     subtitle: 'Verified Engineering Missions',
     codeName: 'ACT 04 // SOFTWARE MISSIONS',
-    color: '#FF1E40',
+    color: '#39FF88',
     description: 'Verified real architectures: LorryBook / RDA Logistics, NexusATS, and Recall AI RAG prototype.'
   },
   {
@@ -69,7 +69,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'INTERNSHIPS',
     subtitle: 'Cybernaut & ELITA Toll Lanes',
     codeName: 'ACT 05 // PROFESSIONAL MILESTONES',
-    color: '#FFB347',
+    color: '#00BFA5',
     description: 'Python Developer Intern at Cybernaut (Karur) & Web/App Development Intern at ELITA (Bangalore).'
   },
   {
@@ -79,7 +79,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'SECURITY LAB',
     subtitle: 'CTF Challenges & Cyber Club',
     codeName: 'ACT 06 // SECURITY OVERLOOK',
-    color: '#00E5FF',
+    color: '#00E676',
     description: 'Web application security testing, lab vulnerability analysis, and Cybersecurity Club member at Gnanamani.'
   },
   {
@@ -89,7 +89,7 @@ export const HIGHWAY_MILESTONES: HighwayMilestone[] = [
     title: 'CONTACT',
     subtitle: 'Direct Dispatch & Resume Terminal',
     codeName: 'ACT 07 // TERMINAL ZENITH',
-    color: '#FF1E40',
+    color: '#39FF88',
     description: 'Direct contact channels, phone (+91 9345402493), email, LinkedIn, GitHub, and resume download.'
   }
 ];

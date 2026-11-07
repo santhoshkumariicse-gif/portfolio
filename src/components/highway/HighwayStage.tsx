@@ -11,7 +11,7 @@ import { HighwayHUD } from './HighwayHUD';
 import { AICore, AIConversationPanel, useSanAI } from '../../ai';
 
 export interface HighwayStageProps {
-  onExitHighway: () => void;
+  onExitHighway?: () => void;
   onReturnToUniverse?: () => void;
 }
 
@@ -24,15 +24,15 @@ const HighwayCanvasInner: React.FC<HighwayCanvasInnerProps> = ({ onSelectMilesto
 
   return (
     <>
-      <color attach="background" args={['#050706']} />
-      <fog attach="fog" args={['#050706', 40, 480]} />
+      <color attach="background" args={['#030806']} />
+      <fog attach="fog" args={['#030806', 40, 480]} />
 
-      {/* Atmospheric Lighting: Deep Night with Overhead Lanterns */}
-      <ambientLight intensity={0.45} color="#0B120F" />
+      {/* Atmospheric Lighting: Deep Emerald Night with Overhead Lanterns */}
+      <ambientLight intensity={0.45} color="#07120D" />
       <directionalLight
         position={[35, 60, 20]}
         intensity={0.85}
-        color="#D0E8DD"
+        color="#D4F6E5"
       />
 
       {/* 3D Road Geometry along CatmullRomCurve3 */}
@@ -71,7 +71,7 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onExitHighway, onRet
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-[#050706] overflow-hidden select-none">
+    <div className="relative w-full h-screen bg-[#030806] overflow-hidden select-none">
       {/* 1. Main 3D WebGL Canvas */}
       <div className="absolute inset-0 z-0">
         <Canvas
@@ -83,7 +83,7 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onExitHighway, onRet
             fallback={
               <mesh position={[0, 2, 0]}>
                 <boxGeometry args={[1, 1, 1]} />
-                <meshBasicMaterial color="#FF1E40" wireframe />
+                <meshBasicMaterial color="#00E676" wireframe />
               </mesh>
             }
           >
@@ -93,7 +93,7 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onExitHighway, onRet
       </div>
 
       {/* 2. Cinematic Vignette & Cyber Grid Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(5,7,6,0.85)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(3,8,6,0.88)_100%)]" />
 
       {/* 3. Responsive JARVIS-inspired HUD */}
       <HighwayHUD

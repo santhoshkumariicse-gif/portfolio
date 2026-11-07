@@ -136,19 +136,19 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
       <mesh position={[0, 0, -0.4]}>
         <boxGeometry args={[width + 0.8, height + 0.8, 0.6]} />
         <meshStandardMaterial
-          color="#0B0E0D"
-          metalness={0.85}
+          color="#0A1710"
+          metalness={0.88}
           roughness={0.25}
         />
       </mesh>
 
-      {/* 2. Crimson/Cyan Neon Perimeter Glow Border */}
+      {/* 2. Emerald/Cyan Neon Perimeter Glow Border */}
       <mesh ref={glowRef} position={[0, 0, -0.05]}>
         <planeGeometry args={[width + 1.2, height + 1.2]} />
         <meshBasicMaterial
           color={data.accentColor}
           transparent
-          opacity={0.2}
+          opacity={0.25}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -163,7 +163,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
           />
         ) : (
           <meshStandardMaterial
-            color="#141917"
+            color="#07120D"
             roughness={0.6}
             metalness={0.3}
             side={THREE.DoubleSide}
@@ -174,10 +174,10 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
       {/* Dedicated Spotlights for KM 1 Personal Photo Billboard */}
       {isKM1Personal && (
         <group position={[0, height / 2 + 1.5, 3]}>
-          <pointLight color="#FF1E40" intensity={3.5} distance={25} />
+          <pointLight color="#00E676" intensity={3.8} distance={28} />
           <mesh>
             <sphereGeometry args={[0.2, 8, 8]} />
-            <meshBasicMaterial color="#FF1E40" />
+            <meshBasicMaterial color="#00E676" />
           </mesh>
         </group>
       )}
@@ -187,7 +187,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
         {/* Banner Bar */}
         <mesh>
           <boxGeometry args={[width, 0.8, 0.3]} />
-          <meshStandardMaterial color="#0E1210" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#07120D" metalness={0.9} roughness={0.2} />
         </mesh>
         {/* Neon Light Accent */}
         <mesh position={[0, 0, 0.18]}>
@@ -200,7 +200,7 @@ const SingleBillboard: React.FC<SingleBillboardProps> = ({ data, onSelect }) => 
       <group position={[0, -height / 2 - 0.6, 0.1]}>
         <mesh>
           <boxGeometry args={[width, 0.8, 0.3]} />
-          <meshStandardMaterial color="#0E1210" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#07120D" metalness={0.9} roughness={0.2} />
         </mesh>
         <mesh position={[0, 0, 0.18]}>
           <planeGeometry args={[width * 0.95, 0.12]} />

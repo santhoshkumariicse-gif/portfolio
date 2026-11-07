@@ -12,11 +12,11 @@ export const AICore: React.FC<AICoreProps> = ({ size = 96, className = '' }) => 
   const shouldReduceMotion = useReducedMotion();
 
   const themeColors = {
-    idle: { primary: '#00E5FF', glow: 'rgba(0, 229, 255, 0.4)', status: 'ONLINE // IDLE' },
-    listening: { primary: '#C7FF45', glow: 'rgba(199, 255, 69, 0.6)', status: 'LISTENING // AUDIO_IN' },
-    processing: { primary: '#FFB347', glow: 'rgba(255, 179, 71, 0.6)', status: 'ANALYZING // KB_QUERY' },
-    speaking: { primary: '#00E5FF', glow: 'rgba(0, 229, 255, 0.8)', status: 'TRANSMITTING // SPEECH_OUT' },
-    navigation: { primary: '#FF3358', glow: 'rgba(255, 51, 88, 0.7)', status: 'ROUTING // COORDINATE_LOCK' },
+    idle: { primary: '#00E676', glow: 'rgba(0, 230, 118, 0.45)', status: 'ONLINE // JARVIS_CORE' },
+    listening: { primary: '#39FF88', glow: 'rgba(57, 255, 136, 0.65)', status: 'LISTENING // AUDIO_IN' },
+    processing: { primary: '#00BFA5', glow: 'rgba(0, 191, 165, 0.65)', status: 'ANALYZING // KB_QUERY' },
+    speaking: { primary: '#39FF88', glow: 'rgba(57, 255, 136, 0.85)', status: 'TRANSMITTING // SPEECH_OUT' },
+    navigation: { primary: '#00E676', glow: 'rgba(0, 230, 118, 0.75)', status: 'ROUTING // COORDINATE_LOCK' },
     error: { primary: '#FF3358', glow: 'rgba(255, 51, 88, 0.8)', status: 'ALERT // ANOMALY' }
   }[state];
 

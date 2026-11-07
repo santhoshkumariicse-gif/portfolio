@@ -201,9 +201,9 @@ export const HighwayRoadMesh: React.FC = () => {
       {/* 1. Main Asphalt Highway Surface */}
       <mesh geometry={roadGeometry} receiveShadow>
         <meshStandardMaterial
-          color="#0B0E0D"
-          roughness={0.82}
-          metalness={0.18}
+          color="#030806"
+          roughness={0.88}
+          metalness={0.15}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -216,44 +216,44 @@ export const HighwayRoadMesh: React.FC = () => {
         <meshBasicMaterial color="#E2E8F0" side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 3. Amber Center Dashed Divider Line */}
+      {/* 3. Holographic Green Center Dashed Divider Line */}
       <mesh geometry={centerLineGeometry}>
-        <meshBasicMaterial color="#FFB347" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#39FF88" side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 4. Crimson Holographic Laser Edge Rails */}
+      {/* 4. Emerald Holographic Laser Edge Rails */}
       <mesh geometry={laserRailLeftGeom}>
-        <meshBasicMaterial color="#FF1E40" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#00E676" side={THREE.DoubleSide} />
       </mesh>
       <mesh geometry={laserRailRightGeom}>
-        <meshBasicMaterial color="#FF1E40" side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#00E676" side={THREE.DoubleSide} />
       </mesh>
 
       {/* 5. Left and Right Guardrails */}
       <mesh geometry={guardrailLeftGeom}>
-        <meshStandardMaterial color="#2B312E" metalness={0.8} roughness={0.35} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#0A1710" metalness={0.85} roughness={0.3} side={THREE.DoubleSide} />
       </mesh>
       <mesh geometry={guardrailRightGeom}>
-        <meshStandardMaterial color="#2B312E" metalness={0.8} roughness={0.35} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#0A1710" metalness={0.85} roughness={0.3} side={THREE.DoubleSide} />
       </mesh>
 
-      {/* 6. Roadside Highway Light Posts with Amber Luminescence */}
+      {/* 6. Roadside Highway Light Posts with Emerald Luminescence */}
       {lightPostsData.map((post, idx) => (
         <group key={`light-post-${idx}`} position={post.position} rotation={[0, post.rotationY, 0]}>
           <mesh position={[0, 4.5, 0]}>
             <cylinderGeometry args={[0.12, 0.16, 9.0, 8]} />
-            <meshStandardMaterial color="#1E2421" metalness={0.8} roughness={0.4} />
+            <meshStandardMaterial color="#0F2117" metalness={0.85} roughness={0.35} />
           </mesh>
           <mesh position={[1.4, 8.8, 0]} rotation={[0, 0, -Math.PI / 4]}>
             <cylinderGeometry args={[0.08, 0.1, 3.2, 8]} />
-            <meshStandardMaterial color="#1E2421" metalness={0.8} roughness={0.4} />
+            <meshStandardMaterial color="#0F2117" metalness={0.85} roughness={0.35} />
           </mesh>
           <mesh position={[2.5, 9.7, 0]}>
             <boxGeometry args={[0.7, 0.2, 0.4]} />
             <meshStandardMaterial
-              color="#FFB347"
-              emissive="#FF8800"
-              emissiveIntensity={2.2}
+              color="#00E676"
+              emissive="#00E676"
+              emissiveIntensity={2.5}
             />
           </mesh>
         </group>
@@ -265,22 +265,22 @@ export const HighwayRoadMesh: React.FC = () => {
           {/* Left Column */}
           <mesh position={[-9.5, 5.5, 0]}>
             <cylinderGeometry args={[0.3, 0.35, 11.0, 8]} />
-            <meshStandardMaterial color="#181E1B" metalness={0.85} roughness={0.3} />
+            <meshStandardMaterial color="#07120D" metalness={0.9} roughness={0.25} />
           </mesh>
           {/* Right Column */}
           <mesh position={[9.5, 5.5, 0]}>
             <cylinderGeometry args={[0.3, 0.35, 11.0, 8]} />
-            <meshStandardMaterial color="#181E1B" metalness={0.85} roughness={0.3} />
+            <meshStandardMaterial color="#07120D" metalness={0.9} roughness={0.25} />
           </mesh>
           {/* Crossbeam */}
           <mesh position={[0, 11.0, 0]} rotation={[0, 0, Math.PI / 2]}>
             <boxGeometry args={[1.2, 19.5, 0.6]} />
-            <meshStandardMaterial color="#121614" metalness={0.85} roughness={0.3} />
+            <meshStandardMaterial color="#0A1710" metalness={0.9} roughness={0.25} />
           </mesh>
-          {/* Glowing Crimson Telemetry Bar across beam */}
+          {/* Glowing Emerald Telemetry Bar across beam */}
           <mesh position={[0, 11.0, 0.35]}>
             <planeGeometry args={[18.0, 0.15]} />
-            <meshBasicMaterial color="#FF1E40" />
+            <meshBasicMaterial color="#00E676" />
           </mesh>
         </group>
       ))}
@@ -296,7 +296,7 @@ export const HighwayRoadMesh: React.FC = () => {
           <group key={ms.id} position={[postPos.x, postPos.y, postPos.z]}>
             <mesh position={[0, 1.2, 0]}>
               <boxGeometry args={[1.2, 2.4, 0.6]} />
-              <meshStandardMaterial color="#161B19" roughness={0.6} metalness={0.3} />
+              <meshStandardMaterial color="#0A1710" roughness={0.6} metalness={0.3} />
             </mesh>
             <mesh position={[0, 1.6, 0.32]}>
               <planeGeometry args={[1.0, 0.9]} />
@@ -314,7 +314,7 @@ export const HighwayRoadMesh: React.FC = () => {
       <mesh position={[0, -0.4, -1100]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[500, 2600, 32, 32]} />
         <meshStandardMaterial
-          color="#050706"
+          color="#030806"
           roughness={0.96}
           metalness={0.1}
           wireframe={false}

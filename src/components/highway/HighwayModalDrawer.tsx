@@ -7,13 +7,12 @@ import { SoundFX } from '../../utils/SoundFX';
 export interface HighwayModalDrawerProps {
   milestone: HighwayMilestoneData | null;
   onClose: () => void;
-  onOpenClassicView: () => void;
+  onOpenClassicView?: () => void;
 }
 
 export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
   milestone,
-  onClose,
-  onOpenClassicView
+  onClose
 }) => {
   // ESC key to dismiss modal
   useEffect(() => {
@@ -47,26 +46,18 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 20 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-3xl max-h-[88vh] bg-[#070908] border border-red-500/40 rounded-xl shadow-[0_0_50px_rgba(255,30,64,0.3)] overflow-hidden flex flex-col z-10"
+          className="relative w-full max-w-3xl max-h-[88vh] bg-[#07120D] border border-[#00E676]/40 rounded-xl shadow-[0_0_50px_rgba(0,230,118,0.25)] overflow-hidden flex flex-col z-10"
         >
-          {/* 1. Header Bar with Crimson Laser Accent */}
-          <div className="flex items-center justify-between px-5 py-3.5 bg-[#0C100E] border-b border-white/10">
+          {/* 1. Header Bar with Emerald Laser Accent */}
+          <div className="flex items-center justify-between px-5 py-3.5 bg-[#0A1710] border-b border-[#00E676]/20">
             <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FF1E40] shadow-[0_0_8px_#FF1E40]" />
-              <span className="text-[10px] tracking-widest text-[#FF1E40] font-black uppercase">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#00E676] shadow-[0_0_8px_#39FF88]" />
+              <span className="text-[10px] tracking-widest text-[#39FF88] font-black uppercase">
                 {milestone.codeName} // KM {milestone.km.toFixed(1)}
               </span>
             </div>
 
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={onOpenClassicView}
-                className="px-2.5 py-1 text-[10px] font-bold text-slate-300 bg-white/5 hover:bg-white/15 rounded border border-white/15 transition-all"
-              >
-                Open Full 2D View
-              </button>
-
               <button
                 type="button"
                 onClick={handleClose}
@@ -83,44 +74,44 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
             {/* Top Showcase: Image + Title Header */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
               {/* Asset Visual */}
-              <div className="md:col-span-5 relative rounded-lg overflow-hidden border border-white/15 bg-black/60 shadow-lg aspect-video md:aspect-[3/4]">
+              <div className="md:col-span-5 relative rounded-lg overflow-hidden border border-[#00E676]/30 bg-black/60 shadow-lg aspect-video md:aspect-[3/4]">
                 <img
                   src={milestone.imageAsset}
                   alt={milestone.title}
                   className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute top-2 left-2 px-2 py-0.5 bg-black/80 backdrop-blur-md rounded text-[9px] font-bold text-[#FFB347] border border-[#FFB347]/40">
+                <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#030806]/90 backdrop-blur-md rounded text-[9px] font-bold text-[#39FF88] border border-[#00E676]/40">
                   {milestone.statBadge.label}: {milestone.statBadge.value}
                 </div>
               </div>
 
               {/* Title & Description */}
               <div className="md:col-span-7 space-y-2">
-                <div className="text-xs text-[#00E5FF] uppercase font-bold tracking-wider">
+                <div className="text-xs text-[#39FF88] uppercase font-bold tracking-wider">
                   {milestone.subtitle}
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-wide">
                   {milestone.title}
                 </h2>
-                <p className="text-sm text-slate-300 leading-relaxed font-sans">
+                <p className="text-sm text-[#E7F5EC] leading-relaxed font-sans">
                   {milestone.tagline}
                 </p>
-                <p className="text-xs text-slate-400 italic font-mono pt-1">
+                <p className="text-xs text-[#91A99A] italic font-mono pt-1">
                   "{milestone.narration}"
                 </p>
               </div>
             </div>
 
             {/* Bullet Highlights */}
-            <div className="bg-[#0B0F0D] border border-white/10 rounded-lg p-4 space-y-2.5">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <div className="bg-[#0A1710] border border-[#00E676]/20 rounded-lg p-4 space-y-2.5">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-[#91A99A]">
                 Verified Dossier Points:
               </div>
-              <ul className="space-y-2 text-xs text-slate-200">
+              <ul className="space-y-2 text-xs text-[#E7F5EC]">
                 {milestone.bulletPoints.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF1E40] shrink-0 mt-0.5" />
-                    <span className="font-sans text-slate-200">{point}</span>
+                    <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0 mt-0.5" />
+                    <span className="font-sans text-[#E7F5EC]">{point}</span>
                   </li>
                 ))}
               </ul>
@@ -131,31 +122,21 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
               <div className="space-y-4 pt-2">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-slate-400 text-[10px]">Degree</div>
+                    <div className="text-[#91A99A] text-[10px]">Degree</div>
                     <div className="text-white font-bold mt-1">B.E. CSE</div>
                   </div>
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-slate-400 text-[10px]">GPA</div>
-                    <div className="text-[#00E5FF] font-bold mt-1">7.2 / 10</div>
+                    <div className="text-[#91A99A] text-[10px]">GPA</div>
+                    <div className="text-[#39FF88] font-bold mt-1">7.2 / 10</div>
                   </div>
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-slate-400 text-[10px]">Graduation</div>
+                    <div className="text-[#91A99A] text-[10px]">Graduation</div>
                     <div className="text-white font-bold mt-1">May 2027</div>
                   </div>
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-slate-400 text-[10px]">Location</div>
+                    <div className="text-[#91A99A] text-[10px]">Location</div>
                     <div className="text-white font-bold mt-1">Namakkal, India</div>
                   </div>
-                </div>
-
-                <div className="flex justify-center pt-2">
-                  <button
-                    type="button"
-                    onClick={onOpenClassicView}
-                    className="px-5 py-2.5 bg-[#FF1E40] hover:bg-[#FF3366] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-[0_0_20px_rgba(255,30,64,0.4)] transition-all flex items-center gap-2"
-                  >
-                    <span>Explore Full About Section</span>
-                  </button>
                 </div>
               </div>
             )}
@@ -163,23 +144,23 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
             {/* Category: SKILLS (Highway Signboards) */}
             {milestone.skillsCategories && (
               <div className="space-y-3 pt-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#00E5FF]">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#39FF88]">
                   Categorized Technical Competencies:
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {milestone.skillsCategories.map((cat, cIdx) => (
                     <div
                       key={cIdx}
-                      className="p-3.5 bg-white/5 rounded-lg border border-white/10 space-y-2"
+                      className="p-3.5 bg-white/5 rounded-lg border border-[#00E676]/20 space-y-2"
                     >
-                      <div className="text-xs font-bold text-[#FFB347] uppercase tracking-wider">
+                      <div className="text-xs font-bold text-[#00E676] uppercase tracking-wider">
                         {cat.category}
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {cat.skills.map((s, sIdx) => (
                           <span
                             key={sIdx}
-                            className="px-2 py-0.5 bg-black/60 border border-white/15 text-slate-200 text-xs rounded"
+                            className="px-2 py-0.5 bg-black/60 border border-[#00E676]/25 text-[#E7F5EC] text-xs rounded"
                           >
                             {s}
                           </span>
@@ -194,29 +175,29 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
             {/* Category: INTERNSHIP EXPERIENCE */}
             {milestone.internships && (
               <div className="space-y-4 pt-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#00E5FF]">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#39FF88]">
                   Verified Internship Records:
                 </div>
                 <div className="space-y-3">
                   {milestone.internships.map((intern, iIdx) => (
                     <div
                       key={iIdx}
-                      className="p-4 bg-white/5 rounded-lg border border-white/10 space-y-2.5"
+                      className="p-4 bg-white/5 rounded-lg border border-[#00E676]/20 space-y-2.5"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                         <div>
                           <span className="text-sm font-black text-white">{intern.company}</span>
-                          <span className="text-xs text-slate-400 ml-2">({intern.location})</span>
+                          <span className="text-xs text-[#91A99A] ml-2">({intern.location})</span>
                         </div>
-                        <div className="text-[10px] px-2 py-0.5 bg-[#FF1E40]/20 text-[#FF1E40] border border-[#FF1E40]/30 rounded font-bold w-fit">
+                        <div className="text-[10px] px-2 py-0.5 bg-[#00E676]/20 text-[#39FF88] border border-[#00E676]/30 rounded font-bold w-fit">
                           {intern.period}
                         </div>
                       </div>
-                      <div className="text-xs font-bold text-[#FFB347]">{intern.role}</div>
-                      <ul className="space-y-1.5 text-xs text-slate-300 font-sans">
+                      <div className="text-xs font-bold text-[#00E676]">{intern.role}</div>
+                      <ul className="space-y-1.5 text-xs text-[#E7F5EC] font-sans">
                         {intern.responsibilities.map((resp, rIdx) => (
                           <li key={rIdx} className="flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0 mt-1.5" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#39FF88] shrink-0 mt-1.5" />
                             <span>{resp}</span>
                           </li>
                         ))}
@@ -230,25 +211,25 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
             {/* Category: PROJECT */}
             {milestone.projectDetails && (
               <div className="space-y-3 pt-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#00E5FF]">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#39FF88]">
                   Project Specifications & Features:
                 </div>
-                <div className="p-4 bg-white/5 rounded-lg border border-white/10 space-y-3">
+                <div className="p-4 bg-white/5 rounded-lg border border-[#00E676]/20 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold text-white">{milestone.projectDetails.name}</span>
-                    <span className="text-[10px] px-2 py-0.5 bg-[#FF1E40]/20 text-[#FF1E40] rounded font-bold border border-[#FF1E40]/30">
+                    <span className="text-[10px] px-2 py-0.5 bg-[#00E676]/20 text-[#39FF88] rounded font-bold border border-[#00E676]/30">
                       {milestone.projectDetails.badge}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 font-sans">{milestone.projectDetails.desc}</p>
+                  <p className="text-xs text-[#E7F5EC] font-sans">{milestone.projectDetails.desc}</p>
 
                   <div className="space-y-1.5 pt-1">
-                    <div className="text-[10px] font-bold text-slate-400 uppercase">Verified Architecture Highlights:</div>
+                    <div className="text-[10px] font-bold text-[#91A99A] uppercase">Verified Architecture Highlights:</div>
                     <ul className="space-y-1 text-xs text-slate-200">
                       {milestone.projectDetails.features.map((feat, fIdx) => (
                         <li key={fIdx} className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" />
-                          <span className="font-sans text-slate-300">{feat}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00E676]" />
+                          <span className="font-sans text-[#E7F5EC]">{feat}</span>
                         </li>
                       ))}
                     </ul>
@@ -256,7 +237,7 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
 
                   <div className="flex flex-wrap gap-1.5 pt-2">
                     {milestone.projectDetails.tags.map((t, tIdx) => (
-                      <span key={tIdx} className="text-[10px] px-2 py-0.5 bg-black/60 text-slate-300 rounded border border-white/10">
+                      <span key={tIdx} className="text-[10px] px-2 py-0.5 bg-black/60 text-[#91A99A] rounded border border-white/10">
                         {t}
                       </span>
                     ))}
@@ -279,7 +260,7 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
                         href={milestone.projectDetails.demoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-3.5 py-1.5 bg-[#FF1E40]/20 hover:bg-[#FF1E40]/30 text-[#FF1E40] text-xs font-bold rounded border border-[#FF1E40]/40 transition-all flex items-center gap-1.5"
+                        className="px-3.5 py-1.5 bg-[#00E676]/20 hover:bg-[#00E676]/30 text-[#39FF88] text-xs font-bold rounded border border-[#00E676]/40 transition-all flex items-center gap-1.5"
                       >
                         <span>Verified Live Demo</span>
                       </a>
@@ -292,15 +273,15 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
             {/* Category: CYBERSECURITY (Practical Exposure & Club) */}
             {milestone.category === 'cybersecurity' && (
               <div className="space-y-4 pt-2">
-                <div className="p-4 bg-white/5 rounded-lg border border-cyan-500/30 space-y-2.5">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#00E5FF] uppercase">
-                    <Shield className="w-4 h-4 text-[#00E5FF]" />
+                <div className="p-4 bg-white/5 rounded-lg border border-[#00E676]/30 space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#39FF88] uppercase">
+                    <Shield className="w-4 h-4 text-[#00E676]" />
                     <span>Cybersecurity Club — Gnanamani College of Technology</span>
                   </div>
-                  <div className="text-[10px] text-[#FFB347] font-semibold">
+                  <div className="text-[10px] text-[#00BFA5] font-semibold">
                     Member | August 2022 – May 2024
                   </div>
-                  <ul className="space-y-1.5 text-xs text-slate-300 font-sans">
+                  <ul className="space-y-1.5 text-xs text-[#E7F5EC] font-sans">
                     <li>• Participated in Capture The Flag (CTF) challenges focusing on web security and basic exploitation techniques.</li>
                     <li>• Gained hands-on exposure to vulnerability identification and security fundamentals.</li>
                     <li>• Actively explored ethical hacking concepts and secure system practices.</li>
@@ -309,11 +290,11 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10 space-y-1">
-                    <div className="text-slate-400 text-[10px] uppercase font-bold">Interests</div>
+                    <div className="text-[#91A99A] text-[10px] uppercase font-bold">Interests</div>
                     <div className="text-white font-bold">Cybersecurity Research</div>
                   </div>
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10 space-y-1">
-                    <div className="text-slate-400 text-[10px] uppercase font-bold">Languages</div>
+                    <div className="text-[#91A99A] text-[10px] uppercase font-bold">Languages</div>
                     <div className="text-white font-bold">English, Tamil</div>
                   </div>
                 </div>
@@ -322,10 +303,10 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
 
             {/* Category: DESTINATION (Contact Channels from Resume) */}
             {milestone.category === 'destination' && (
-              <div className="bg-[#0C120F] border border-red-500/40 rounded-xl p-5 space-y-4">
+              <div className="bg-[#07120D] border border-[#00E676]/40 rounded-xl p-5 space-y-4">
                 <div className="text-center space-y-1.5">
                   <div className="text-sm font-bold text-white">Verified Contact Channels</div>
-                  <p className="text-xs text-slate-300 font-sans">
+                  <p className="text-xs text-[#91A99A] font-sans">
                     Seeking entry-level cybersecurity, internship, or SOC analyst roles. Direct dispatch channels open:
                   </p>
                 </div>
@@ -335,7 +316,7 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
                     href="mailto:santhoshkumar160706@gmail.com"
                     className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/15 flex items-center gap-2.5 text-slate-200 transition-colors"
                   >
-                    <Mail className="w-4 h-4 text-[#FF1E40] shrink-0" />
+                    <Mail className="w-4 h-4 text-[#00E676] shrink-0" />
                     <span className="truncate">santhoshkumar160706@gmail.com</span>
                   </a>
 
@@ -343,12 +324,12 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
                     href="tel:+919345402493"
                     className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/15 flex items-center gap-2.5 text-slate-200 transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-[#00E5FF] shrink-0" />
+                    <Phone className="w-4 h-4 text-[#39FF88] shrink-0" />
                     <span>+91 9345402493</span>
                   </a>
 
                   <div className="p-3 bg-white/5 rounded-lg border border-white/15 flex items-center gap-2.5 text-slate-200">
-                    <MapPin className="w-4 h-4 text-[#FFB347] shrink-0" />
+                    <MapPin className="w-4 h-4 text-[#00BFA5] shrink-0" />
                     <span>Namakkal, India</span>
                   </div>
 
@@ -358,7 +339,7 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
                     rel="noreferrer"
                     className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/15 flex items-center gap-2.5 text-slate-200 transition-colors"
                   >
-                    <Globe className="w-4 h-4 text-[#00E5FF] shrink-0" />
+                    <Globe className="w-4 h-4 text-[#39FF88] shrink-0" />
                     <span className="truncate">linkedin.com/in/santhosh-kumar-8681612a4/</span>
                   </a>
                 </div>
@@ -366,9 +347,9 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                   <a
                     href="mailto:santhoshkumar160706@gmail.com?subject=Job%20Inquiry%20-%20Santhosh%20Kumar%20M"
-                    className="px-5 py-2.5 bg-[#FF1E40] hover:bg-[#FF3366] text-white text-xs font-bold rounded-lg shadow-[0_0_20px_rgba(255,30,64,0.4)] transition-all flex items-center gap-2"
+                    className="px-5 py-2.5 bg-[#00E676] hover:bg-[#39FF88] text-[#030806] text-xs font-bold rounded-lg shadow-[0_0_20px_rgba(0,230,118,0.4)] transition-all flex items-center gap-2"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-3.5 h-3.5 text-[#030806]" />
                     <span>Send Direct Email</span>
                   </a>
                   <a
@@ -388,12 +369,12 @@ export const HighwayModalDrawer: React.FC<HighwayModalDrawerProps> = ({
           </div>
 
           {/* 3. Bottom Footer Navigation */}
-          <div className="px-5 py-3 bg-[#0A0D0B] border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+          <div className="px-5 py-3 bg-[#0A1710] border-t border-[#00E676]/20 flex items-center justify-between text-xs text-[#91A99A]">
             <span className="text-[10px]">PRESS [ESC] OR CLICK OUTSIDE TO RETURN TO SPEEDWAY</span>
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-1.5 bg-[#FF1E40] hover:bg-[#FF3366] text-white font-bold rounded text-xs transition-colors"
+              className="px-4 py-1.5 bg-[#00E676] hover:bg-[#39FF88] text-[#030806] font-bold rounded text-xs transition-colors"
             >
               Resume Driving
             </button>

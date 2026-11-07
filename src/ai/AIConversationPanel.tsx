@@ -65,23 +65,23 @@ export const AIConversationPanel: React.FC = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.95 }}
           transition={{ duration: 0.25 }}
-          className="fixed bottom-4 right-4 z-50 w-[94vw] sm:w-[420px] max-h-[580px] h-[82vh] flex flex-col rounded-sm bg-[#0E1210]/95 border border-[#00E5FF]/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
+          className="fixed bottom-4 right-4 z-50 w-[94vw] sm:w-[420px] max-h-[580px] h-[82vh] flex flex-col rounded-sm bg-[#07120D]/95 border border-[#00E676]/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] overflow-hidden"
           role="dialog"
           aria-label="SAN AI Interactive Assistant"
         >
-          {/* Top Cyan Accent Edge */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#00E5FF] via-[#C7FF45] to-[#00E5FF]" />
+          {/* Top Emerald Accent Edge */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#00E676] via-[#39FF88] to-[#00BFA5]" />
 
           {/* Panel Header */}
-          <div className="p-3.5 bg-black/40 border-b border-white/10 flex items-center justify-between gap-2">
+          <div className="p-3.5 bg-black/50 border-b border-[#00E676]/20 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#00E676] animate-pulse" />
               <div>
-                <span className="font-mono text-xs font-bold text-[#00E5FF] block">
-                  SAN AI // PERSONAL COPILOT
+                <span className="font-mono text-xs font-bold text-[#39FF88] block">
+                  SAN AI // JARVIS COPILOT
                 </span>
-                <span className="font-mono text-[9px] text-[var(--muted)] flex items-center gap-1">
-                  <Compass className="w-2.5 h-2.5" />
+                <span className="font-mono text-[9px] text-[#91A99A] flex items-center gap-1">
+                  <Compass className="w-2.5 h-2.5 text-[#00E676]" />
                   <span>ZONE: {activeZoneId.toUpperCase()}</span>
                 </span>
               </div>
@@ -105,11 +105,11 @@ export const AIConversationPanel: React.FC = () => {
               <button
                 type="button"
                 onClick={toggleMute}
-                className="p-1.5 hover:text-[#C7FF45] hover:bg-white/5 rounded transition-colors"
+                className="p-1.5 hover:text-[#00E676] hover:bg-white/5 rounded transition-colors"
                 title={isMuted ? 'Unmute voice synthesis' : 'Mute voice synthesis'}
                 aria-label={isMuted ? 'Unmute voice' : 'Mute voice'}
               >
-                {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#C7FF45]" />}
+                {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#00E676]" />}
               </button>
 
               <button
@@ -152,8 +152,8 @@ export const AIConversationPanel: React.FC = () => {
                   <div
                     className={`p-3 rounded-sm max-w-[85%] leading-relaxed ${
                       isAi
-                        ? 'bg-[#141A17] border border-[#00E5FF]/30 text-[var(--primary-text)]'
-                        : 'bg-[#C7FF45]/15 border border-[#C7FF45]/40 text-[#F0F0E9]'
+                        ? 'bg-[#0A1710] border border-[#00E676]/30 text-[#E7F5EC]'
+                        : 'bg-[#00E676]/15 border border-[#00E676]/40 text-[#E7F5EC]'
                     }`}
                   >
                     {m.text}
@@ -163,8 +163,8 @@ export const AIConversationPanel: React.FC = () => {
             })}
 
             {state === 'processing' && (
-              <div className="flex items-center gap-2 text-xs font-mono text-[#00E5FF] p-2 bg-white/5 rounded">
-                <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-ping" />
+              <div className="flex items-center gap-2 text-xs font-mono text-[#39FF88] p-2 bg-white/5 rounded">
+                <span className="w-2 h-2 rounded-full bg-[#00E676] animate-ping" />
                 <span>Processing query against verified knowledge base...</span>
               </div>
             )}
@@ -173,13 +173,13 @@ export const AIConversationPanel: React.FC = () => {
           </div>
 
           {/* Quick Command Chips */}
-          <div className="px-3 py-2 bg-black/40 border-t border-white/5 flex items-center gap-1.5 overflow-x-auto select-none">
+          <div className="px-3 py-2 bg-black/50 border-t border-white/5 flex items-center gap-1.5 overflow-x-auto select-none">
             {quickPrompts.map((prompt, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => sendMessage(prompt)}
-                className="px-2 py-0.5 whitespace-nowrap rounded-sm bg-white/5 border border-white/10 hover:border-[#00E5FF] hover:text-[#00E5FF] text-[10px] font-mono text-[var(--secondary-text)] transition-colors"
+                className="px-2 py-0.5 whitespace-nowrap rounded-sm bg-white/5 border border-white/10 hover:border-[#00E676] hover:text-[#39FF88] text-[10px] font-mono text-[#91A99A] transition-colors"
               >
                 {prompt}
               </button>
@@ -187,19 +187,19 @@ export const AIConversationPanel: React.FC = () => {
           </div>
 
           {/* Input & Voice Controls */}
-          <form onSubmit={handleSend} className="p-3 bg-black/60 border-t border-white/10 flex items-center gap-2">
+          <form onSubmit={handleSend} className="p-3 bg-black/70 border-t border-[#00E676]/20 flex items-center gap-2">
             <button
               type="button"
               onClick={toggleListening}
               className={`p-2.5 rounded-sm border transition-all ${
                 state === 'listening'
-                  ? 'bg-[#C7FF45] text-[#0A0B09] border-[#C7FF45] shadow-[0_0_12px_rgba(199,255,69,0.5)]'
-                  : 'bg-white/5 border-white/15 text-[var(--secondary-text)] hover:text-[#C7FF45] hover:border-[#C7FF45]'
+                  ? 'bg-[#00E676] text-[#030806] border-[#39FF88] shadow-[0_0_12px_rgba(0,230,118,0.6)]'
+                  : 'bg-white/5 border-white/15 text-[#91A99A] hover:text-[#00E676] hover:border-[#00E676]'
               }`}
               title="Click to speak (voice command)"
               aria-label="Toggle voice input"
             >
-              {state === 'listening' ? <Mic className="w-4 h-4 animate-pulse" /> : <MicOff className="w-4 h-4" />}
+              {state === 'listening' ? <Mic className="w-4 h-4 animate-pulse text-[#030806]" /> : <MicOff className="w-4 h-4" />}
             </button>
 
             <input
@@ -207,23 +207,23 @@ export const AIConversationPanel: React.FC = () => {
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               placeholder={state === 'listening' ? 'Listening to speech...' : 'Ask SAN AI about Santhosh...'}
-              className="flex-1 min-h-[38px] px-3 bg-[#131512] border border-white/15 rounded-sm text-xs font-sans text-white focus:outline-none focus:border-[#00E5FF] placeholder:text-[var(--muted)]"
+              className="flex-1 min-h-[38px] px-3 bg-[#0A1710] border border-[#00E676]/30 rounded-sm text-xs font-sans text-white focus:outline-none focus:border-[#39FF88] placeholder:text-[#536B5E]"
             />
 
             <button
               type="submit"
               disabled={!inputVal.trim()}
-              className="p-2.5 bg-[#00E5FF] text-[#0A0B09] rounded-sm disabled:opacity-30 disabled:pointer-events-none hover:bg-[#33EAFF] font-bold transition-all shadow-[0_0_10px_rgba(0,229,255,0.3)]"
+              className="p-2.5 bg-[#00E676] text-[#030806] rounded-sm disabled:opacity-30 disabled:pointer-events-none hover:bg-[#39FF88] font-bold transition-all shadow-[0_0_12px_rgba(0,230,118,0.4)]"
               aria-label="Send message"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 text-[#030806]" />
             </button>
           </form>
 
           {/* Footer Telemetry Bar */}
-          <div className="px-3 py-1 bg-black/90 text-[8px] font-mono text-[var(--muted)] flex items-center justify-between border-t border-white/5">
+          <div className="px-3 py-1 bg-black/90 text-[8px] font-mono text-[#536B5E] flex items-center justify-between border-t border-white/5">
             <span className="flex items-center gap-1">
-              <Terminal className="w-2.5 h-2.5 text-[#00E5FF]" />
+              <Terminal className="w-2.5 h-2.5 text-[#00E676]" />
               <span>LOCAL KNOWLEDGE ENGINE // NO DATA EXPOSURE</span>
             </span>
             <span>VERIFIED PORTFOLIO DATA</span>
