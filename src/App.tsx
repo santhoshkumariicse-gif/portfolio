@@ -19,20 +19,48 @@ const FallbackLoader: React.FC = () => (
   </div>
 );
 
+const getInitialMode = (): 'universe' | 'highway' => {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('mode') === 'highway' || window.location.hash === '#highway') {
+      return 'highway';
+    }
+  }
+  return 'universe';
+};
+
 export const App: React.FC = () => {
-  const [portfolioMode, setPortfolioMode] = useState<'universe' | 'highway'>('universe');
+  const [portfolioMode, setPortfolioMode] = useState<'universe' | 'highway'>(getInitialMode);
+
+  const handleEnterHighway = () => {
+    setPortfolioMode('highway');
+    if (typeof window !== 'undefined' && window.history.pushState) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', 'highway');
+      window.history.pushState({}, '', url.toString());
+    }
+  };
+
+  const handleReturnToUniverse = () => {
+    setPortfolioMode('universe');
+    if (typeof window !== 'undefined' && window.history.pushState) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('mode');
+      window.history.pushState({}, '', url.toString());
+    }
+  };
 
   if (portfolioMode === 'universe') {
     return (
       <Suspense fallback={<FallbackLoader />}>
-        <UniverseHomepage onViewJourney={() => setPortfolioMode('highway')} />
+        <UniverseHomepage onViewJourney={handleEnterHighway} />
       </Suspense>
     );
   }
 
   return (
     <Suspense fallback={<FallbackLoader />}>
-      <HighwayStage onReturnToUniverse={() => setPortfolioMode('universe')} />
+      <HighwayStage onReturnToUniverse={handleReturnToUniverse} />
     </Suspense>
   );
 };
