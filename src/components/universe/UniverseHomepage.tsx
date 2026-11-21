@@ -30,10 +30,10 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
     // Camera orbital sway - framed to keep the planet elegantly in the upper half above the card
     if (!isWarping) {
       const t = state.clock.elapsedTime * 0.22;
-      state.camera.position.x = Math.sin(t) * 5;
-      state.camera.position.y = 14 + Math.cos(t * 0.7) * 1.0;
-      state.camera.position.z = 49 + Math.cos(t) * 2;
-      state.camera.lookAt(0, 11, 0);
+      state.camera.position.x = Math.sin(t) * 4.5;
+      state.camera.position.y = 16.5 + Math.cos(t * 0.7) * 0.8;
+      state.camera.position.z = 47 + Math.cos(t) * 1.5;
+      state.camera.lookAt(0, 14.5, 0);
     } else {
       // Rapid forward warp acceleration
       state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, -120, 2.5, delta);
@@ -59,10 +59,10 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
       />
 
       {/* 2. Central Cinematic Sculpture - Pure Deep Black Globe with Racing Red Accents, Elevated to Upper Half */}
-      <group ref={planetGroupRef} position={[0, 16.5, 0]}>
+      <group ref={planetGroupRef} position={[0, 19.5, 0]}>
         {/* Core Globe - Solid Deep Black */}
         <mesh>
-          <sphereGeometry args={[8.8, 48, 48]} />
+          <sphereGeometry args={[7.8, 48, 48]} />
           <meshStandardMaterial
             color="#090B0E"
             roughness={0.4}
@@ -72,7 +72,7 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
         {/* Precision Obsidian Continental Geometry Wireframe */}
         <mesh>
-          <sphereGeometry args={[8.95, 32, 32]} />
+          <sphereGeometry args={[7.95, 32, 32]} />
           <meshStandardMaterial
             color="#171B20"
             emissive="#000000"
@@ -84,7 +84,7 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
         {/* Subtle Dark Rim Atmosphere Silhouette */}
         <mesh ref={atmosphereRef}>
-          <sphereGeometry args={[9.4, 32, 32]} />
+          <sphereGeometry args={[8.35, 32, 32]} />
           <meshStandardMaterial
             color="#090B0E"
             emissive="#E10620"
@@ -97,7 +97,7 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
 
         {/* Precision Telemetry Orbital Ring - Black & Racing Red */}
         <mesh ref={ringRef} rotation={[Math.PI / 3.4, 0, 0]}>
-          <ringGeometry args={[11.5, 14.8, 64]} />
+          <ringGeometry args={[10.2, 13.2, 64]} />
           <meshStandardMaterial
             color="#090B0E"
             emissive="#E10620"
@@ -166,6 +166,13 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
         <Canvas
           camera={{ position: [0, 12, 48], fov: 50, near: 0.1, far: 600 }}
           dpr={[1, 1.5]}
+          onCreated={({ gl, scene, camera }) => {
+            if (typeof window !== 'undefined') {
+              (window as any).__HOMEPAGE_RENDERER__ = gl;
+              (window as any).__HOMEPAGE_SCENE__ = scene;
+              (window as any).__HOMEPAGE_CAMERA__ = camera;
+            }
+          }}
           gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
         >
           <color attach="background" args={['#DCE2E8']} />
@@ -223,7 +230,8 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative max-w-xl w-full flex flex-col items-center space-y-2.5 sm:space-y-3.5 px-4 py-4 sm:px-8 sm:py-6 rounded-2xl bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] shadow-[0_12px_36px_rgba(9,11,14,0.10)] overflow-hidden"
+            className="relative max-w-xl w-full flex flex-col items-center space-y-2 sm:space-y-3 px-4 py-3.5 sm:px-8 sm:py-5 rounded-2xl bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] shadow-[0_12px_36px_rgba(9,11,14,0.12)] overflow-hidden"
+            style={{ backgroundColor: '#F2F4F7' }}
           >
             {/* Top Racing Red Accent Bar */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#A9081A] via-[#E10620] to-[#FF3548]" />
@@ -235,7 +243,7 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
             </div>
 
             {/* Developer Identity Heading - 100% READABLE BOLD BLACK */}
-            <h1 className="text-xl sm:text-3xl md:text-[38px] font-black tracking-tight text-[#090B0E] uppercase font-sans leading-tight select-text text-center">
+            <h1 className="text-xl sm:text-3xl md:text-[38px] font-black tracking-tight text-[#090B0E] uppercase font-sans leading-tight select-text text-center sm:whitespace-nowrap">
               SANTHOSH KUMAR M
             </h1>
 

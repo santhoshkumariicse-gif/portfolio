@@ -155,7 +155,12 @@ const HighwayStageContent: React.FC<HighwayStageProps> = ({ onReturnToUniverse }
           dpr={[1, 1.5]}
           style={{ width: '100%', height: '100%', display: 'block' }}
           resize={{ scroll: false, debounce: { scroll: 50, resize: 50 } }}
-          onCreated={({ gl }) => {
+          onCreated={({ gl, scene, camera }) => {
+            if (typeof window !== 'undefined') {
+              (window as any).__THREE_RENDERER__ = gl;
+              (window as any).__THREE_SCENE__ = scene;
+              (window as any).__THREE_CAMERA__ = camera;
+            }
             gl.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.25 : 1.5));
             gl.setSize(window.innerWidth, window.innerHeight, true);
             gl.domElement.style.width = '100%';

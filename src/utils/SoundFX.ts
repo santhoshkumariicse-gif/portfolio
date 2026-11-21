@@ -231,4 +231,7 @@ class SoundFXEngine {
 }
 
 export const SoundFX = new SoundFXEngine();
+if (typeof window !== 'undefined') {
+  (window as any).__SOUND_FX__ = SoundFX;
+}
 
