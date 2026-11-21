@@ -26,7 +26,7 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
-      if (e.key === 'ArrowRight' || e.key === 'KeyD') {
+      if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') {
         if (!isTransitioning) {
           if (!isFinalSection) {
             goToNextSection();
@@ -34,7 +34,7 @@ export const HighwayNavigationUI: React.FC<HighwayNavigationUIProps> = ({ onRetu
             onReturnToUniverse();
           }
         }
-      } else if (e.key === 'ArrowLeft' || e.key === 'KeyA') {
+      } else if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
         if (!isTransitioning && !isFirstSection) {
           goToPrevSection();
         }

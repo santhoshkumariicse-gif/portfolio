@@ -5,6 +5,7 @@ class SoundFXEngine {
   private ctx: AudioContext | null = null;
   private isMuted: boolean = true; // Default muted for browser autoplay policy compliance
   private masterGain: GainNode | null = null;
+  private highwayAmbientAudio: HTMLAudioElement | null = null;
 
   constructor() {
     // AudioContext is initialized on first user interaction to comply with browser audio policies
@@ -30,6 +31,11 @@ class SoundFXEngine {
     this.isMuted = muted;
     if (this.masterGain && this.ctx) {
       this.masterGain.gain.setValueAtTime(muted ? 0 : 0.25, this.ctx.currentTime);
+    }
+    if (muted) {
+      this.stopHighwayAmbient();
+    } else {
+      this.playHighwayAmbient();
     }
   }
 
@@ -154,6 +160,73 @@ class SoundFXEngine {
 
     osc.start();
     osc.stop(this.ctx.currentTime + 0.4);
+  }
+
+  // --- INNOVATIVE ASSET PACK AUDIO METHODS ---
+
+  // 1. Ambient Highway Loop (ambient_highway_loop.wav)
+  public playHighwayAmbient() {
+    if (this.isMuted) return;
+    if (typeof window === 'undefined') return;
+
+    try {
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      if (!this.highwayAmbientAudio) {
+        this.highwayAmbientAudio = new Audio(`${baseUrl}assets/audio/ambient_highway_loop.wav`);
+        this.highwayAmbientAudio.loop = true;
+        this.highwayAmbientAudio.volume = 0.28;
+      }
+      this.highwayAmbientAudio.play().catch(() => {
+        // Autoplay policy prevented playback until user interaction
+      });
+    } catch {
+      // Audio element fallback
+    }
+  }
+
+  public stopHighwayAmbient() {
+    if (this.highwayAmbientAudio) {
+      try {
+        this.highwayAmbientAudio.pause();
+        this.highwayAmbientAudio.currentTime = 0;
+      } catch {
+        // Safe catch
+      }
+    }
+  }
+
+  // 2. Chapter Transition Whoosh (chapter_transition_whoosh.wav)
+  public playChapterWhoosh() {
+    if (this.isMuted) return;
+    if (typeof window === 'undefined') return;
+
+    try {
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      const audio = new Audio(`${baseUrl}assets/audio/chapter_transition_whoosh.wav`);
+      audio.volume = 0.35;
+      audio.play().catch(() => {
+        this.playWarp(); // Synthesizer fallback
+      });
+    } catch {
+      this.playWarp();
+    }
+  }
+
+  // 3. Milestone Chime (milestone_chime.wav)
+  public playMilestoneChime() {
+    if (this.isMuted) return;
+    if (typeof window === 'undefined') return;
+
+    try {
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      const audio = new Audio(`${baseUrl}assets/audio/milestone_chime.wav`);
+      audio.volume = 0.40;
+      audio.play().catch(() => {
+        this.playBeaconChime(); // Synthesizer fallback
+      });
+    } catch {
+      this.playBeaconChime();
+    }
   }
 }
 

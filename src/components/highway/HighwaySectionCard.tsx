@@ -1,21 +1,29 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useHighwayState } from './HighwayStateContext';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-  User,
-  GraduationCap,
-  Cpu,
-  FolderGit2,
+  ArrowUpRight,
   Briefcase,
-  ShieldCheck,
-  Send,
-  Mail,
-  Phone,
-  MapPin,
   CheckCircle2,
+  Cpu,
   ExternalLink,
-  Sparkles
+  FolderGit2,
+  GraduationCap,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  User
 } from 'lucide-react';
+import { useHighwayState } from './HighwayStateContext';
+import { personalProfileData } from '../../data/profile';
+import {
+  ProgrammingSvg,
+  SecurityEngineeringSvg,
+  DatabaseSvg,
+  ToolsSvg
+} from '../../svgs/SkillCategorySvgs';
 
 const SECTION_ICONS: Record<string, React.ElementType> = {
   about: User,
@@ -27,261 +35,361 @@ const SECTION_ICONS: Record<string, React.ElementType> = {
   contact: Send
 };
 
+const getVisual = (id: string): { src: string; alt: string } => {
+  switch (id) {
+    case 'about':
+      return { src: `${import.meta.env.BASE_URL}assets/profile/santhosh-profile-formal.jpg`, alt: 'Portrait of Santhosh Kumar M' };
+    case 'education':
+      return { src: `${import.meta.env.BASE_URL}assets/portfolio/billboards/km2-education-telemetry.jpg`, alt: 'Education milestone visual' };
+    case 'skills':
+      return { src: `${import.meta.env.BASE_URL}assets/portfolio/billboards/km3-skills-telemetry.jpg`, alt: 'Technical skills milestone visual' };
+    case 'projects':
+      return { src: `${import.meta.env.BASE_URL}assets/projects/systems-lab-optical-bus.jpg`, alt: 'Software project environment' };
+    case 'experience':
+      return { src: `${import.meta.env.BASE_URL}assets/portfolio/billboards/km5-experience-telemetry.jpg`, alt: 'Professional experience milestone visual' };
+    case 'interests':
+      return { src: `${import.meta.env.BASE_URL}assets/cybersecurity/cyber-soc-threat-command.jpg`, alt: 'Cybersecurity operations visual' };
+    case 'contact':
+      return { src: `${import.meta.env.BASE_URL}assets/profile/santhosh-profile-formal.jpg`, alt: 'Santhosh Kumar M contact portrait' };
+    default:
+      return { src: `${import.meta.env.BASE_URL}assets/portfolio/billboards/km0-welcome-telemetry.jpg`, alt: 'Portfolio milestone visual' };
+  }
+};
+
 export const HighwaySectionCard: React.FC = () => {
   const { currentSection, totalSections } = useHighwayState();
   const SectionIcon = SECTION_ICONS[currentSection.id] || Sparkles;
+  const visual = getVisual(currentSection.id);
+
+  const skillIcon = (category: string, index: number) => {
+    const Icon = /security|cyber/i.test(category)
+      ? SecurityEngineeringSvg
+      : /database/i.test(category)
+        ? DatabaseSvg
+        : /tool/i.test(category)
+          ? ToolsSvg
+          : ProgrammingSvg;
+    return <Icon key={index} className="w-5 h-5" />;
+  };
 
   return (
     <aside
       aria-label={`Active Portfolio Section: ${currentSection.title}`}
-      className="pointer-events-auto w-full max-w-md sm:max-w-lg ml-0 sm:ml-4 lg:ml-8 max-h-[52vh] sm:max-h-[64vh] overflow-hidden flex flex-col rounded-2xl bg-[#F2F4F7]/95 border border-[rgba(9,11,14,0.12)] backdrop-blur-xl shadow-[0_20px_50px_rgba(9,11,14,0.12)] transition-all font-sans"
+      aria-live="polite"
+      className="pointer-events-auto mx-auto w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-[980px] h-[min(68vh,680px)] sm:h-[min(66vh,680px)] overflow-hidden rounded-[18px] border border-[rgba(9,11,14,0.16)] bg-[#F2F4F7]/[0.97] backdrop-blur-2xl shadow-[0_24px_70px_rgba(9,11,14,0.24)] font-sans"
     >
-      {/* 1. Card Header */}
-      <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-[rgba(9,11,14,0.12)] bg-[#DCE2E8]/90 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#E10620]/12 border border-[#E10620]/25 flex items-center justify-center text-[#E10620]">
-            <SectionIcon className="w-4 h-4" />
-          </div>
-          <div>
-            <div className="text-[10px] font-mono font-bold tracking-widest text-[#E10620] uppercase">
-              SECTION {currentSection.sectionNumber} OF 0{totalSections}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSection.id}
+          initial={{ opacity: 0, y: 16, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -10, scale: 0.985 }}
+          transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+          className="h-full flex flex-col"
+        >
+          <header className="shrink-0 h-[68px] px-4 sm:px-6 flex items-center justify-between border-b border-[rgba(9,11,14,0.12)] bg-[#DCE2E8]/90">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-9 h-9 rounded-lg bg-[#090B0E] text-[#FF3548] border border-[rgba(255,53,72,0.35)] flex items-center justify-center shrink-0">
+                <SectionIcon className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.18em] text-[#E10620] uppercase">
+                  Section {currentSection.sectionNumber} / {String(totalSections).padStart(2, '0')}
+                </div>
+                <h2 className="text-base sm:text-lg font-black tracking-tight text-[#090B0E] truncate">
+                  {currentSection.id === 'about' ? 'ABOUT ME' : currentSection.title}
+                </h2>
+              </div>
             </div>
-            <h2 className="text-sm sm:text-base font-bold text-[#090B0E] tracking-tight">
-              {currentSection.title}
-            </h2>
-          </div>
-        </div>
-
-        <div className="text-right">
-          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-[#E10620]/15 text-[#E10620] border border-[#E10620]/30">
-            {currentSection.statBadge.value}
-          </span>
-          <div className="text-[9px] font-mono text-[#626C78] mt-0.5 font-semibold">
-            KM {currentSection.km.toFixed(1)}
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Scrollable Section Body */}
-      <div className="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#171B20] custom-scrollbar">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSection.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="space-y-4"
-          >
-            {/* Subtitle & Tagline */}
-            <div>
-              <div className="text-xs font-mono text-[#E10620] font-bold tracking-wide uppercase">
-                {currentSection.subtitle}
+            <div className="hidden sm:flex items-center gap-3 shrink-0">
+              <div className="text-right">
+                <div className="text-[9px] font-mono uppercase text-[#626C78]">{currentSection.statBadge.label}</div>
+                <div className="text-[11px] font-mono font-bold text-[#090B0E]">{currentSection.statBadge.value}</div>
               </div>
-              <p className="text-xs sm:text-sm text-[#626C78] mt-1 leading-relaxed">
-                {currentSection.tagline}
-              </p>
+              <div className="w-px h-8 bg-[rgba(9,11,14,0.14)]" />
+              <div className="text-[10px] font-mono font-bold text-[#E10620]">KM {currentSection.km.toFixed(1)}</div>
             </div>
+          </header>
 
-            {/* SECTION 01: ABOUT ME FAST FACTS */}
-            {currentSection.id === 'about' && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-center font-mono">
-                <div className="p-2.5 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] shadow-xs">
-                  <div className="text-[9px] text-[#626C78] uppercase tracking-wider font-semibold">Degree</div>
-                  <div className="text-xs font-bold text-[#090B0E] mt-0.5">B.E. CSE</div>
-                </div>
-                <div className="p-2.5 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] shadow-xs">
-                  <div className="text-[9px] text-[#626C78] uppercase tracking-wider font-semibold">GPA</div>
-                  <div className="text-xs font-bold text-[#E10620] mt-0.5">7.2 / 10</div>
-                </div>
-                <div className="p-2.5 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] shadow-xs">
-                  <div className="text-[9px] text-[#626C78] uppercase tracking-wider font-semibold">Graduation</div>
-                  <div className="text-xs font-bold text-[#090B0E] mt-0.5">May 2027</div>
-                </div>
-                <div className="p-2.5 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] shadow-xs">
-                  <div className="text-[9px] text-[#626C78] uppercase tracking-wider font-semibold">Location</div>
-                  <div className="text-xs font-bold text-[#090B0E] mt-0.5">Namakkal, IN</div>
-                </div>
-              </div>
-            )}
-
-            {/* SECTION 03: SKILLS MATRIX */}
-            {currentSection.skillsCategories && (
-              <div className="space-y-3 pt-1">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {currentSection.skillsCategories.map((cat, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] space-y-1.5 shadow-xs"
-                    >
-                      <div className="text-[10px] font-mono font-bold text-[#E10620] uppercase tracking-wider">
-                        {cat.category}
-                      </div>
-                      <div className="flex flex-wrap gap-1">
-                        {cat.skills.map((skill, sIdx) => (
-                          <span
-                            key={sIdx}
-                            className="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F2F4F7] border border-[rgba(9,11,14,0.10)] text-[#090B0E]"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+          <div className="min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+            <div className="grid grid-cols-1 md:grid-cols-[38%_62%] min-h-full">
+              <motion.section
+                initial={{ opacity: 0, x: -14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.12, duration: 0.45 }}
+                className="relative min-h-[260px] md:min-h-full bg-[#171B20] overflow-hidden border-b md:border-b-0 md:border-r border-[rgba(9,11,14,0.12)]"
+              >
+                <img
+                  src={visual.src}
+                  alt={visual.alt}
+                  className={`absolute inset-0 w-full h-full ${
+                    currentSection.id === 'about' || currentSection.id === 'contact'
+                      ? 'object-cover object-[center_18%]'
+                      : 'object-cover'
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090B0E]/80 via-transparent to-[#090B0E]/10" />
+                <div className="absolute left-4 right-4 bottom-4 flex items-end justify-between gap-3">
+                  {currentSection.id === 'about' && (
+                    <div>
+                      <div className="text-[9px] font-mono tracking-[0.18em] uppercase text-[#C9D0D8]">Personal Dossier</div>
+                      <div className="text-lg sm:text-xl font-black text-white">Santhosh Kumar M</div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* SECTION 04: PROJECTS */}
-            {currentSection.projects && (
-              <div className="space-y-3 pt-1">
-                {currentSection.projects.map((proj) => (
-                  <div
-                    key={proj.id}
-                    className="p-3.5 rounded-xl bg-[#DCE2E8]/70 border border-[rgba(9,11,14,0.10)] hover:border-[#E10620]/40 transition-colors space-y-2 shadow-xs"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-bold text-[#090B0E] text-sm">{proj.name}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#E10620]/15 text-[#E10620] border border-[#E10620]/30 font-bold">
-                        {proj.badge}
-                      </span>
+                  )}
+                  {currentSection.id === 'education' && (
+                    <div className="font-mono text-xs text-white">
+                      <div className="text-[#FF3548] font-bold">2023 — 2027</div>
+                      <div>B.E. CSE</div>
                     </div>
-                    <p className="text-xs text-[#171B20] leading-relaxed">{proj.desc}</p>
-                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[rgba(9,11,14,0.08)]">
-                      <div className="flex flex-wrap gap-1">
-                        {proj.tags.map((t, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className="px-1.5 py-0.5 text-[10px] font-mono bg-black/5 rounded text-[#626C78]"
-                          >
-                            {t}
-                          </span>
-                        ))}
+                  )}
+                  {currentSection.id === 'projects' && (
+                    <div className="font-mono text-xs text-white">VERIFIED PROJECT ARCHITECTURES</div>
+                  )}
+                  {currentSection.id === 'experience' && (
+                    <div className="font-mono text-xs text-white">CYBERNAUT · ELITA</div>
+                  )}
+                  {currentSection.id === 'interests' && (
+                    <div className="font-mono text-xs text-white">CTF · WEB SECURITY · RESEARCH</div>
+                  )}
+                  {currentSection.id === 'skills' && (
+                    <div className="font-mono text-xs text-white">ENGINEERING · SECURITY · TOOLING</div>
+                  )}
+                  {currentSection.id === 'contact' && (
+                    <div className="font-mono text-xs text-white">NAMAKKAL · INDIA</div>
+                  )}
+                  <span className="w-2 h-2 mb-1 rounded-full bg-[#E10620] shadow-[0_0_12px_#FF3548]" />
+                </div>
+              </motion.section>
+
+              <motion.section
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.16, duration: 0.45 }}
+                className="p-5 sm:p-7 lg:p-8"
+              >
+                <div className="mb-5">
+                  <div className="text-[10px] font-mono font-bold tracking-[0.16em] uppercase text-[#E10620]">
+                    {currentSection.subtitle}
+                  </div>
+                  {currentSection.id === 'about' && (
+                    <h1 className="mt-2 text-2xl sm:text-3xl lg:text-4xl leading-tight font-black tracking-tight text-[#090B0E]">
+                      Santhosh Kumar M
+                    </h1>
+                  )}
+                  <p className="mt-2 text-sm sm:text-[15px] leading-7 text-[#626C78] max-w-[620px]">
+                    {currentSection.tagline}
+                  </p>
+                </div>
+
+                {currentSection.id === 'about' && (
+                  <div className="space-y-5">
+                    <div className="space-y-3 text-sm leading-7 text-[#171B20]">
+                      {personalProfileData.bio.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-lg border border-[rgba(9,11,14,0.12)] bg-[rgba(9,11,14,0.12)]">
+                      {[
+                        ['Degree', 'B.E. CSE'],
+                        ['GPA', '7.2 / 10'],
+                        ['Graduation', 'May 2027'],
+                        ['Location', 'Namakkal, IN']
+                      ].map(([label, value]) => (
+                        <div key={label} className="bg-[#F2F4F7] p-3">
+                          <div className="text-[9px] font-mono uppercase text-[#626C78]">{label}</div>
+                          <div className="mt-1 text-xs font-bold text-[#090B0E]">{value}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {personalProfileData.interests.map((interest) => (
+                        <span key={interest} className="border-l-2 border-[#E10620] pl-2 pr-1 text-[11px] font-mono text-[#626C78]">
+                          {interest}
+                        </span>
+                      ))}
+                    </div>
+                    <SocialLinks />
+                  </div>
+                )}
+
+                {currentSection.id === 'education' && (
+                  <div className="space-y-5">
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        ['Institution', 'Gnanamani College of Technology'],
+                        ['Degree', 'Bachelor of Engineering'],
+                        ['Department', 'Computer Science & Engineering'],
+                        ['Timeline', '2023 — 2027'],
+                        ['Graduation', 'May 2027'],
+                        ['GPA', '7.2 / 10.0']
+                      ].map(([label, value]) => (
+                        <div key={label} className="border-t border-[rgba(9,11,14,0.12)] pt-3">
+                          <div className="text-[9px] font-mono uppercase tracking-wider text-[#626C78]">{label}</div>
+                          <div className="mt-1 text-sm font-bold text-[#090B0E]">{value}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <ContentList points={currentSection.bulletPoints} />
+                  </div>
+                )}
+
+                {currentSection.skillsCategories && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
+                    {currentSection.skillsCategories.map((category, index) => (
+                      <div key={category.category} className="border-t-2 border-[rgba(9,11,14,0.12)] pt-3">
+                        <div className="flex items-center gap-2.5 mb-3 text-[#E10620]">
+                          {skillIcon(category.category, index)}
+                          <div className="text-[10px] font-mono font-bold uppercase tracking-[0.12em] text-[#090B0E]">
+                            {category.category}
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {category.skills.map((skill) => (
+                            <span key={skill} className="text-xs text-[#171B20] bg-[#DCE2E8]/70 px-2.5 py-1.5 rounded-md">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                      <a
-                        href={proj.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[11px] font-mono font-bold text-[#E10620] hover:text-[#090B0E] flex items-center gap-1 transition-colors"
-                      >
-                        <span>GitHub</span>
-                        <ExternalLink className="w-3 h-3" />
+                    ))}
+                  </div>
+                )}
+
+                {currentSection.projects && (
+                  <div className="space-y-4">
+                    {currentSection.projects.map((project) => (
+                      <article key={project.id} className="border-t border-[rgba(9,11,14,0.14)] pt-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <div className="text-[10px] font-mono font-bold uppercase text-[#E10620]">{project.badge}</div>
+                            <h3 className="mt-1 text-lg font-black text-[#090B0E]">{project.name}</h3>
+                          </div>
+                          <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.name} on GitHub`} className="p-2 rounded-full border border-[rgba(9,11,14,0.14)] text-[#090B0E] hover:text-[#E10620] hover:border-[#E10620]">
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        </div>
+                        <p className="mt-2 text-sm leading-6 text-[#626C78]">{project.desc}</p>
+                        <ul className="mt-3 grid gap-1.5 text-xs text-[#171B20]">
+                          {project.features.map((feature) => (
+                            <li key={feature} className="flex gap-2">
+                              <span className="mt-2 w-1 h-1 rounded-full bg-[#E10620] shrink-0" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {project.tags.map((tag) => (
+                            <span key={tag} className="font-mono text-[10px] px-2 py-1 rounded bg-[#171B20] text-[#F2F4F7]">{tag}</span>
+                          ))}
+                        </div>
+                        {project.demoUrl && (
+                          <a href={project.demoUrl} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#E10620]">
+                            View live project <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                      </article>
+                    ))}
+                  </div>
+                )}
+
+                {currentSection.internships && (
+                  <div className="space-y-5">
+                    {currentSection.internships.map((internship) => (
+                      <article key={`${internship.company}-${internship.role}`} className="border-t border-[rgba(9,11,14,0.14)] pt-4">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                          <div>
+                            <h3 className="text-lg font-black text-[#090B0E]">{internship.company}</h3>
+                            <div className="text-xs font-mono font-bold text-[#E10620]">{internship.role}</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-[10px] font-mono font-bold text-[#090B0E]">{internship.period}</div>
+                            <div className="text-[10px] text-[#626C78]">{internship.location}</div>
+                          </div>
+                        </div>
+                        <ul className="mt-3 space-y-2">
+                          {internship.responsibilities.map((responsibility) => (
+                            <li key={responsibility} className="flex gap-2.5 text-sm leading-6 text-[#171B20]">
+                              <CheckCircle2 className="w-4 h-4 mt-1 text-[#E10620] shrink-0" />
+                              {responsibility}
+                            </li>
+                          ))}
+                        </ul>
+                      </article>
+                    ))}
+                  </div>
+                )}
+
+                {currentSection.id === 'interests' && (
+                  <div className="space-y-5">
+                    <ContentList points={currentSection.bulletPoints} />
+                    <div className="grid grid-cols-2 gap-3">
+                      {['Cybersecurity Research', 'Web Security', 'CTF Challenges', 'Python Automation'].map((interest) => (
+                        <div key={interest} className="flex items-center gap-2 border-l-2 border-[#E10620] pl-3 py-2 text-xs font-bold text-[#090B0E]">
+                          {interest}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {currentSection.contactInfo && (
+                  <div className="space-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-px overflow-hidden rounded-lg border border-[rgba(9,11,14,0.12)] bg-[rgba(9,11,14,0.12)]">
+                      <a href={`mailto:${currentSection.contactInfo.email}`} className="bg-[#F2F4F7] p-3.5 flex items-center gap-3 text-sm text-[#090B0E] hover:bg-[#DCE2E8]">
+                        <Mail className="w-4 h-4 text-[#E10620]" />
+                        <span className="truncate">{currentSection.contactInfo.email}</span>
+                      </a>
+                      <a href={`tel:${currentSection.contactInfo.phone}`} className="bg-[#F2F4F7] p-3.5 flex items-center gap-3 text-sm text-[#090B0E] hover:bg-[#DCE2E8]">
+                        <Phone className="w-4 h-4 text-[#E10620]" />
+                        {currentSection.contactInfo.phone}
+                      </a>
+                      <div className="bg-[#F2F4F7] p-3.5 flex items-center gap-3 text-sm text-[#626C78]">
+                        <MapPin className="w-4 h-4 text-[#E10620]" />
+                        {currentSection.contactInfo.location}
+                      </div>
+                      <a href={currentSection.contactInfo.linkedin} target="_blank" rel="noreferrer" className="bg-[#F2F4F7] p-3.5 flex items-center gap-3 text-sm text-[#090B0E] hover:bg-[#DCE2E8]">
+                        <ExternalLink className="w-4 h-4 text-[#E10620]" />
+                        LinkedIn
                       </a>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* SECTION 05: INTERNSHIP EXPERIENCE */}
-            {currentSection.internships && (
-              <div className="space-y-3 pt-1">
-                {currentSection.internships.map((intern, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-xl bg-[#DCE2E8]/70 border border-[rgba(9,11,14,0.10)] space-y-2 shadow-xs"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                      <div>
-                        <span className="font-bold text-[#090B0E] text-sm">{intern.company}</span>
-                        <span className="text-xs text-[#626C78] ml-2 font-mono font-medium">({intern.location})</span>
-                      </div>
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#E10620]/15 text-[#E10620] border border-[#E10620]/30 w-fit">
-                        {intern.period}
-                      </span>
+                    <div className="flex flex-wrap gap-3">
+                      <a href={`mailto:${currentSection.contactInfo.email}?subject=Interview%20Inquiry`} className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#E10620] text-white text-xs font-bold hover:bg-[#FF3548]">
+                        <Send className="w-4 h-4" /> Send direct email
+                      </a>
+                      <a href={currentSection.contactInfo.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#171B20] text-white text-xs font-bold hover:bg-[#090B0E]">
+                        <ExternalLink className="w-4 h-4" /> GitHub profile
+                      </a>
                     </div>
-                    <div className="text-xs font-mono font-bold text-[#E10620]">{intern.role}</div>
-                    <ul className="space-y-1 text-xs text-[#171B20]">
-                      {intern.responsibilities.map((resp, rIdx) => (
-                        <li key={rIdx} className="flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E10620] shrink-0 mt-1.5" />
-                          <span className="leading-relaxed">{resp}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <ContentList points={currentSection.bulletPoints.filter((point) => !point.includes('@') && !point.includes('linkedin') && !point.includes('github'))} />
                   </div>
-                ))}
-              </div>
-            )}
-
-            {/* SECTION 07: CONTACT CHANNELS */}
-            {currentSection.contactInfo && (
-              <div className="space-y-3 pt-1">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
-                  <a
-                    href={`mailto:${currentSection.contactInfo.email}`}
-                    className="p-3 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] hover:border-[#E10620]/40 flex items-center gap-2.5 text-[#090B0E] transition-colors shadow-xs"
-                  >
-                    <Mail className="w-4 h-4 text-[#E10620] shrink-0" />
-                    <span className="truncate">{currentSection.contactInfo.email}</span>
-                  </a>
-                  <a
-                    href={`tel:${currentSection.contactInfo.phone}`}
-                    className="p-3 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] hover:border-[#E10620]/40 flex items-center gap-2.5 text-[#090B0E] transition-colors shadow-xs"
-                  >
-                    <Phone className="w-4 h-4 text-[#E10620] shrink-0" />
-                    <span>{currentSection.contactInfo.phone}</span>
-                  </a>
-                  <div className="p-3 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] flex items-center gap-2.5 text-[#626C78] shadow-xs">
-                    <MapPin className="w-4 h-4 text-[#E10620] shrink-0" />
-                    <span>{currentSection.contactInfo.location}</span>
-                  </div>
-                  <a
-                    href={currentSection.contactInfo.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-3 rounded-lg bg-[#DCE2E8]/80 border border-[rgba(9,11,14,0.10)] hover:border-[#E10620]/40 flex items-center gap-2.5 text-[#090B0E] transition-colors shadow-xs"
-                  >
-                    <svg className="w-4 h-4 fill-[#E10620] shrink-0" viewBox="0 0 24 24">
-                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.48 1.48 0 1 0 0-2.96 1.48 1.48 0 0 0 0 2.96M7.86 18.5v-8.37H5.07v8.37h2.79z" />
-                    </svg>
-                    <span>LinkedIn Profile</span>
-                  </a>
-                </div>
-
-                <div className="pt-2 flex flex-wrap gap-2.5">
-                  <a
-                    href={`mailto:${currentSection.contactInfo.email}?subject=Interview%20Inquiry%20-%20Santhosh%20Kumar%20M`}
-                    className="px-5 py-2.5 rounded-lg bg-[#E10620] hover:bg-[#FF3548] text-white font-bold text-xs flex items-center gap-2 shadow-[0_4px_16px_rgba(225,6,32,0.3)] transition-all border border-[#FF3548]"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Send Direct Email</span>
-                  </a>
-                  <a
-                    href={currentSection.contactInfo.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-5 py-2.5 rounded-lg bg-[#171B20] hover:bg-[#090B0E] text-white font-bold text-xs flex items-center gap-2 transition-all shadow-sm"
-                  >
-                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                    </svg>
-                    <span>GitHub Profile</span>
-                  </a>
-                </div>
-              </div>
-            )}
-
-            {/* Bullet Highlights for Non-Grid Sections */}
-            {currentSection.id !== 'skills' && currentSection.id !== 'projects' && currentSection.id !== 'contact' && (
-              <div className="space-y-2 pt-2 border-t border-[rgba(9,11,14,0.10)]">
-                <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#626C78]">
-                  Verified Highlights:
-                </div>
-                <ul className="space-y-2 text-xs">
-                  {currentSection.bulletPoints.map((point, pIdx) => (
-                    <li key={pIdx} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#E10620] shrink-0 mt-0.5" />
-                      <span className="text-[#171B20] leading-relaxed font-sans">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+                )}
+              </motion.section>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </aside>
   );
 };
+
+const ContentList: React.FC<{ points: string[] }> = ({ points }) => (
+  <ul className="space-y-2.5">
+    {points.map((point) => (
+      <li key={point} className="flex items-start gap-2.5 text-sm leading-6 text-[#171B20]">
+        <CheckCircle2 className="w-4 h-4 mt-1 text-[#E10620] shrink-0" />
+        <span>{point}</span>
+      </li>
+    ))}
+  </ul>
+);
+
+const SocialLinks: React.FC = () => (
+  <div className="flex flex-wrap gap-3">
+    <a href={personalProfileData.contact.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[rgba(9,11,14,0.14)] text-xs font-bold text-[#090B0E] hover:border-[#E10620] hover:text-[#E10620]">
+      LinkedIn <ArrowUpRight className="w-3.5 h-3.5" />
+    </a>
+    <a href={personalProfileData.contact.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[rgba(9,11,14,0.14)] text-xs font-bold text-[#090B0E] hover:border-[#E10620] hover:text-[#E10620]">
+      GitHub <ArrowUpRight className="w-3.5 h-3.5" />
+    </a>
+  </div>
+);

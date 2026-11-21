@@ -38,7 +38,7 @@ export const PORTFOLIO_SECTIONS: PortfolioSection[] = [
     id: 'about',
     km: 1.0,
     progress: 1.0 / 7.0,
-    title: 'About Santhosh',
+    title: 'ABOUT ME',
     subtitle: 'Computer Science Student & Security Enthusiast',
     codeName: 'OVERVIEW // PROFILE',
     accentColor: '#FF3548',

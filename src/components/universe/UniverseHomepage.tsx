@@ -27,13 +27,13 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
       atmosphereRef.current.rotation.y -= delta * 0.04;
     }
 
-    // Camera orbital sway
+    // Camera orbital sway - framed to keep the planet elegantly in the upper half above the card
     if (!isWarping) {
-      const t = state.clock.elapsedTime * 0.25;
-      state.camera.position.x = Math.sin(t) * 10;
-      state.camera.position.y = 8 + Math.cos(t * 0.8) * 1.5;
-      state.camera.position.z = 46 + Math.cos(t) * 3;
-      state.camera.lookAt(0, 6.5, 0);
+      const t = state.clock.elapsedTime * 0.22;
+      state.camera.position.x = Math.sin(t) * 5;
+      state.camera.position.y = 14 + Math.cos(t * 0.7) * 1.0;
+      state.camera.position.z = 49 + Math.cos(t) * 2;
+      state.camera.lookAt(0, 11, 0);
     } else {
       // Rapid forward warp acceleration
       state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, -120, 2.5, delta);
@@ -58,53 +58,53 @@ const CinematicPlanet: React.FC<CinematicPlanetProps> = ({ isWarping }) => {
         speed={isWarping ? 7 : 0.8}
       />
 
-      {/* 2. Central Cinematic Sculpture - Pure Deep Black Globe with Racing Red Accents */}
-      <group ref={planetGroupRef} position={[0, 8.5, 0]}>
+      {/* 2. Central Cinematic Sculpture - Pure Deep Black Globe with Racing Red Accents, Elevated to Upper Half */}
+      <group ref={planetGroupRef} position={[0, 16.5, 0]}>
         {/* Core Globe - Solid Deep Black */}
         <mesh>
-          <sphereGeometry args={[10.5, 48, 48]} />
+          <sphereGeometry args={[8.8, 48, 48]} />
           <meshStandardMaterial
-            color="#000000"
-            roughness={0.7}
-            metalness={0.1}
+            color="#090B0E"
+            roughness={0.4}
+            metalness={0.6}
           />
         </mesh>
 
         {/* Precision Obsidian Continental Geometry Wireframe */}
         <mesh>
-          <sphereGeometry args={[10.65, 32, 32]} />
+          <sphereGeometry args={[8.95, 32, 32]} />
           <meshStandardMaterial
-            color="#090B0E"
+            color="#171B20"
             emissive="#000000"
             wireframe
             transparent
-            opacity={0.35}
+            opacity={0.4}
           />
         </mesh>
 
         {/* Subtle Dark Rim Atmosphere Silhouette */}
         <mesh ref={atmosphereRef}>
-          <sphereGeometry args={[11.1, 32, 32]} />
+          <sphereGeometry args={[9.4, 32, 32]} />
           <meshStandardMaterial
-            color="#000000"
-            emissive="#090B0E"
-            emissiveIntensity={0.2}
+            color="#090B0E"
+            emissive="#E10620"
+            emissiveIntensity={0.15}
             transparent
-            opacity={0.25}
+            opacity={0.2}
             side={THREE.BackSide}
           />
         </mesh>
 
         {/* Precision Telemetry Orbital Ring - Black & Racing Red */}
-        <mesh ref={ringRef} rotation={[Math.PI / 3.2, 0, 0]}>
-          <ringGeometry args={[13.5, 17, 64]} />
+        <mesh ref={ringRef} rotation={[Math.PI / 3.4, 0, 0]}>
+          <ringGeometry args={[11.5, 14.8, 64]} />
           <meshStandardMaterial
-            color="#000000"
+            color="#090B0E"
             emissive="#E10620"
-            emissiveIntensity={0.4}
+            emissiveIntensity={0.5}
             side={THREE.DoubleSide}
             transparent
-            opacity={0.3}
+            opacity={0.4}
             wireframe
           />
         </mesh>
@@ -218,46 +218,46 @@ export const UniverseHomepage: React.FC<UniverseHomepageProps> = ({
 
       {/* 4. Center Presentation Hero */}
       {!isWarping && (
-        <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-end pb-6 sm:pb-10 p-4 sm:p-6 text-center">
+        <main className="pointer-events-auto absolute inset-0 z-20 flex flex-col items-center justify-end pb-4 sm:pb-8 p-3 sm:p-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative max-w-2xl w-full flex flex-col items-center space-y-3.5 sm:space-y-4 px-6 py-6 sm:px-8 sm:py-7 rounded-2xl sm:rounded-3xl bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] shadow-[0_20px_50px_rgba(9,11,14,0.12)] overflow-hidden"
+            className="relative max-w-xl w-full flex flex-col items-center space-y-2.5 sm:space-y-3.5 px-4 py-4 sm:px-8 sm:py-6 rounded-2xl bg-[#F2F4F7] border border-[rgba(9,11,14,0.14)] shadow-[0_12px_36px_rgba(9,11,14,0.10)] overflow-hidden"
           >
             {/* Top Racing Red Accent Bar */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#A9081A] via-[#E10620] to-[#FF3548]" />
 
             {/* Technical Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DCE2E8] border border-[rgba(9,11,14,0.14)] text-black text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
-              <Sparkles className="w-3 h-3 text-[#E10620]" />
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-[#DCE2E8] border border-[rgba(9,11,14,0.12)] text-black text-[9px] sm:text-[11px] font-mono font-bold uppercase tracking-wider">
+              <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E10620]" />
               <span>INTERACTIVE 3D PRESENTATION</span>
             </div>
 
             {/* Developer Identity Heading - 100% READABLE BOLD BLACK */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-black uppercase font-sans leading-none select-text">
+            <h1 className="text-xl sm:text-3xl md:text-[38px] font-black tracking-tight text-[#090B0E] uppercase font-sans leading-tight select-text text-center">
               SANTHOSH KUMAR M
             </h1>
 
             {/* Subheading / Profession from Resume - CRISP BOLD BLACK */}
-            <div className="text-xs sm:text-sm font-mono text-black font-bold tracking-widest uppercase">
-              CYBERSECURITY ENTHUSIAST · COMPUTER SCIENCE ENGINEERING STUDENT
+            <div className="text-[9px] sm:text-xs font-mono text-[#090B0E] font-bold tracking-wide sm:tracking-widest uppercase text-center leading-relaxed max-w-sm sm:max-w-none">
+              CYBERSECURITY ENTHUSIAST · COMPUTER SCIENCE ENGINEER
             </div>
 
             {/* Clear, Non-Redundant Recruiter Narrative - HIGH CONTRAST */}
-            <p className="text-xs sm:text-sm md:text-base text-[#171B20] font-sans max-w-lg leading-relaxed font-medium">
+            <p className="text-[11px] sm:text-sm text-[#171B20] font-sans max-w-md leading-relaxed font-medium">
               B.E. Computer Science student at Gnanamani College of Technology (GPA: 7.2, Exp. 2027). Specializing in web application security, vulnerability assessment, and Python automation.
             </p>
 
             {/* Primary Action CTA: VIEW JOURNEY */}
-            <div className="flex items-center justify-center pt-1.5 w-full max-w-xs">
+            <div className="flex items-center justify-center pt-1 w-full max-w-xs">
               <button
                 type="button"
                 onClick={handleViewJourney}
-                className="w-full px-8 py-3.5 bg-[#E10620] hover:bg-[#FF3548] text-white rounded-xl font-bold text-xs sm:text-sm uppercase tracking-widest shadow-[0_4px_24px_rgba(225,6,32,0.35)] hover:shadow-[0_4px_32px_rgba(255,53,72,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 border border-[#FF3548]"
+                className="w-full px-6 sm:px-8 py-2.5 sm:py-3 bg-[#E10620] hover:bg-[#FF3548] text-white rounded-xl font-bold text-xs sm:text-sm uppercase tracking-widest shadow-[0_4px_20px_rgba(225,6,32,0.35)] hover:shadow-[0_4px_28px_rgba(255,53,72,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 border border-[#FF3548]"
                 title="Launch the 3D Highway Experience"
               >
-                <Play className="w-4 h-4 fill-current text-white" />
+                <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current text-white" />
                 <span>VIEW JOURNEY</span>
               </button>
             </div>
